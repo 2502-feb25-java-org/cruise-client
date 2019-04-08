@@ -3,22 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
-import { LoginComponent } from './login/login.component';
-=======
+import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RequestComponent } from './components/request/request.component';
->>>>>>> origin
 
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    LoginComponent
-=======
+    LoginComponent,
     NavbarComponent,
     RequestComponent
->>>>>>> origin
   ],
   imports: [
     BrowserModule,
