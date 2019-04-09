@@ -14,6 +14,7 @@ import { AgmCoreModule } from '@agm/core';
     NavbarComponent,
     RequestComponent,
     HomeComponent,
+    AgmCoreModule
     
   ],
   imports: [
