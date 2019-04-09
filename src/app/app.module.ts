@@ -8,6 +8,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RequestComponent } from './components/request/request.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RiderService } from './services/rider/rider.service';
+import { CarService } from './services/car/car.service';
+import { RideService } from './services/ride/ride.service';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    RiderService,
+    CarService,
+    RideService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
