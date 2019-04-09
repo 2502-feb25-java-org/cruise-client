@@ -5,7 +5,11 @@ import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: 'request', component: RequestComponent},
+<<<<<<< HEAD
   { path: 'login', component: LoginComponent }
+=======
+  { path: 'login', component: LoginComponent}
+>>>>>>> master
 ];
 
 @NgModule({
