@@ -16,16 +16,25 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-test(){
-  alert('hello!');
-  //$("#user_message").html('changed');
+submit(username: string, password: string){
+  if(this.validUsername(username) || this.validPassword(password)){
+  
+    this.login();
+  }
+  else{
+    alert('Please fillout all forms!');
+  }
+  
+  
 }
 validUsername(username: string){
   if(username == null || username == ""){
     this.uErrorMessage="Please enter a username!";
+    return false;
   }
   else{
     this.uErrorMessage = "";
+    return true;
   }
 }
 validPassword(password: string){
@@ -35,5 +44,8 @@ validPassword(password: string){
   else{
     this.pErrorMessage = "";
   }
+}
+login(){
+
 }
 }
