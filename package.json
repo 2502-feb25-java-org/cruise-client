@@ -22,13 +22,9 @@
     "@angular/router": "~7.2.0",
     "angular-datatables": "^7.0.0",
     "core-js": "^2.5.4",
-<<<<<<< HEAD
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "jquery": "^3.3.1",
-=======
-    "npm-install-missing": "^0.1.4",
->>>>>>> a74556589ca300bb673a44da0ef47c6a23a47236
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
@@ -39,15 +35,10 @@
     "@angular/compiler-cli": "~7.2.0",
     "@angular/http": "^7.2.12",
     "@angular/language-service": "~7.2.0",
-<<<<<<< HEAD
     "@types/datatables.net": "^1.10.17",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.3.29",
-=======
-    "@types/jasmine": "~2.8.8",
-    "@types/jasminewd2": "~2.0.3",
->>>>>>> a74556589ca300bb673a44da0ef47c6a23a47236
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",

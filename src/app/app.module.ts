@@ -4,11 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
-<<<<<<< HEAD
 import { DataTablesModule } from 'angular-datatables';
 
-=======
->>>>>>> a74556589ca300bb673a44da0ef47c6a23a47236
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
