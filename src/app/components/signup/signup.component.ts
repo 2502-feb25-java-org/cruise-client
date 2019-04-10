@@ -16,13 +16,13 @@ export class SignupComponent implements OnInit {
   password: string;
   email: string;
   phoneNumber: string;
-  DOB: Date;
+  DOB: string;
   addressLine1: string;
   addressLine2: string;
   addressType: string;
   city: string;
   zipcode: string;
-  picture: Blob;
+  picture: string;
 
 
 
@@ -34,7 +34,8 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     console.log('in SignupComponent ngOnInit');
     this.test = this.riderService.test();
-    this.addRider();
+    //this.addRider();
+    this.loadLocalVal();
   }
 
   addRider() {
@@ -61,10 +62,34 @@ export class SignupComponent implements OnInit {
       },
       error => console.log('ERR')
     );
-
-
-
-
+  }
+  
+  //===LocalStorage===
+  saveSignUp(){
+    localStorage.setItem("firstname", this.firstName);
+    localStorage.setItem("lastname", this.lastName);
+    localStorage.setItem("username", this.userName);
+    localStorage.setItem("email", this.email);
+    localStorage.setItem("phonenumber", this.phoneNumber);
+    localStorage.setItem("DoB", this.DOB);
+    localStorage.setItem("addressType", this.addressType);
+    localStorage.setItem("addressLine1", this.addressLine1);
+    localStorage.setItem("addressLine2",this.addressLine2);
+    localStorage.setItem("city", this.city);
+    localStorage.setItem("zipcode", this.zipcode);
+  }
+  loadLocalVal(){
+    this.firstName = localStorage.getItem("firstname");
+    this.lastName = localStorage.getItem("lastname");
+    this.userName = localStorage.getItem("username");
+    this.email = localStorage.getItem("email");
+    this.phoneNumber = localStorage.getItem("phonenumber");
+    this.DOB = localStorage.getItem("DoB");
+    this.addressType = localStorage.getItem("addressType");
+    this.addressLine1 = localStorage.getItem("addressLine1");
+    this.addressLine2 = localStorage.getItem("addressLine2");
+    this.city = localStorage.getItem("city");
+    this.zipcode = localStorage.getItem("zipcode");
   }
 
 }
