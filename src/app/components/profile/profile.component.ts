@@ -14,3 +14,9 @@ export class ProfileComponent implements OnInit {
   }
 
 }
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: 'profile.component.html'
+})
+export class ZeroConfigComponent {}
