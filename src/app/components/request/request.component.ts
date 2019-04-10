@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestComponent implements OnInit {
 
+  
   constructor() { }
 
   ngOnInit() {
   }
 
+  
+}
+
+function name(param: String) {
+ 
+    
 }

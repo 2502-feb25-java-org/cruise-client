@@ -22,8 +22,7 @@ import { RideService } from './services/ride/ride.service';
     RequestComponent,
     SignupComponent,
     HomeComponent,
-    FooterComponent,
-    HomeComponent, 
+    FooterComponent, 
    ProfileComponent
   ],
   imports: [
