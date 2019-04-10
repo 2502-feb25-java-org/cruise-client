@@ -9,6 +9,6 @@ export class Rider {
     email: string;
     phoneNumber: string;
     DOB: string;
-    picture: Blob;
+    picture: string;
     addresses: Address[];
 }

@@ -22,11 +22,11 @@ export class RiderService {
   }
 
   public getByUsernameAndPassword(username: string, password: string): Observable<Rider>{
-    return this.http.post<Rider>(this.API_URL,[username, password]);
+    return this.http.post<Rider>(this.API_URL + "/get",[username, password]);
   }
 
   public postRider(rider: Rider): Observable<Rider>{
-    return this.http.post<Rider>(this.API_URL, rider, this.httpOptions);
+    return this.http.post<Rider>(this.API_URL + "/add", rider, this.httpOptions);
   }
 
 }
