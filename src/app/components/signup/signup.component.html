@@ -16,82 +16,71 @@
       
   <tr>
     <td>First Name</td>
-    <td><input type= "text" placeholder = "First Name here" required/></td>
+    <td><input type= "text" [(ngModel)]="firstName" placeholder = "First Name here"/></td>
   </tr>
       
   <tr>
     <td>Last Name</td>
-    <td><input type= "text" placeholder = "Last Name here" required/></td>
+    <td><input type= "text" [(ngModel)]="lastName" placeholder = "Last Name here"/></td>
   </tr>
       
   <tr>
     <td>Username</td>
-    <td><input type= "text" placeholder = "Desired username" required/></td>
+    <td><input type= "text" [(ngModel)]="username" placeholder = "Desired username"/></td>
   </tr>
       
 <tr>
     <td>Password</td>
-    <td><input type= "password" placeholder = "Desired password" required/></td>
+    <td><input type= "password" [(ngModel)]="password" placeholder = "Desired password"/></td>
   </tr>
 
  <tr>
     <td>Email</td>
-    <td><input type= "text" placeholder = "Primary email address" required/></td>
+    <td><input type= "text" [(ngModel)]="email" placeholder = "Primary email address"/></td>
   </tr>
  
   <tr>
     <td>Phone Number</td>
-    <td><input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder = "XXX-XXX-XXXX" required></td>
+    <td><input type="tel" [(ngModel)]="phoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder = "XXX-XXX-XXXX"></td>
   </tr>
       
 <tr>
     <td>Date of Birth</td>
-    <td><input type="date" name="birthday" placeholder="Date of Birth" required></td>
+    <td><input type="date" [(ngModel)]="DOB" name="birthday" placeholder="Date of Birth"></td>
   </tr>    
   
   <tr>
     <td>Address Line 1: </td>
-    <td><input type="text" name="addressLine1" placeholder= "Address Line 1" required></td>
+    <td><input type="text" [(ngModel)]="addressLine1" placeholder= "Address Line 1"></td>
   </tr>
   
   <tr>
     <td>Address Line 2: </td>
-    <td><input type="text" name="addressLine2" placeholder="Address Line 2" required></td>
+    <td><input type="text" [(ngModel)]="addressLine2" placeholder="Address Line 2"></td>
   </tr>
 
   <tr>
-<<<<<<< HEAD
-    <td>
-      <select>
-        <option value="residenceType">Type of Residence:</option>
-        <option value="type1">Home</option>
-        <option value="type2">Work</option>
-        <option value="other">Other</option>
-      </select>
-   </td>
-=======
-    <td><select>
+    <td><select [(ngModel)]="addressType">
       <option value="residenceType">Type of Residence:</option>
       <option value="type1">Home</option>
       <option value="type2">Work</option>
       <option value="other">Other</option>
     </select></td>
->>>>>>> 5f1129d64b2ee690ea3a1a3f3c7e6515222165e0
   </tr>
 
   <tr>
     <td>City: </td>
-    <td><input type="text" name="city" placeholder="City" required></td>
+    <td><input type="text" [(ngModel)]="city" placeholder="City" required></td>
   </tr>
 
   <tr>
     <td>Zipcode: </td>
-    <td><input type="number" name="zipcode"placeholder="Postal/Zipcode"></td>
+    <td><input type="number" [(ngModel)]="zipcode" placeholder="Postal/Zipcode"></td>
   </tr>
 
   <tr>
       <td>Profile Picture: </td>
-      <td><input type="file" name="pic" accept="image/*"></td>
+      <td><input type="file" [(ngModel)]="picture" name="pic" accept="image/*"></td>
   </tr>
 
 </table>
@@ -99,5 +88,5 @@
 <div>
   <p>Please read through your information and make sure it is correct.</p>
   <p>When you have verified your personal/contact information is accurate, click sumbit to join Cruise!</p>
-  <button>Register!</button>
+  <button (click) = "addRider()">Register!</button>
 </div>
