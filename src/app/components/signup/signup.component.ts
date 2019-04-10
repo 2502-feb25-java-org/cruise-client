@@ -12,7 +12,7 @@ export class SignupComponent implements OnInit {
   test: string;
   firstName: string;
   lastName: string;
-  userName: string;
+  newUserName: string;
   password: string;
   email: string;
   phoneNumber: string;
@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
     let address = new Address;
     rider.firstName = this.firstName;
     rider.lastName = this.lastName;
-    rider.username = this.userName;
+    rider.username = this.newUserName;
     rider.password = this.password;
     rider.email = this.email;
     rider.phoneNumber = this.phoneNumber;
@@ -63,12 +63,12 @@ export class SignupComponent implements OnInit {
       error => console.log('ERR')
     );
   }
-  
+
   //===LocalStorage===
   saveSignUp(){
     localStorage.setItem("firstname", this.firstName);
     localStorage.setItem("lastname", this.lastName);
-    localStorage.setItem("username", this.userName);
+    localStorage.setItem("newUsername", this.newUserName);
     localStorage.setItem("email", this.email);
     localStorage.setItem("phonenumber", this.phoneNumber);
     localStorage.setItem("DoB", this.DOB);
@@ -79,17 +79,26 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("zipcode", this.zipcode);
   }
   loadLocalVal(){
-    this.firstName = localStorage.getItem("firstname");
-    this.lastName = localStorage.getItem("lastname");
-    this.userName = localStorage.getItem("username");
-    this.email = localStorage.getItem("email");
-    this.phoneNumber = localStorage.getItem("phonenumber");
-    this.DOB = localStorage.getItem("DoB");
-    this.addressType = localStorage.getItem("addressType");
-    this.addressLine1 = localStorage.getItem("addressLine1");
-    this.addressLine2 = localStorage.getItem("addressLine2");
-    this.city = localStorage.getItem("city");
-    this.zipcode = localStorage.getItem("zipcode");
+    this.firstName = this.notNull("firstname");
+    this.lastName = this.notNull("lastname");
+    this.newUserName = this.notNull("newUsername");
+    this.email = this.notNull("email");
+    this.phoneNumber = this.notNull("phonenumber");
+    this.DOB = this.notNull("DoB");
+    this.addressType = this.notNull("addressType");
+    this.addressLine1 = this.notNull("addressLine1");
+    this.addressLine2 = this.notNull("addressLine2");
+    this.city = this.notNull("city");
+    this.zipcode = this.notNull("zipcode");
+  }
+  notNull(checkStr: string){
+    var localStr: string = localStorage.getItem(checkStr);
+    if(localStr != null && localStr != ""){
+      return localStr;
+    }
+    else{
+      return "";
+    }
   }
 
 }
