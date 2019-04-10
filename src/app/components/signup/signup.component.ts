@@ -24,8 +24,7 @@ export class SignupComponent implements OnInit {
   zipcode: string;
   picture: string;
 
-
-
+  
   constructor(private riderService: RiderService) {
     console.log('in SignUpComponent constructor. instantiating RiderService');
     console.log(riderService.name);
@@ -59,9 +58,11 @@ export class SignupComponent implements OnInit {
     this.riderService.postRider(rider).subscribe(
       r => {
         console.log(r + "addded successfully");
+        window.location.href = "/login";
       },
       error => console.log('ERR')
     );
+    
   }
 
   //===LocalStorage===
