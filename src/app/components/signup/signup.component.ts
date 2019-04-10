@@ -62,6 +62,7 @@ export class SignupComponent implements OnInit {
       },
       error => console.log('ERR')
     );
+    window.location.href = "/home";
   }
 
   //===LocalStorage===
