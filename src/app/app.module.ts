@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -36,7 +37,8 @@ import { RideService } from './services/ride/ride.service';
     HttpModule,
     HttpClientModule,
     AgmCoreModule.forRoot({ 
-      apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' })
+      apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
+      DataTablesModule
   ],
   providers: [
     RiderService,
