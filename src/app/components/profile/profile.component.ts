@@ -8,9 +8,9 @@ import { RiderService } from 'src/app/services/rider/rider.service'
 })
 export class ProfileComponent implements OnInit {
 
-  uName : string;
-  email: string;
-  homeAddr: string;
+  uName : string = "";
+  email: string = "";
+  homeAddr: string = "";
 
 
   constructor() { }
