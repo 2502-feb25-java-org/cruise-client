@@ -59,10 +59,11 @@ export class SignupComponent implements OnInit {
     this.riderService.postRider(rider).subscribe(
       r => {
         console.log(r + "addded successfully");
+        window.location.href = "/home";
       },
       error => console.log('ERR')
     );
-    window.location.href = "/home";
+    
   }
 
   //===LocalStorage===
