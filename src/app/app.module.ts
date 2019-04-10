@@ -16,7 +16,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RiderService } from './services/rider/rider.service';
 import { CarService } from './services/car/car.service';
 import { RideService } from './services/ride/ride.service';
-import { RouteService } from './services/route/route.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { RouteService } from './services/route/route.service';
     FooterComponent, 
    ProfileComponent,
     HomeComponent, 
-    ProfileComponent
 
   ],
   imports: [
@@ -44,7 +42,6 @@ import { RouteService } from './services/route/route.service';
     RiderService,
     CarService,
     RideService,
-    RouteService
   ],
   bootstrap: [AppComponent]
 })
