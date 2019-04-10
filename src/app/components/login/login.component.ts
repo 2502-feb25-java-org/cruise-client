@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { $ } from 'protractor';
+import { RiderService } from '../../services/rider/rider.service'
+import { Rider } from '../../models/rider/rider'
 
 @Component({
   selector: 'app-login',
@@ -7,13 +9,18 @@ import { $ } from 'protractor';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  
+  //===Strings===
   username: string;
-  uErrorMessage: string;
-  pErrorMessage: string;
+  userErrMsg: string;
+  pswErrMsg: string;
+  loginErrMsg: string;
   rememberBox;
 
-  constructor() { }
+  //===Objects===
+  rider: Rider;
+
+  constructor(private rService: RiderService) { }
 
   ngOnInit() {
     if (localStorage.getItem('rememberMe') == 'true') {
@@ -26,34 +33,25 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  submit(username: string, password: string) {
-    if (this.validUsername(username) || this.validPassword(password)) {
-      this.remember();
-      this.login();
-    }
-    else {
-      alert('Please fillout all forms!');
-    }
-  }
+  //===Methods===
   validUsername(username: string) {
     if (username == null || username == "") {
-      this.uErrorMessage = "Please enter a username!";
+      this.userErrMsg = "Please enter a username!";
       return false;
     }
     else {
-      this.uErrorMessage = "";
+      this.userErrMsg = "";
       return true;
     }
   }
   validPassword(password: string) {
     if (password == null || password == "") {
-      this.pErrorMessage = "Please enter a password.";
+      this.pswErrMsg = "Please enter a password.";
     }
     else {
-      this.pErrorMessage = "";
+      this.pswErrMsg = "";
     }
   }
-
   remember() {
     if (this.rememberBox) {
 
@@ -64,10 +62,32 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('rememberMe', this.rememberBox);
       localStorage.setItem('storedUsername', "");
     }
-
   }
 
-  login() {
-
+  login(username: string, password: string) {
+    this.rService.getUserByUsername(username).subscribe(
+      myRespBody => {
+        if(myRespBody != null){
+          this.rider = myRespBody;
+          console.log("User recieved!" + JSON.stringify(this.rider));
+          this.loginErrMsg = '';
+        }
+        else{
+          console.log("User not found");
+          this.loginErrMsg = "Username or Password not found";
+        }
+      },
+      error => console.log('ERR')
+    );
+  }
+//===Super function called by login_btn===
+  submit(username: string, password: string) {
+    if (this.validUsername(username) || this.validPassword(password)) {
+      this.remember();
+      this.login(username, password);
+    }
+    else {
+      alert('Please fillout all forms!');
+    }
   }
 }
