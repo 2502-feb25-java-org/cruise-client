@@ -11,20 +11,30 @@ export class LoginComponent implements OnInit {
   username: string;
   uErrorMessage: string;
   pErrorMessage: string;
+  rememberBox;
+  
 
   constructor() { }
 
   ngOnInit() {
+    if(localStorage.getItem('rememberMe') == 'true'){
+      this.username = localStorage.getItem('storedUsername');
+      this.rememberBox = localStorage.getItem('rememberMe');
+    }
+    else{
+      this.username = "";
+      this.rememberBox = false;
+    }
   }
+
 submit(username: string, password: string){
   if(this.validUsername(username) || this.validPassword(password)){
-  
+    this.remember();
     this.login();
   }
   else{
     alert('Please fillout all forms!');
   }
-  
   
 }
 validUsername(username: string){
@@ -45,6 +55,20 @@ validPassword(password: string){
     this.pErrorMessage = "";
   }
 }
+
+remember(){
+  if(this.rememberBox){
+   
+    localStorage.setItem('storedUsername', this.username);
+    localStorage.setItem('rememberMe', this.rememberBox);
+  }
+  else {
+    localStorage.setItem('rememberMe', this.rememberBox);
+    localStorage.setItem('storedUsername', "");
+  }
+
+}
+
 login(){
 
 }
