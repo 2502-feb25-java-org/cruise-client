@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
   password: string;
   email: string;
   phoneNumber: string;
-  DOB: string;
+  dob: string;
   addressLine1: string;
   addressLine2: string;
   addressType: string;
@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
     rider.password = this.password;
     rider.email = this.email;
     rider.phoneNumber = this.phoneNumber;
-    rider.DOB = this.DOB;
+    rider.dob = this.dob;
     address.type = this.addressType;
     address.line1 = this.addressLine1;
     address.line2 = this.addressLine2;
@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("newUsername", this.newUserName);
     localStorage.setItem("email", this.email);
     localStorage.setItem("phonenumber", this.phoneNumber);
-    localStorage.setItem("DoB", this.DOB);
+    localStorage.setItem("dob", this.dob);
     localStorage.setItem("addressType", this.addressType);
     localStorage.setItem("addressLine1", this.addressLine1);
     localStorage.setItem("addressLine2",this.addressLine2);
@@ -84,7 +84,7 @@ export class SignupComponent implements OnInit {
     this.newUserName = this.notNull("newUsername");
     this.email = this.notNull("email");
     this.phoneNumber = this.notNull("phonenumber");
-    this.DOB = this.notNull("DoB");
+    this.dob = this.notNull("dob");
     this.addressType = this.notNull("addressType");
     this.addressLine1 = this.notNull("addressLine1");
     this.addressLine2 = this.notNull("addressLine2");
