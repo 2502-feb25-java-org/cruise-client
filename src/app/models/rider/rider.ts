@@ -8,7 +8,7 @@ export class Rider {
     password: string;
     email: string;
     phoneNumber: string;
-    DOB: string;
+    dob: string;
     picture: string;
     addresses: Address[];
 }
