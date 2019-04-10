@@ -7,9 +7,12 @@ import { Rider } from 'src/app/models/rider/rider';
   providedIn: 'root'
 })
 export class RiderService {
+  //==variables==
   name: string ='This is my singleton rider service';
 
   API_URL: string = 'http://localhost:8080/cruise/rider';
+  //==user==
+  public static globalRider: Rider;
  
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

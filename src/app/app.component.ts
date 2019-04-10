@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Rider } from './models/rider/rider';
+
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'cruise-client';
   
+  globalRider: Rider;
 }

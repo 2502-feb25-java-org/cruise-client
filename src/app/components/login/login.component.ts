@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
           this.rider = myRespBody;
           console.log("User recieved!" + JSON.stringify(this.rider));
           this.loginErrMsg = '';
+          RiderService.globalRider = this.rider; //must make global rider public static
         }
         else{
           console.log("User not found");
