@@ -16,51 +16,68 @@
       
   <tr>
     <td>First Name</td>
-    <td><input type= "text" [(ngModel)]="firstName" placeholder = "First Name here"/></td>
+    <td><input type= "text" [(ngModel)]="firstName" placeholder = "First Name here" 
+      (change)="saveSignUp()"/>
+    </td>
   </tr>
       
   <tr>
     <td>Last Name</td>
-    <td><input type= "text" [(ngModel)]="lastName" placeholder = "Last Name here"/></td>
+    <td><input type= "text" [(ngModel)]="lastName" placeholder = "Last Name here"
+      (change)="saveSignUp()"/>
+    </td>
   </tr>
       
   <tr>
     <td>Username</td>
-    <td><input type= "text" [(ngModel)]="username" placeholder = "Desired username"/></td>
+    <td><input type= "text" [(ngModel)]="newUserName" placeholder = "Desired username"
+      (change)="saveSignUp()"/>
+    </td>
   </tr>
       
 <tr>
     <td>Password</td>
-    <td><input type= "password" [(ngModel)]="password" placeholder = "Desired password"/></td>
+    <td><input type= "password" [(ngModel)]="password" placeholder = "Desired password"/>
+    </td>
   </tr>
 
  <tr>
     <td>Email</td>
-    <td><input type= "text" [(ngModel)]="email" placeholder = "Primary email address"/></td>
+    <td><input type= "text" [(ngModel)]="email" placeholder = "Primary email address"
+      (change)="saveSignUp()"/>
+    </td>
   </tr>
  
   <tr>
     <td>Phone Number</td>
-    <td><input type="tel" [(ngModel)]="phoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder = "XXX-XXX-XXXX"></td>
+    <td><input type="tel" [(ngModel)]="phoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" 
+      placeholder = "XXX-XXX-XXXX" (change)="saveSignUp()">
+    </td>
   </tr>
       
 <tr>
     <td>Date of Birth</td>
-    <td><input type="date" [(ngModel)]="DOB" name="birthday" placeholder="Date of Birth"></td>
+    <td><input type="date" [(ngModel)]="DOB" name="birthday" placeholder="Date of Birth"
+      (change)="saveSignUp()">
+    </td>
   </tr>    
   
   <tr>
     <td>Address Line 1: </td>
-    <td><input type="text" [(ngModel)]="addressLine1" placeholder= "Address Line 1"></td>
+    <td><input type="text" [(ngModel)]="addressLine1" placeholder= "Address Line 1"
+      (change)="saveSignUp()">
+    </td>
   </tr>
   
   <tr>
     <td>Address Line 2: </td>
-    <td><input type="text" [(ngModel)]="addressLine2" placeholder="Address Line 2"></td>
+    <td><input type="text" [(ngModel)]="addressLine2" placeholder="Address Line 2"
+      (change)="saveSignUp()">
+    </td>
   </tr>
 
   <tr>
-    <td><select [(ngModel)]="addressType">
+    <td><select [(ngModel)]="addressType" (change) = "saveSignUp()">
       <option value="residenceType">Type of Residence:</option>
       <option value="type1">Home</option>
       <option value="type2">Work</option>
@@ -70,12 +87,15 @@
 
   <tr>
     <td>City: </td>
-    <td><input type="text" [(ngModel)]="city" placeholder="City" required></td>
+    <td><input type="text" [(ngModel)]="city" placeholder="City" 
+      (change)="saveSignUp()">
+    </td>
   </tr>
 
   <tr>
     <td>Zipcode: </td>
-    <td><input type="number" [(ngModel)]="zipcode" placeholder="Postal/Zipcode"></td>
+    <td><input type="number" [(ngModel)]="zipcode" placeholder="Postal/Zipcode"
+      (change) = "saveSignUp()"></td>
   </tr>
 
   <tr>
