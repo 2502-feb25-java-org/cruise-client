@@ -28,9 +28,7 @@ import { RideService } from './services/ride/ride.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-<<<<<<< HEAD
-    FormsModule
-=======
+    FormsModule,
     AgmCoreModule.forRoot({ 
       apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' })
   ],
@@ -38,7 +36,6 @@ import { RideService } from './services/ride/ride.service';
     RiderService,
     CarService,
     RideService
->>>>>>> origin/staging
   ],
   bootstrap: [AppComponent]
 })
