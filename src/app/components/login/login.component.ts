@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(username: string, password: string) {
-    this.rService.getUserByUsername(username).subscribe(
+    this.rService.getByUsernameAndPassword(username, password).subscribe(
       myRespBody => {
         if(myRespBody != null){
           this.rider = myRespBody;

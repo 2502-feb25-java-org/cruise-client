@@ -21,8 +21,8 @@ export class RiderService {
     return 'properly injected service';
   }
 
-  public getUserByUsername(username: string): Observable<Rider>{
-    return this.http.post<Rider>(this.API_URL, username);
+  public getByUsernameAndPassword(username: string, password: string): Observable<Rider>{
+    return this.http.post<Rider>(this.API_URL,[username, password]);
   }
 
   public postRider(rider: Rider): Observable<Rider>{
