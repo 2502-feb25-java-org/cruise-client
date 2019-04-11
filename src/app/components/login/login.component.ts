@@ -3,6 +3,7 @@ import { $ } from 'protractor';
 import { RiderService } from '../../services/rider/rider.service'
 import { Rider } from '../../models/rider/rider'
 import { WindowRef } from '@agm/core/utils/browser-globals';
+//import { rider } from '../../app.component'
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { WindowRef } from '@agm/core/utils/browser-globals';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   //===Strings===
   username: string;
   userErrMsg: string;
@@ -68,13 +69,13 @@ export class LoginComponent implements OnInit {
   login(username: string, password: string) {
     this.rService.getByUsernameAndPassword(username, password).subscribe(
       myRespBody => {
-        if(myRespBody != null){
+        if (myRespBody != null) {
           this.rider = myRespBody;
           console.log("User recieved!" + JSON.stringify(this.rider));
           this.loginErrMsg = '';
           RiderService.globalRider = this.rider; //must make global rider public static
         }
-        else{
+        else {
           console.log("User not found");
           this.loginErrMsg = "Username or Password not found";
         }
@@ -82,7 +83,7 @@ export class LoginComponent implements OnInit {
       error => console.log('ERR')
     );
   }
-//===Super function called by login_btn===
+  //===Super function called by login_btn===
   submit(username: string, password: string) {
     if (this.validUsername(username) || this.validPassword(password)) {
       this.remember();

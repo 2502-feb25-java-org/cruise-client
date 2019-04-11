@@ -9,9 +9,9 @@ import { Address } from 'src/app/models/address/address'
 })
 export class ProfileComponent implements OnInit {
 
-  // uName = RiderService.globalRider.username;
+  //uName = "test";
   // email: string;
-  // homeAddr = RiderSerivce.globalRider.address;
+  // homeAddr = RiderService.globalRider.addresses;
 
 
   constructor() { }
