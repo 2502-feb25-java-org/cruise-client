@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RiderService } from 'src/app/services/rider/rider.service';
 import { Rider } from 'src/app/models/rider/rider';
 import { Address } from 'src/app/models/address/address';
+import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -35,8 +36,8 @@ export class SignupComponent implements OnInit {
     this.test = this.riderService.test();
     //this.addRider();
     this.loadLocalVal();
+  
   }
-
   addRider() {
     let rider = new Rider();
     let address = new Address;
