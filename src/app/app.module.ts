@@ -19,6 +19,7 @@ import { RiderService } from './services/rider/rider.service';
 import { CarService } from './services/car/car.service';
 import { RideService } from './services/ride/ride.service';
 import { RouteService } from './services/route/route.service';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { RouteService } from './services/route/route.service';
     FooterComponent, 
    ProfileComponent,
     HomeComponent, 
-    ProfileComponent
+    ProfileComponent, FeedbackComponent
 
   ],
   imports: [
