@@ -8,15 +8,15 @@
 
             <h3>Hail our Driverless Fleet!</h3>
             <div class="form-group">
-              <input type="text" name="pickup" class="form-control" id="pickup" placeholder="Your Pickup Location *"
+              <input type="text" name="pickup" [(ngModel)]="start" class="form-control" id="pickup" placeholder="Your Pickup Location *"
                 value="" />
             </div>
             <div class="form-group">
-              <input type="text" name="dropff" id="dropff" class="form-control"
+              <input type="text" name="dropff" [(ngModel)]="destination" id="dropff" class="form-control"
                 placeholder="Your Drop Off Location *" value="" />
             </div>
             <div class="form-group">
-              <select name="rideType" id="rideType">
+              <select name="rideType" [(ngModel)]="type" id="rideType" >
                 <option value="">Ride Options</option>
                 <option value="Solo">Solo</option>
                 <option value="Shareable">Shareable</option>
@@ -25,7 +25,7 @@
             <div class="googlemap">
             <div class="form-group">
               <!-- <input type="button" class="btnSubmit" name="login" id="login" value="Login" />-->
-              <button class="btnSubmit" id="hail">Hail a Car!</button>
+              <button class="btnSubmit" (click)= "addRide()" id="hail">Hail a Car!</button>
             </div>
             </div>
           </div>
@@ -40,7 +40,7 @@
         width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
         <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng">
+<agm-map class="demo" [latitude]="lat" [longitude]="lng">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 </agm-map>
     </div>
