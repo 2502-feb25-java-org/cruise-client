@@ -58,6 +58,7 @@ export class SignupComponent implements OnInit {
     this.riderService.postRider(rider).subscribe(
       r => {
         console.log(r + "addded successfully");
+        this.rmLocalStrg();                     //rm local storage
         window.location.href = "/login";
       },
       error => console.log('ERR')
@@ -101,5 +102,17 @@ export class SignupComponent implements OnInit {
       return "";
     }
   }
-
+rmLocalStrg(){
+  localStorage.setItem("firstname", "");
+    localStorage.setItem("lastname", "");
+    localStorage.setItem("newUsername", "");
+    localStorage.setItem("email", "");
+    localStorage.setItem("phonenumber", "");
+    localStorage.setItem("dob", "");
+    localStorage.setItem("addressType", "");
+    localStorage.setItem("addressLine1", "");
+    localStorage.setItem("addressLine2", "");
+    localStorage.setItem("city", "");
+    localStorage.setItem("zipcode", "");
+}
 }
