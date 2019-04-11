@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.pswErrMsg = "";
+      return true;
     }
   }
   remember() {
@@ -84,7 +85,8 @@ export class LoginComponent implements OnInit {
   }
 //===Super function called by login_btn===
   submit(username: string, password: string) {
-    if (this.validUsername(username) || this.validPassword(password)) {
+    if (this.validUsername(username) && this.validPassword(password)) { 
+      //make sure validPassword returns otherwise evaluated as void
       this.remember();
       this.login(username, password);
       window.location.href = "/home"; //redirects a user
