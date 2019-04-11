@@ -74,7 +74,6 @@ export class LoginComponent implements OnInit {
           console.log("User recieved!" + JSON.stringify(this.rider));
           this.loginErrMsg = '';
           RiderService.globalRider = this.rider; //must make global rider public static
-          window.location.href = "/home"; //redirects a user
         }
         else{
           console.log("User not found");
@@ -90,7 +89,7 @@ export class LoginComponent implements OnInit {
       //make sure validPassword returns otherwise evaluated as void
       this.remember();
       this.login(username, password);
-      
+      window.location.href = "/home"; //redirects a user
     }
     else {
       alert('Please fillout all forms!');
