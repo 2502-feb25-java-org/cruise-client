@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RiderService } from 'src/app/services/rider/rider.service'
+import { Address } from 'src/app/models/address/address'
 
 @Component({
   selector: 'app-profile',
@@ -8,14 +9,17 @@ import { RiderService } from 'src/app/services/rider/rider.service'
 })
 export class ProfileComponent implements OnInit {
 
-  uName : string = "test";
-  email: string = "test";
-  homeAddr: string = "test";
+  // uName = RiderService.globalRider.username;
+  // email: string;
+  // homeAddr = RiderSerivce.globalRider.address;
 
 
   constructor() { }
 
   ngOnInit() {
+    // this.uName = RiderService.globalRider.username;
+    //this.email = "Test email";
+    // this.homeAddr = RiderService.globalRider.addresses[1];
   }
 
 }
