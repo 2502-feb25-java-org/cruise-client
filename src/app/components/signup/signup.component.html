@@ -112,7 +112,7 @@
 <div>
   <p>Please read through your information and make sure it is correct.</p>
   <p>When you have verified your personal/contact information is accurate, click sumbit to join Cruise!</p>
-  <button (click) = "addRider()">Register!</button>
+  <button [disabled]="lol.invalid || phone.invalid" (click) = "addRider()">Register!</button>
 </div>
 <!--Error message for not having a valid email address-->
 <div *ngIf="lol.invalid && (lol.dirty || lol.touched)"
