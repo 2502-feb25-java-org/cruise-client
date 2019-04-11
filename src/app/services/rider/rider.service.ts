@@ -13,7 +13,7 @@ export class RiderService {
   API_URL: string = 'http://ec2-18-218-174-33.us-east-2.compute.amazonaws.com:8080/cruise/rider';
   //
   //==user==
-  public static globalRider: Rider;
+  public globalRider: Rider;
  
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

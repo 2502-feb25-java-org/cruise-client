@@ -20,14 +20,14 @@ import { RideService } from './services/ride/ride.service';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 
 @NgModule({
-  declarations: [
+  declarations:[
     AppComponent,
     LoginComponent,
     NavbarComponent,
     RequestComponent,
     SignupComponent,   
     FooterComponent, 
-   ProfileComponent,
+    ProfileComponent,
     HomeComponent, 
     ProfileComponent, 
     FeedbackComponent
