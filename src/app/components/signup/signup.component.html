@@ -50,8 +50,8 @@
  
   <tr>
     <td>Phone Number</td>
-    <td><input type="tel" [(ngModel)]="phoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" 
-      placeholder = "XXX-XXX-XXXX" (change)="saveSignUp()">
+    <td><input type="number" [(ngModel)]="phoneNumber"  
+      placeholder = "XXX-XXX-XXXX" (change)="saveSignUp()" maxlength="10">
     </td>
   </tr>
       
