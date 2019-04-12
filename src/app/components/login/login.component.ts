@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem("loggedAddress1", this.rider.address.line1);
           sessionStorage.setItem("loggedCountry", this.rider.address.country);
           sessionStorage.setItem("loggedCity", this.rider.address.city);
+          sessionStorage.setItem("loggedZip", this.rider.address.zipcode);
         }
         else{
           console.log("User not found");
