@@ -5,11 +5,6 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { DataTablesModule } from 'angular-datatables';
-<<<<<<< HEAD
-import { Rider } from '../app/models/rider/rider'
-
-=======
->>>>>>> 74e22fe459f4b425e6f71ea08c6e5d17c8119600
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
