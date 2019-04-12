@@ -54,7 +54,8 @@ export class SignupComponent implements OnInit {
     address.line2 = this.addressLine2;
     address.city = this.city;
     address.country = "United States";
-    rider.addresses = [address];
+    address.zipcode = this.zipcode;     //added zipcode
+    rider.addresses = address;
 
     if(this.check(this.firstName) && this.check(this.lastName)&& this.check(this.newUserName)
     && this.check(this.password)&& this.check(this.password)&& this.check(this.email)

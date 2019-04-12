@@ -10,5 +10,5 @@ export class Rider {
     phoneNumber: string;
     dob: string;
     picture: string;
-    addresses: Address[];
+    addresses: Address;
 }
