@@ -88,9 +88,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(username: string, password: string) {
+    debugger;
     let sam = this.makeSam();
     this.rService.getByUsernameAndPassword(sam).subscribe(
       myRespBody => {
+        
         console.log("Observable received");
         // if(myRespBody != null){
         //   this.rider = myRespBody;
