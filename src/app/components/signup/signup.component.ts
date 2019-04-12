@@ -3,6 +3,7 @@ import { RiderService } from 'src/app/services/rider/rider.service';
 import { Rider } from 'src/app/models/rider/rider';
 import { Address } from 'src/app/models/address/address';
 import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
+import { checkAndUpdateBinding } from '@angular/core/src/view/util';
 
 @Component({
   selector: 'app-signup',
@@ -54,7 +55,14 @@ export class SignupComponent implements OnInit {
     address.city = this.city;
     address.country = "United States";
     rider.addresses = [address];
-    //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
+
+    if(this.check(this.firstName) && this.check(this.lastName)&& this.check(this.newUserName)
+    && this.check(this.password)&& this.check(this.password)&& this.check(this.email)
+    && this.check(this.phoneNumber)&& this.check(this.dob)&& this.check(this.addressLine1)
+    && this.check(this.addressType)&& this.check(this.city)
+    && this.check(this.zipcode)) {
+      alert("it works!");
+          //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
     console.log(JSON.stringify(rider));
     this.riderService.postRider(rider).subscribe(
       r => {
@@ -65,6 +73,12 @@ export class SignupComponent implements OnInit {
       error => console.log('ERR')
     );
     
+    }
+    else{
+      alert("it doesn't work!")
+    }
+
+
   }
 
   //===LocalStorage===
@@ -116,5 +130,12 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("addressLine2","");
     localStorage.setItem("city", "");
     localStorage.setItem("zipcode", "");
+  }
+
+  check(cf: string){
+    if(cf != null && cf != "" ){
+      return true;
+    }
+    return false;
   }
 }
