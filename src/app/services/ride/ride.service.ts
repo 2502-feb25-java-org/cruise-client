@@ -11,7 +11,7 @@ export class RideService {
 
   name: string ='This is my singleton ride service';
 
-  API_URL: string = 'http://localhost:8080/cruise/ride';
+  API_URL: string = 'http://ec2-18-218-174-33.us-east-2.compute.amazonaws.com:8080/cruise/ride';
   //==user==
 
   httpOptions = {
@@ -26,8 +26,8 @@ export class RideService {
     return 'properly injected service';
   }
 
-  public getByDestination(start: Address, destination: Address, duration: number, distance: number ): Observable<Ride>{
-    return this.http.post<Ride>(this.API_URL + "/get",[start, destination, duration, distance ]);
+  public getByUsername(username : string): Observable<Ride>{
+    return this.http.post<Ride>(this.API_URL + "/get", username, this.httpOptions);
   }
 
   public postRide(ride: Ride): Observable<Ride>{

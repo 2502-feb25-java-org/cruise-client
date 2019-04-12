@@ -25,18 +25,18 @@ export class SignupComponent implements OnInit {
   zipcode: string;
   picture: string;
 
-  
+
   constructor(private riderService: RiderService) {
     console.log('in SignUpComponent constructor. instantiating RiderService');
     console.log(riderService.name);
-   }
+  }
 
   ngOnInit() {
     console.log('in SignupComponent ngOnInit');
     this.test = this.riderService.test();
     //this.addRider();
     this.loadLocalVal();
-  
+
   }
   addRider() {
     let rider = new Rider();
@@ -53,22 +53,21 @@ export class SignupComponent implements OnInit {
     address.line2 = this.addressLine2;
     address.city = this.city;
     address.country = "United States";
-    rider.addresses = [address];
+    rider.address = address;
     //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
     console.log(JSON.stringify(rider));
     this.riderService.postRider(rider).subscribe(
       r => {
-        console.log(r + "added successfully");
+        console.log(r.firstName + " added successfully");
         this.delSignUp();
-        window.location.href = "/login";
+        //window.location.href = "/login";
       },
       error => console.log('ERR')
     );
-    
   }
 
   //===LocalStorage===
-  saveSignUp(){
+  saveSignUp() {
     localStorage.setItem("firstname", this.firstName);
     localStorage.setItem("lastname", this.lastName);
     localStorage.setItem("newUsername", this.newUserName);
@@ -77,11 +76,11 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("dob", this.dob);
     localStorage.setItem("addressType", this.addressType);
     localStorage.setItem("addressLine1", this.addressLine1);
-    localStorage.setItem("addressLine2",this.addressLine2);
+    localStorage.setItem("addressLine2", this.addressLine2);
     localStorage.setItem("city", this.city);
     localStorage.setItem("zipcode", this.zipcode);
   }
-  loadLocalVal(){
+  loadLocalVal() {
     this.firstName = this.notNull("firstname");
     this.lastName = this.notNull("lastname");
     this.newUserName = this.notNull("newUsername");
@@ -94,17 +93,17 @@ export class SignupComponent implements OnInit {
     this.city = this.notNull("city");
     this.zipcode = this.notNull("zipcode");
   }
-  notNull(checkStr: string){
+  notNull(checkStr: string) {
     var localStr: string = localStorage.getItem(checkStr);
-    if(localStr != null && localStr != ""){
+    if (localStr != null && localStr != "") {
       return localStr;
     }
-    else{
+    else {
       return "";
     }
   }
 
-  delSignUp(){
+  delSignUp() {
     localStorage.setItem("firstname", "");
     localStorage.setItem("lastname", "");
     localStorage.setItem("newUsername", "");
@@ -113,7 +112,7 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("dob", "");
     localStorage.setItem("addressType", "");
     localStorage.setItem("addressLine1", "");
-    localStorage.setItem("addressLine2","");
+    localStorage.setItem("addressLine2", "");
     localStorage.setItem("city", "");
     localStorage.setItem("zipcode", "");
   }

@@ -1,5 +1,4 @@
 export class Address {
-    id: number;
     type: string;
     line1: string;
     line2: string;
