@@ -3,6 +3,7 @@ import { RiderService } from 'src/app/services/rider/rider.service';
 import { Rider } from 'src/app/models/rider/rider';
 import { Address } from 'src/app/models/address/address';
 import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
+import { checkAndUpdateBinding } from '@angular/core/src/view/util';
 
 @Component({
   selector: 'app-signup',
@@ -53,6 +54,16 @@ export class SignupComponent implements OnInit {
     address.city = this.city;
     address.zipcode = this.zipcode;
     address.country = "United States";
+    address.zipcode = this.zipcode;     //added zipcode
+    rider.address = address;
+
+    if(this.check(this.firstName) && this.check(this.lastName)&& this.check(this.newUserName)
+    && this.check(this.password)&& this.check(this.password)&& this.check(this.email)
+    && this.check(this.phoneNumber)&& this.check(this.dob)&& this.check(this.addressLine1)
+    && this.check(this.addressType)&& this.check(this.city)
+    && this.check(this.zipcode)) {
+      alert("Sign up successfull!");
+          //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
     rider.address = address;
     //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
     console.log(JSON.stringify(rider));
@@ -64,6 +75,13 @@ export class SignupComponent implements OnInit {
       },
       error => console.log('Observable not returned')
     );
+    
+    }
+    else{
+      alert("Signup failed, please check your credentials!")
+    }
+
+
   }
 
   //===LocalStorage===
@@ -115,5 +133,12 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("addressLine2", "");
     localStorage.setItem("city", "");
     localStorage.setItem("zipcode", "");
+  }
+
+  check(cf: string){
+    if(cf != null && cf != "" ){
+      return true;
+    }
+    return false;
   }
 }
