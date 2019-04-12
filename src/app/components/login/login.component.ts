@@ -67,8 +67,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(username: string, password: string) {
+    debugger;
     this.rService.getByUsernameAndPassword("bill", "bill123").subscribe(
       myRespBody => {
+        
         console.log("Observable received");
         if(myRespBody != null){
           this.rider = myRespBody;

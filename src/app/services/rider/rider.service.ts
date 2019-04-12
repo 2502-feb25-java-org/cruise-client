@@ -26,6 +26,7 @@ export class RiderService {
   }
 
   public getByUsernameAndPassword(username: string, password: string): Observable<Rider>{
+    console.log(this.http.post<Rider>(this.API_URL + "/get",[username, password]));
     return this.http.post<Rider>(this.API_URL + "/get",[username, password]);
   }
 
