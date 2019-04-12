@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
 
    uName = sessionStorage.getItem("loggedUsername");
    email = sessionStorage.getItem("loggedEmail");
-  // homeAddr = RiderSerivce.globalRider.address;
+   homeAddr = sessionStorage.getItem("loggedAddress1") + sessionStorage.getItem("loggedCountry");
 
 
   constructor() { }
