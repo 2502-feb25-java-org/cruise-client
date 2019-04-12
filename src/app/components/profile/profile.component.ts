@@ -9,9 +9,10 @@ import { Address } from 'src/app/models/address/address'
 })
 export class ProfileComponent implements OnInit {
 
-  uName: string;
-  email: string;
-  homeAddr: string;
+
+   uName = sessionStorage.getItem("loggedUsername");
+   email = sessionStorage.getItem("loggedEmail");
+   homeAddr = sessionStorage.getItem("loggedAddress1") + sessionStorage.getItem("loggedCountry");
 
 
   constructor() { }
