@@ -10,7 +10,9 @@ export class RiderService {
   //==variables==
   name: string ='This is my singleton rider service';
 
-  API_URL: string = 'http://localhost:8080/cruise/rider';
+  API_URL: string = 'http://ec2-18-218-174-33.us-east-2.compute.amazonaws.com:8080/cruise/rider';
+  //API_URL: string = 'http://localhost:8080/cruise/rider';
+
   //==user==
   public static globalRider: Rider;
  
@@ -24,8 +26,9 @@ export class RiderService {
     return 'properly injected service';
   }
 
-  public getByUsernameAndPassword(username: string, password: string): Observable<Rider>{
-    return this.http.post<Rider>(this.API_URL + "/get",[username, password]);
+  public getByUsernameAndPassword(rider: Rider): Observable<Rider>{
+    console.log("testing");
+    return this.http.post<Rider>(this.API_URL + "/get",rider, this.httpOptions);
   }
 
   public postRider(rider: Rider): Observable<Rider>{

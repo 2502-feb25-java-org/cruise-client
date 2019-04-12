@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { $ } from 'protractor';
 import { RiderService } from '../../services/rider/rider.service'
 import { Rider } from '../../models/rider/rider'
-import { WindowRef } from '@agm/core/utils/browser-globals';
-//import { rider } from '../../app.component'
 
 @Component({
   selector: 'app-login',
@@ -20,7 +17,8 @@ export class LoginComponent implements OnInit {
   rememberBox;
 
   //===Objects===
-  rider: Rider;
+  //rider : Rider;
+  sendRider: Rider;
 
   constructor(private rService: RiderService) { }
 
@@ -66,21 +64,32 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(username: string, password: string) {
-    this.rService.getByUsernameAndPassword(username, password).subscribe(
-      myRespBody => {
-        if (myRespBody != null) {
-          this.rider = myRespBody;
-          console.log("User recieved!" + JSON.stringify(this.rider));
+  login(sendUsername: string, sendPassword: string) 
+  {
+    sendUsername = "mattL";
+    sendPassword = "password123";
+    
+    console.log('TEST');
+    
+    //this.sendRider.username = sendUsername;
+    //this.sendRider.password = sendPassword;
+    
+    this.rService.getByUsernameAndPassword(this.sendRider).subscribe(
+      myRespBody => 
+      {
+        if (myRespBody != null) 
+        {
+          this.sendRider = myRespBody;
+          console.log("User recieved!" + JSON.stringify(this.sendRider));
           this.loginErrMsg = '';
-          RiderService.globalRider = this.rider; //must make global rider public static
         }
-        else {
+        else 
+        {
           console.log("User not found");
           this.loginErrMsg = "Username or Password not found";
         }
       },
-      error => console.log('ERR')
+      () => console.log('ERR')
     );
   }
   //===Super function called by login_btn===
