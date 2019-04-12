@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.pswErrMsg = "";
+      return true;
     }
   }
   remember() {
@@ -64,6 +65,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   login(sendUsername: string, sendPassword: string) 
   {
     sendUsername = "mattL";
@@ -82,6 +84,17 @@ export class LoginComponent implements OnInit {
           this.sendRider = myRespBody;
           console.log("User recieved!" + JSON.stringify(this.sendRider));
           this.loginErrMsg = '';
+=======
+  login(username: string, password: string) {
+    this.rService.getByUsernameAndPassword("bill", "bill123").subscribe(
+      myRespBody => {
+        console.log("Observable received");
+        if(myRespBody != null){
+          this.rider = myRespBody;
+          console.log("User recieved!" + JSON.stringify(this.rider));
+          this.loginErrMsg = '';
+          this.rService.globalRider = this.rider; //must make global rider public static
+>>>>>>> 74e22fe459f4b425e6f71ea08c6e5d17c8119600
         }
         else 
         {
@@ -89,18 +102,24 @@ export class LoginComponent implements OnInit {
           this.loginErrMsg = "Username or Password not found";
         }
       },
+<<<<<<< HEAD
       () => console.log('ERR')
+=======
+      error => console.log('Observable not returned')
+>>>>>>> 74e22fe459f4b425e6f71ea08c6e5d17c8119600
     );
   }
   //===Super function called by login_btn===
   submit(username: string, password: string) {
-    if (this.validUsername(username) || this.validPassword(password)) {
-      this.remember();
-      this.login(username, password);
-      window.location.href = "/home"; //redirects a user
-    }
-    else {
-      alert('Please fillout all forms!');
-    }
+    this.login(username, password);
+    // if (this.validUsername(username) && this.validPassword(password)) { 
+    //   //make sure validPassword returns otherwise evaluated as void
+    //   this.remember();
+    //   this.login(username, password);
+    //   window.location.href = "/home"; //redirects a user
+    // }
+    // else {
+    //   alert('Please fillout all forms!');
+    // }
   }
 }

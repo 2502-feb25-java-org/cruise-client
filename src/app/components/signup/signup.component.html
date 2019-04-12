@@ -43,15 +43,19 @@
 
  <tr>
     <td>Email</td>
-    <td><input type= "text" [(ngModel)]="email" placeholder = "Primary email address"
-      (change)="saveSignUp()"/>
+    <td>
+      <input id="email" name="test" class="form-control"
+      required email appForbiddenName="bob"
+      [(ngModel)]="email" #lol="ngModel" (change)="saveSignUp()"placeholder = "Primary email address">
     </td>
   </tr>
  
   <tr>
     <td>Phone Number</td>
-    <td><input type="tel" [(ngModel)]="phoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" 
-      placeholder = "XXX-XXX-XXXX" (change)="saveSignUp()">
+    <td>
+      <input id="email" name="test" class="form-control"
+      required pattern="^[2-9]\d{2}-\d{3}-\d{4}$"
+      [(ngModel)]="phoneNumber" #phone="ngModel"(change)="saveSignUp()" maxlength="12" >
     </td>
   </tr>
       
@@ -108,5 +112,27 @@
 <div>
   <p>Please read through your information and make sure it is correct.</p>
   <p>When you have verified your personal/contact information is accurate, click sumbit to join Cruise!</p>
-  <button (click) = "addRider()">Register!</button>
+  <button [disabled]="lol.invalid || phone.invalid" (click) = "addRider()">Register!</button>
+</div>
+<!--Error message for not having a valid email address-->
+<div *ngIf="lol.invalid && (lol.dirty || lol.touched)"
+    class="alert alert-danger">
+
+  <div *ngIf="lol.errors.required">
+    Please enter your email!
+  </div>
+  <div *ngIf="lol.errors.email">
+    Not a valid Email!
+</div>
+</div>
+<!--Error Message for not having a proper phone number-->
+<div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+    class="alert alert-danger">
+
+  <div *ngIf="phone.errors.required">
+    Please enter your phone number
+  </div>
+  <div *ngIf="phone.errors.pattern">
+    Phone number must be in this form: XXX-XXX-XXXX.
+</div>
 </div>
