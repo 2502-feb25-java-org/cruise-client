@@ -26,21 +26,16 @@ export class RiderService {
     return 'properly injected service';
   }
 
-  //public getByUsernameAndPassword(rider: Rider): Observable<Rider>{
-    //console.log(this.http.post<Rider>(this.API_URL + "/find",rider));
-   // return this.http.post<Rider>(this.API_URL + "/find",rider);
-  // public getAll(): Observable<Rider[]> {
-  //   return this.http.get<Rider[]>(this.API_URL + "/getall");
-  // }
-  
-  public getByUsernameAndPassword(username: string, password: string): Observable<Rider>{
-    console.log("Inside RiderService getByUsernameAndPassword method");
-    return this.http.post<Rider>(this.API_URL + "/get", [username, password]);
-}
-
-
   public postRider(rider: Rider): Observable<Rider>{
     return this.http.post<Rider>(this.API_URL + "/add", rider, this.httpOptions);
   }
+  // public getAll(): Observable<Rider[]> {
+  //   return this.http.get<Rider[]>(this.API_URL + "/getall");
+  // }
+
+  public getByUsernameAndPassword(username: string, password: string): Observable<Rider>{
+    return this.http.post<Rider>(this.API_URL + "/find", [username, password], this.httpOptions);
+  }
+
 
 }
