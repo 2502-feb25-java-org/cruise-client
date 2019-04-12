@@ -13,7 +13,8 @@ export class ProfileComponent implements OnInit {
    uName = sessionStorage.getItem("loggedUsername");
    email = sessionStorage.getItem("loggedEmail");
    homeAddr = sessionStorage.getItem("loggedAddress1") + ", "
-   + sessionStorage.getItem("loggedCity") + " " + sessionStorage.getItem("loggedZip") + ", "
+   + sessionStorage.getItem("loggedCity") + " " 
+   + sessionStorage.getItem("loggedZip") + ", "
    + sessionStorage.getItem("loggedCountry");
 
 
