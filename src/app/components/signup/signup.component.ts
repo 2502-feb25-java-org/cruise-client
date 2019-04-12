@@ -34,10 +34,9 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     console.log('in SignupComponent ngOnInit');
     this.test = this.riderService.test();
-    //this.addRider();
     this.loadLocalVal();
-
   }
+  
   addRider() {
     let rider = new Rider();
     let address = new Address;
@@ -52,6 +51,7 @@ export class SignupComponent implements OnInit {
     address.line1 = this.addressLine1;
     address.line2 = this.addressLine2;
     address.city = this.city;
+    address.zipcode = this.zipcode;
     address.country = "United States";
     rider.address = address;
     //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
@@ -62,7 +62,7 @@ export class SignupComponent implements OnInit {
         this.delSignUp();
         //window.location.href = "/login";
       },
-      error => console.log('ERR')
+      error => console.log('Observable not returned')
     );
   }
 
