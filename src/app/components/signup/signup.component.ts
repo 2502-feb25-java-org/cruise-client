@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RiderService } from 'src/app/services/rider/rider.service';
 import { Rider } from 'src/app/models/rider/rider';
 import { Address } from 'src/app/models/address/address';
+import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -35,8 +36,8 @@ export class SignupComponent implements OnInit {
     this.test = this.riderService.test();
     //this.addRider();
     this.loadLocalVal();
+  
   }
-
   addRider() {
     let rider = new Rider();
     let address = new Address;
@@ -57,7 +58,8 @@ export class SignupComponent implements OnInit {
     console.log(JSON.stringify(rider));
     this.riderService.postRider(rider).subscribe(
       r => {
-        console.log(r + "addded successfully");
+        console.log(r + "added successfully");
+        this.delSignUp();
         window.location.href = "/login";
       },
       error => console.log('ERR')
@@ -102,4 +104,17 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  delSignUp(){
+    localStorage.setItem("firstname", "");
+    localStorage.setItem("lastname", "");
+    localStorage.setItem("newUsername", "");
+    localStorage.setItem("email", "");
+    localStorage.setItem("phonenumber", "");
+    localStorage.setItem("dob", "");
+    localStorage.setItem("addressType", "");
+    localStorage.setItem("addressLine1", "");
+    localStorage.setItem("addressLine2","");
+    localStorage.setItem("city", "");
+    localStorage.setItem("zipcode", "");
+  }
 }
