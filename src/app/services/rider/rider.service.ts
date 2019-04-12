@@ -11,8 +11,9 @@ export class RiderService {
   //==variables==
   name: string ='This is my singleton rider service';
 
-  API_URL: string = 'http://localhost:8081/cruise/rider';
-  //
+  API_URL: string = "http://ec2-18-218-174-33.us-east-2.compute.amazonaws.com:8080/cruise/rider";
+  //API_URL: string = 'http://localhost:8081/cruise/rider';
+  
   //==user==
   public globalRider: Rider;
  
