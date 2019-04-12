@@ -1,7 +1,8 @@
 .jumbotron {
-    background: #358CCE;
+    background: rgb(53, 206, 104);
     color: #FFF;
     border-radius: 0px;
+    text-align: center;
     }
     .jumbotron-sm { padding-top: 24px;
     padding-bottom: 24px; }

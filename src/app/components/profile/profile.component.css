@@ -11,7 +11,7 @@ p{
   }
   
   #dOne{
-    background-color: cyan;
+    background-color:rgba(111, 228, 44, 0.363);
     position: relative;
     top: 0px; /* Header Height */
     bottom: 20px; /* Footer Height */
@@ -25,3 +25,19 @@ p{
   img{
     margin-left: 50%;
   }
+
+  .jumbotron {
+    background: #358CCE;
+    color: #FFF;
+    border-radius: 0px;
+    text-align: center;
+    }
+    .jumbotron-sm { padding-top: 24px;
+    padding-bottom: 24px; }
+    .jumbotron small {
+    color: #FFF;
+    }
+    .h1 small {
+    font-size: 24px;
+    
+    }

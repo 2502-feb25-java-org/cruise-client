@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,8 @@ import { RiderService } from './services/rider/rider.service';
 import { CarService } from './services/car/car.service';
 import { RideService } from './services/ride/ride.service';
 import { FeedbackComponent } from './components/feedback/feedback.component';
+import { MapComponent } from './components/map/map.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations:[
@@ -30,7 +32,7 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
     ProfileComponent,
     HomeComponent, 
     ProfileComponent, 
-    FeedbackComponent
+    FeedbackComponent, MapComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +42,14 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
     HttpClientModule,
     AgmCoreModule.forRoot({ 
       apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
-      DataTablesModule
+      DataTablesModule,
+      NgbModule.forRoot()
   ],
   providers: [
     RiderService,
     CarService,
-    RideService
+    RideService,
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })
