@@ -16,51 +16,72 @@
       
   <tr>
     <td>First Name</td>
-    <td><input type= "text" [(ngModel)]="firstName" placeholder = "First Name here"/></td>
+    <td><input type= "text" [(ngModel)]="firstName" placeholder = "First Name here" 
+      (change)="saveSignUp()"/>
+    </td>
   </tr>
       
   <tr>
     <td>Last Name</td>
-    <td><input type= "text" [(ngModel)]="lastName" placeholder = "Last Name here"/></td>
+    <td><input type= "text" [(ngModel)]="lastName" placeholder = "Last Name here"
+      (change)="saveSignUp()"/>
+    </td>
   </tr>
       
   <tr>
     <td>Username</td>
-    <td><input type= "text" [(ngModel)]="username" placeholder = "Desired username"/></td>
+    <td><input type= "text" [(ngModel)]="newUserName" placeholder = "Desired username"
+      (change)="saveSignUp()"/>
+    </td>
   </tr>
       
 <tr>
     <td>Password</td>
-    <td><input type= "password" [(ngModel)]="password" placeholder = "Desired password"/></td>
+    <td><input type= "password" [(ngModel)]="password" placeholder = "Desired password"/>
+    </td>
   </tr>
 
  <tr>
     <td>Email</td>
-    <td><input type= "text" [(ngModel)]="email" placeholder = "Primary email address"/></td>
+    <td>
+      <input id="email" name="test" class="form-control"
+      required email appForbiddenName="bob"
+      [(ngModel)]="email" #lol="ngModel" (change)="saveSignUp()"placeholder = "Primary email address">
+    </td>
   </tr>
  
   <tr>
     <td>Phone Number</td>
-    <td><input type="tel" [(ngModel)]="phoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder = "XXX-XXX-XXXX"></td>
+    <td>
+      <input id="email" name="test" class="form-control"
+      required pattern="^[2-9]\d{2}-\d{3}-\d{4}$"
+      [(ngModel)]="phoneNumber" #phone="ngModel"(change)="saveSignUp()" maxlength="12" >
+    </td>
   </tr>
       
 <tr>
     <td>Date of Birth</td>
-    <td><input type="date" [(ngModel)]="DOB" name="birthday" placeholder="Date of Birth"></td>
+    <td><input type="date" [(ngModel)]="dob" name="birthday" placeholder="Date of Birth"
+      (change)="saveSignUp()">
+    </td>
   </tr>    
   
   <tr>
     <td>Address Line 1: </td>
-    <td><input type="text" [(ngModel)]="addressLine1" placeholder= "Address Line 1"></td>
+    <td><input type="text" [(ngModel)]="addressLine1" placeholder= "Address Line 1"
+      (change)="saveSignUp()">
+    </td>
   </tr>
   
   <tr>
     <td>Address Line 2: </td>
-    <td><input type="text" [(ngModel)]="addressLine2" placeholder="Address Line 2"></td>
+    <td><input type="text" [(ngModel)]="addressLine2" placeholder="Address Line 2"
+      (change)="saveSignUp()">
+    </td>
   </tr>
 
   <tr>
-    <td><select [(ngModel)]="addressType">
+    <td><select [(ngModel)]="addressType" (change) = "saveSignUp()">
       <option value="residenceType">Type of Residence:</option>
       <option value="type1">Home</option>
       <option value="type2">Work</option>
@@ -70,12 +91,15 @@
 
   <tr>
     <td>City: </td>
-    <td><input type="text" [(ngModel)]="city" placeholder="City" required></td>
+    <td><input type="text" [(ngModel)]="city" placeholder="City" 
+      (change)="saveSignUp()">
+    </td>
   </tr>
 
   <tr>
     <td>Zipcode: </td>
-    <td><input type="number" [(ngModel)]="zipcode" placeholder="Postal/Zipcode"></td>
+    <td><input type="number" [(ngModel)]="zipcode" placeholder="Postal/Zipcode"
+      (change) = "saveSignUp()"></td>
   </tr>
 
   <tr>
@@ -88,5 +112,27 @@
 <div>
   <p>Please read through your information and make sure it is correct.</p>
   <p>When you have verified your personal/contact information is accurate, click sumbit to join Cruise!</p>
-  <button (click) = "addRider()">Register!</button>
+  <button [disabled]="lol.invalid || phone.invalid" (click) = "addRider()">Register!</button>
+</div>
+<!--Error message for not having a valid email address-->
+<div *ngIf="lol.invalid && (lol.dirty || lol.touched)"
+    class="alert alert-danger">
+
+  <div *ngIf="lol.errors.required">
+    Please enter your email!
+  </div>
+  <div *ngIf="lol.errors.email">
+    Not a valid Email!
+</div>
+</div>
+<!--Error Message for not having a proper phone number-->
+<div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+    class="alert alert-danger">
+
+  <div *ngIf="phone.errors.required">
+    Please enter your phone number
+  </div>
+  <div *ngIf="phone.errors.pattern">
+    Phone number must be in this form: XXX-XXX-XXXX.
+</div>
 </div>

@@ -1,43 +1,48 @@
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="card" style="width: 30rem;">
-      <div class="card-body" id="login_card">
+    <div class="card" id="login_card" style="width: 30rem;">
+      <div class="card-body" id="login_card_body">
         <div class="row justify-content-center">
           <div class="form-group mr-3">
-            <label>Username:</label>
+            <label id="username_label">Username:</label>
           </div>
           <div class="form-group">
-            <input type="text" [(ngModel)] = "username" class="form-control" 
+            <input type="text" id="username_input" [(ngModel)] = "username" class="form-control" 
             #usernamebox (change) = "validUsername(usernamebox.value)" placeholder="username"/>
           </div>
         </div>
-        <div class="row justify-content-center">
-          <div>{{uErrorMessage}}</div>
+        <div class="row justify-content-center" id="user_err_msg">
+          <div>{{userErrMsg}}</div>
         </div>
         <div class="form-group row justify-content-center">
           <div class="form-group mr-3">
-            <label>Password:</label>
+            <label id="pwd_label">Password:</label>
           </div>
           <div class="form-group">
-            <input type="password" [(ngModel)] = "password" class="form-control" 
-            #passwordbox (change) = "validPassword(passwordbox.value)" placeholder="password"/>
+            <input type="password" id="pwd_input" [(ngModel)] = "password" class="form-control" 
+            #passwordbox (change) = "validPassword(passwordbox.value)" placeholder="password"
+            (keyup.enter)="submit(usernamebox.value, passwordbox.value)"/>
           </div>
         </div>
         <div class="form-group row justify-content-center">
-          <div>{{pErrorMessage}}</div>
+          <div id="pwd_err_msg">{{pswErrMsg}}</div>
         </div>
         <div class="row justify-content-center">
           <div class="form-group col-4">
-            <label class="form-check-label">Remember me:</label>
+            <label class="form-check-label" id="remb_label">Remember me:</label>
           </div>
           <div>
-            <input type="checkbox" class="form-check-input" [(ngModel)] = "rememberBox"
+            <input type="checkbox" class="form-check-input" id="remb_box" [(ngModel)] = "rememberBox"
             />
           </div>
           <div class="form-group col-4">
-            <input type="button" class="btn btn-primary" value="Login"
+            <input type="button" class="btn btn-primary" id="login_btn" value="Login"
             (click)="submit(usernamebox.value, passwordbox.value)"/>
           </div>
+        </div>
+        <div>{{loginErrMsg}}</div>
+        <div>
+          <a href="/signup">Sign up</a>
         </div>
       </div>
     </div>

@@ -8,25 +8,25 @@
 
             <h3>Hail our Driverless Fleet!</h3>
             <div class="form-group">
-              <input type="text" name="pickup" class="form-control" id="pickup" placeholder="Your Pickup Location *"
-                value="" />
+              <input type="text" name="pickup" [(ngModel)]="start" class="form-control" id="pickup"
+                placeholder="Your Pickup Location *" value="" />
             </div>
             <div class="form-group">
-              <input type="text" name="dropff" id="dropff" class="form-control"
+              <input type="text" name="dropff" [(ngModel)]="destination" id="dropff" class="form-control"
                 placeholder="Your Drop Off Location *" value="" />
             </div>
             <div class="form-group">
-              <select name="rideType" id="rideType">
+              <select name="rideType" [(ngModel)]="type" id="rideType">
                 <option value="">Ride Options</option>
                 <option value="Solo">Solo</option>
                 <option value="Shareable">Shareable</option>
               </select>
             </div>
             <div class="googlemap">
-            <div class="form-group">
-              <!-- <input type="button" class="btnSubmit" name="login" id="login" value="Login" />-->
-              <button class="btnSubmit" id="hail">Hail a Car!</button>
-            </div>
+              <div class="form-group">
+                <!-- <input type="button" class="btnSubmit" name="login" id="login" value="Login" />-->
+                <button class="btnSubmit" (click)="addRide()" id="hail">Hail a Car!</button>
+              </div>
             </div>
           </div>
         </div>
@@ -35,14 +35,30 @@
 
 
     <div class="col">
-     <!-- <iframe
+      <!-- <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6156606455493!2d-73.99223338454202!3d40.74848184331961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9da68b0c5%3A0x277f7da48757851e!2sCUNY+School+of+Professional+Studies!5e0!3m2!1sen!2sus!4v1554724600928!5m2!1sen!2sus"
         width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
-        <!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+      <!-- this creates a google map on the page with the given lat/lng from -->
+      <!-- the component as the initial center of the map: -->
+      <agm-map class="demo" [latitude]="lat" [longitude]="lng">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map>
     </div>
+
+    <div>
+      <table>
+      <tr>
+        <th>Company</th>
+        <th>Contact</th>
+        <th>Country</th>
+      </tr>
+      <tr>
+        <td>Alfreds Futterkiste</td>
+        <td>Maria Anders</td>
+        <td>Germany</td>
+      </tr>
+    </table>
+    </div>
+
   </div>
 </div>
