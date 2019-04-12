@@ -17,9 +17,7 @@ export class ProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.uName = RiderService.globalRider.username;
-    //this.email = "Test email";
-    // this.homeAddr = RiderService.globalRider.addresses[1];
+    
   }
 
 }
