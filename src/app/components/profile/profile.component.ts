@@ -9,8 +9,8 @@ import { Address } from 'src/app/models/address/address'
 })
 export class ProfileComponent implements OnInit {
 
-  // uName = RiderService.globalRider.username;
-  // email: string;
+   uName = sessionStorage.getItem("loggedUsername");
+   email = sessionStorage.getItem("loggedEmail");
   // homeAddr = RiderSerivce.globalRider.address;
 
 
