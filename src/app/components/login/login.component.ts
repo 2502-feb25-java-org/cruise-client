@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RiderService } from '../../services/rider/rider.service'
 import { Rider } from '../../models/rider/rider'
-<<<<<<< HEAD
-=======
 import { Address } from 'src/app/models/address/address';
 
->>>>>>> ca852191545a5e580080991595a8ca5d62d70c5a
 
 @Component({
   selector: 'app-login',
@@ -94,19 +91,6 @@ export class LoginComponent implements OnInit {
     this.rService.getByUsernameAndPassword(sam).subscribe(
       myRespBody => {
         console.log("Observable received");
-<<<<<<< HEAD
-        if(myRespBody != null){
-          this.rider = myRespBody;
-          console.log("User recieved!" + JSON.stringify(this.rider));
-          this.loginErrMsg = '';
-          this.rService.globalRider = this.rider; //must make global rider public static
-        }
-        else 
-        {
-          console.log("User not found");
-          this.loginErrMsg = "Username or Password not found";
-        }
-=======
         // if(myRespBody != null){
         //   this.rider = myRespBody;
         //   console.log("Rider recieved!" + JSON.stringify(this.rider));
@@ -117,15 +101,10 @@ export class LoginComponent implements OnInit {
         //   console.log("User not found");
         //   this.loginErrMsg = "Username or Password not found";
         // }
->>>>>>> ca852191545a5e580080991595a8ca5d62d70c5a
       },
       error => console.log('Observable not returned')
     );
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> ca852191545a5e580080991595a8ca5d62d70c5a
   //===Super function called by login_btn===
   submit(username: string, password: string) {
     this.login(username, password);
