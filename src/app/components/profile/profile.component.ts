@@ -13,9 +13,9 @@ export class ProfileComponent implements OnInit {
 
    uName = this.loggedUser.username;
    email = this.loggedUser.email;
-   homeAddr = this.loggedUser.address.line1 + this.loggedUser.address.line2 + this.loggedUser.address.city
-    + this.loggedUser.address.country + this.loggedUser.address.zipcode;
-
+   homeAddr = this.loggedUser.address.line1 + ", "+ this.loggedUser.address.line2 + ", "
+   + this.loggedUser.address.city + ", " + this.loggedUser.address.country + ", " 
+   + this.loggedUser.address.zipcode;
 
   constructor() { }
 
