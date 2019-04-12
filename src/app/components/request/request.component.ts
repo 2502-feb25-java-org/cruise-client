@@ -4,6 +4,7 @@ import { Rider } from 'src/app/models/rider/rider';
 import { Address } from 'src/app/models/address/address';
 import { RideService } from 'src/app/services/ride/ride.service';
 import { Ride } from 'src/app/models/ride/ride';
+import { Car } from 'src/app/models/car/car';
 
 @Component({
   selector: 'app-request',
@@ -18,25 +19,30 @@ export class RequestComponent implements OnInit {
   destination: Address;
   distance: number;
   duration: number;
+  model: Car;
+  make: Car;
   
+
   constructor(private rideService: RideService) {
-   //console.log(rideService.start);
-   console.log("hello world!");
-   }
+    //console.log(rideService.start);
+    console.log("hello world!");
+  }
 
   ngOnInit() {
     this.test = this.rideService.test();
-    
+
   }
 
-  addRide(){
+  addRide() {
     let ride = new Ride();
     let address = new Address();
+    let car = new Car();
 
     ride.start = this.start;
     ride.destination = this.destination;
     ride.distance = this.distance;
     ride.duration = this.duration;
+    //car.make = this.make;
 
     console.log(JSON.stringify(ride));
     this.rideService.postRide(ride).subscribe(
@@ -46,10 +52,8 @@ export class RequestComponent implements OnInit {
       },
       error => console.log('ERR')
     );
-    
   }
-    
-  }
-  
+}
+
 
 
