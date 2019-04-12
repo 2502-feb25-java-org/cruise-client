@@ -17,8 +17,7 @@ export class LoginComponent implements OnInit {
   rememberBox;
 
   //===Objects===
-  //rider : Rider;
-  sendRider: Rider;
+  rider : Rider;
 
   constructor(private rService: RiderService) { }
 
@@ -65,26 +64,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
-  login(sendUsername: string, sendPassword: string) 
-  {
-    sendUsername = "mattL";
-    sendPassword = "password123";
-    
-    console.log('TEST');
-    
-    //this.sendRider.username = sendUsername;
-    //this.sendRider.password = sendPassword;
-    
-    this.rService.getByUsernameAndPassword(this.sendRider).subscribe(
-      myRespBody => 
-      {
-        if (myRespBody != null) 
-        {
-          this.sendRider = myRespBody;
-          console.log("User recieved!" + JSON.stringify(this.sendRider));
-          this.loginErrMsg = '';
-=======
   login(username: string, password: string) {
     this.rService.getByUsernameAndPassword("bill", "bill123").subscribe(
       myRespBody => {
@@ -94,7 +73,6 @@ export class LoginComponent implements OnInit {
           console.log("User recieved!" + JSON.stringify(this.rider));
           this.loginErrMsg = '';
           this.rService.globalRider = this.rider; //must make global rider public static
->>>>>>> 74e22fe459f4b425e6f71ea08c6e5d17c8119600
         }
         else 
         {
@@ -102,11 +80,8 @@ export class LoginComponent implements OnInit {
           this.loginErrMsg = "Username or Password not found";
         }
       },
-<<<<<<< HEAD
-      () => console.log('ERR')
-=======
+      () => console.log('ERR'),
       error => console.log('Observable not returned')
->>>>>>> 74e22fe459f4b425e6f71ea08c6e5d17c8119600
     );
   }
   //===Super function called by login_btn===
