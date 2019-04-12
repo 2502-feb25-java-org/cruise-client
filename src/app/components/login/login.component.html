@@ -20,7 +20,8 @@
           </div>
           <div class="form-group">
             <input type="password" id="pwd_input" [(ngModel)] = "password" class="form-control" 
-            #passwordbox (change) = "validPassword(passwordbox.value)" placeholder="password"/>
+            #passwordbox (change) = "validPassword(passwordbox.value)" placeholder="password"
+            (keyup.enter)="submit(usernamebox.value, passwordbox.value)"/>
           </div>
         </div>
         <div class="form-group row justify-content-center">
