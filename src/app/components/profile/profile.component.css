@@ -11,7 +11,6 @@ p{
   }
   
   #dOne{
-    background-color: cyan;
     position: relative;
     top: 0px; /* Header Height */
     bottom: 20px; /* Footer Height */
