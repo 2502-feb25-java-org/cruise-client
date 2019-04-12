@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { $ } from 'protractor';
 import { RiderService } from '../../services/rider/rider.service'
 import { Rider } from '../../models/rider/rider'
-import { WindowRef } from '@agm/core/utils/browser-globals';
+import { Address } from 'src/app/models/address/address';
+
 
 @Component({
   selector: 'app-login',
@@ -66,27 +67,49 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  makeSam() {
+    let sam = new Rider();
+    sam.firstName = 'sam';
+    sam.lastName = 'samson';
+    sam.username = 'sam';
+    sam.password = 'sam123';
+    sam.dob = '09/23/1990';
+    sam.email = 'sam@gamil.com';
+    sam.phoneNumber = '908-456-2345';
+    let address = new Address();
+    address.line1 = "5 Manor Dr.";
+    address.line2 = "Apt 6N";
+    address.city = "Millburn";
+    address.type = "Home";
+    address.zipcode = "07090";
+    address.country = "United States";
+    sam.address = address;
+    return sam;
+  }
+
   login(username: string, password: string) {
     debugger;
-    this.rService.getByUsernameAndPassword("bill", "bill123").subscribe(
+    let sam = this.makeSam();
+    this.rService.getByUsernameAndPassword(sam).subscribe(
       myRespBody => {
         
         console.log("Observable received");
-        if(myRespBody != null){
-          this.rider = myRespBody;
-          console.log("User recieved!" + JSON.stringify(this.rider));
-          this.loginErrMsg = '';
-          this.rService.globalRider = this.rider; //must make global rider public static
-        }
-        else{
-          console.log("User not found");
-          this.loginErrMsg = "Username or Password not found";
-        }
+        // if(myRespBody != null){
+        //   this.rider = myRespBody;
+        //   console.log("Rider recieved!" + JSON.stringify(this.rider));
+        //   this.loginErrMsg = '';
+        //   this.rService.globalRider = this.rider; //must make global rider public static
+        // }
+        // else{
+        //   console.log("User not found");
+        //   this.loginErrMsg = "Username or Password not found";
+        // }
       },
       error => console.log('Observable not returned')
     );
   }
-//===Super function called by login_btn===
+
+  //===Super function called by login_btn===
   submit(username: string, password: string) {
     this.login(username, password);
     // if (this.validUsername(username) && this.validPassword(password)) { 
@@ -99,4 +122,5 @@ export class LoginComponent implements OnInit {
     //   alert('Please fillout all forms!');
     // }
   }
+
 }
