@@ -3,6 +3,7 @@
 <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport'>
     <agm-marker [(latitude)]="location.marker.lat" [(longitude)]="location.marker.lng" [markerDraggable]="location.marker.draggable" (dragEnd)='markerDragEnd($event)'></agm-marker>
   </agm-map>
+  <div class="col">
   
         <div class="form-group">
           <label class='col-sm-2'>Address Line 1</label>
@@ -10,7 +11,7 @@
         </div>
         <div class="form-group">
           <label class='col-sm-2'>Address Line 2</label>
-          <input class='col-sm-10'  [(ngModel)]='location.address_level_2' class='' placeholder='City'/>
+          <input class='col-sm-10'  [(ngModel)]='location.address_level_2' class='' placeholder='Office, Apt, Home, Street'/>
         </div>
      
         <div class="form-group">
@@ -20,13 +21,48 @@
      
         <div class="form-group">
           <label class='col-sm-2'>Country</label>
-          <input class='col-sm-10'  [(ngModel)]='location.address_country' class='' placeholder='State'>
+          <input class='col-sm-10'  [(ngModel)]='location.address_country' class='' placeholder='Country'>
         </div>
      
         <div class="form-group">
           <label class='col-sm-2'>Postal / Zip code</label>
           <input class='col-sm-10'  [(ngModel)]='location.address_zip' class='' placeholder='Zip'>
         </div>
+     </div>
+
+     <div class="col">
+  
+        <div class="form-group">
+          <label class='col-sm-2'>Address Line 1</label>
+          <input class='col-sm-10' type='text' [(ngModel)]='location.address_level_3' class='' placeholder='Office, Apt, Home, Street'>
+        </div>
+        <div class="form-group">
+          <label class='col-sm-2'>Address Line 2</label>
+          <input class='col-sm-10'  [(ngModel)]='location.address_level_3' class='' placeholder='Office, Apt, Home, Street'/>
+        </div>
      
+        <div class="form-group">
+          <label class='col-sm-2'>State / Province / Region</label>
+          <input class='col-sm-10'  [(ngModel)]='location.address_state_2' class='' placeholder='State'>
+        </div>
+     
+        <div class="form-group">
+          <label class='col-sm-2'>Country</label>
+          <input class='col-sm-10'  [(ngModel)]='location.address_country_2' class='' placeholder='Country'>
+        </div>
+     
+        <div class="form-group">
+          <label class='col-sm-2'>Postal / Zip code</label>
+          <input class='col-sm-10'  [(ngModel)]='location.address_zip_2' class='' placeholder='Zip'>
+        </div>
+     </div>
+
         <button (click)='updateOnMap()' type="submit" class="btn btn-primary">Search</button>
+  
+  <div >
+    <div class="">
+      Distance : <input type="text" [(ngModel)]='Distance'>
+      Duration : <input type="text" [(ngModel)]='Duration' name="" id="">
+    </div>
+  </div>
      

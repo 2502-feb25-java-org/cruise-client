@@ -133,7 +133,7 @@ export class MapComponent implements OnInit {
 
   calculateDistance() {
     
-    let distance = google.maps.geometry.spherical.computeDistanceBetween("nyc", "london");
+    let distance = google.maps.geometry.spherical.computeDistanceBetween("location1","location2" );
   }
 
 
