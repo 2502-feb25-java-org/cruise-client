@@ -62,7 +62,7 @@ export class SignupComponent implements OnInit {
     && this.check(this.phoneNumber)&& this.check(this.dob)&& this.check(this.addressLine1)
     && this.check(this.addressType)&& this.check(this.city)
     && this.check(this.zipcode)) {
-      alert("it works!");
+      alert("Sign up successfull!");
           //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
     rider.address = address;
     //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
@@ -78,7 +78,7 @@ export class SignupComponent implements OnInit {
     
     }
     else{
-      alert("it doesn't work!")
+      alert("Signup failed, please check your credentials!")
     }
 
 
