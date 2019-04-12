@@ -80,7 +80,6 @@ export class LoginComponent implements OnInit {
           this.loginErrMsg = "Username or Password not found";
         }
       },
-      () => console.log('ERR'),
       error => console.log('Observable not returned')
     );
   }
