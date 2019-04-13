@@ -13,21 +13,29 @@
         <a class="nav-link" href="/request">Request a Ride</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/support">Support</a>
+          <a class="nav-link" href="/signup">Sign Up</a>
       </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Account Options
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/users">User</a>
-          <a class="dropdown-item" href="/login">Login</a>
-          <a class="dropdown-item" href="/signup">Sign Up</a>
-          <a class="dropdown-item" href="/temp">temp</a>
-        </div>
-      </li>
+      
     </ul>
   </div>
+  <ul class="navbar-nav ml-lg-n2" id="loginDrop">
+    	<li class="nav-item">
+    		<div *ngIf ="isUserLogged(); else elseBlock" id="username_nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  {{uName | titlecase}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/users">Profile</a>
+                  <a class="dropdown-item" href="/temp">Temp</a>
+                  <a class="dropdown-item" href="/home" (click)="logout()">Log out</a>
+                </div>
+              </li>
+        </div>
+        <ng-template #elseBlock><a class="nav-link" href="/login">Login</a></ng-template>
+    	</li>
+    
+    </ul>
 </nav>

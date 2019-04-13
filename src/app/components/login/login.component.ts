@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
         if(myRespBody != null){
           this.rider = myRespBody;
           sessionStorage.setItem("loggedUserObj", JSON.stringify(this.rider));
+          sessionStorage.setItem("loggedUserName", this.rider.username);
           console.log("Rider recieved!" + JSON.stringify(this.rider));
           this.loginErrMsg = '';          
           window.location.href = "/home"; //redirects a user
