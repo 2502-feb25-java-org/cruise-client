@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">CRUISE CLIENT</a>
+  <a class="navbar-brand" href="#">Cruise</a>
   <button class="navbar-toggler" style="color:rgb(47, 161, 255)" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
     	<li class="nav-item">
     		<div *ngIf ="isUserLogged(); else elseBlock" id="username_nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                <a class="btn btn-outline-primary dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                   {{uName | titlecase}}
                 </a>
@@ -34,7 +34,7 @@
                 </div>
               </li>
         </div>
-        <ng-template #elseBlock><a class="nav-link" href="/login">Login</a></ng-template>
+        <ng-template #elseBlock><a class="btn btn-outline-primary" href="/login">Login</a></ng-template>
     	</li>
     
     </ul>
