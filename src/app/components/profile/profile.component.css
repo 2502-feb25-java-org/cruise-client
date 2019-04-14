@@ -1,43 +1,17 @@
-p{
-    font-size: 8pt;
-  }
-  
-  #profileHeader{
-    margin-bottom: 0px;
-  }
-  
-  #disclaimer{
-    margin-top: 0px;
-  }
-  
-  #dOne{
-    background-color:rgba(111, 228, 44, 0.363);
-    position: relative;
-    top: 0px; /* Header Height */
-    bottom: 20px; /* Footer Height */
-    width: 100%
-  }
-  
-  table, th, td {
-      border: 1px solid black;
-  }
-  
-  img{
-    margin-left: 50%;
-  }
+.card{
+  width: 35rem;
+  margin: auto;
+}
 
-  .jumbotron {
-    background: #358CCE;
-    color: #FFF;
-    border-radius: 0px;
-    text-align: center;
-    }
-    .jumbotron-sm { padding-top: 24px;
-    padding-bottom: 24px; }
-    .jumbotron small {
-    color: #FFF;
-    }
-    .h1 small {
-    font-size: 24px;
-    
-    }
+#user-pic{
+  margin: auto;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+}
+
+#history-div{
+  padding: 10px;
+  border-style: solid;
+  margin: 10px;
+}

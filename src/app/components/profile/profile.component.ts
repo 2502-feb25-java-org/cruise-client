@@ -11,12 +11,14 @@ import { Rider } from '../../models/rider/rider'
 export class ProfileComponent implements OnInit {
   loggedUser =JSON.parse( sessionStorage.getItem("loggedUserObj"));
 
+  name = this.loggedUser.firstName + " " + this.loggedUser.lastName;
    uName = this.loggedUser.username;
    email = this.loggedUser.email;
    homeAddr = this.loggedUser.address.line1 + ", "+ this.loggedUser.address.line2 + ", "
    + this.loggedUser.address.city + ", " + this.loggedUser.address.country + ", " 
    + this.loggedUser.address.zipcode;
-
+   
+   profDob = this.loggedUser.dob;
   constructor() { }
 
   ngOnInit() {
