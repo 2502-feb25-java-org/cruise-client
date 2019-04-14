@@ -21,6 +21,7 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
 import { MapComponent } from './components/map/map.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations:[
     AppComponent,
@@ -43,7 +44,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AgmCoreModule.forRoot({ 
       apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
       DataTablesModule,
-      NgbModule.forRoot()
+      NgbModule.forRoot(),
+      
   ],
   providers: [
     RiderService,

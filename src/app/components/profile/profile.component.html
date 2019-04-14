@@ -1,51 +1,68 @@
+<div class="card" id="profile-card">
+  <div class="card-header">
+    <h5>My Profile</h5>
+  </div>
 
-<div class="jumbotron jumbotron-sm">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-lg-12">
-                <h1 class="h1">
-                    My Cruise Profile</h1>
-                    <p align="center" id="disclaimer">
-                        
-            </div>
-        </div>
+  <div class="card-body">
+    <div class="row justify-content-center">
+      <img id="user-pic" src="#" alt="user_pic"/>
     </div>
+
+    <ul class="list-group">
+
+        <li class="list-group-item">
+            <div class="row">
+              <div class="col-3"><label>
+                  <h6>Name:</h6>
+                </label></div>
+              <div class="col-lg-6">{{name}}</div>
+            </div>
+          </li>
+
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-3"><label>
+              <h6>Username:</h6>
+            </label></div>
+          <div class="col-lg-6">{{uName}}</div>
+        </div>
+      </li>
+
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-3"><label>
+              <h6>Email:</h6>
+            </label></div>
+          <div class="col-lg-6">{{email}}</div>
+        </div>
+      </li>
+
+      <li class="list-group-item">
+          <div class="row">
+            <div class="col-3"><label>
+                <h6>Birthday:</h6>
+              </label></div>
+            <div class="col-lg-6">{{profDob | date}}</div>
+          </div>
+        </li>
+
+        <li class="list-group-item">
+            <div class="row">
+              <div class="col-3"><label>
+                  <h6>Address:</h6>
+                </label></div>
+              <div class="col-lg-6">{{homeAddr}}</div>
+            </div>
+          </li>
+    </ul>
+  </div>
 </div>
-<div class="container" id="dOne">
-  
-    
+
+<div id="history-div">
+  <div class="row justify-content-center">  
+    <h3>My Ride History</h3>
+</div>
   <hr>
-  <img src="#" alt="user_pic" width="500" height="333" align="center">
-  <h2 align="center">First and Last Name Here</h2>
-
-  <table align="center">
-    <tr>
-      <td><strong>User Fields</strong></td>
-      <td><strong>Field Values</strong></td>
-    </tr>
-
-    <tr>
-      <td>Username: </td>
-      <td>{{uName}}</td>
-    </tr>
-
-    <tr>
-      <td>Email: </td>
-      <td> {{email}}</td>
-    </tr>
-
-    <tr>
-      <td>Home Address: </td>
-      <td>{{homeAddr}}</td>
-    </tr>
-  </table>
-<br>
-<br>
-  <h1 align="center">See below for your past ride history:</h1>
-  <p align="center">**implement data table here for ride history**</p>
-</div>
-
-<div>
   <table datatable class="row-border hover">
     <thead>
       <tr>

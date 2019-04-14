@@ -1,6 +1,7 @@
 import { Address } from '../address/address';
 
 export class Rider {
+    id: number;
     firstName: string;
     lastName: string;
     username: string;

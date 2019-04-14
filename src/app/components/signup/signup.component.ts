@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
     console.log('in SignupComponent ngOnInit');
     this.loadLocalVal();
   }
-  
+
   addRider() {
     let rider = new Rider();
     let address = new Address;
@@ -54,27 +54,27 @@ export class SignupComponent implements OnInit {
     address.country = "United States";
     rider.address = address;
 
-    if(this.check(this.firstName) && this.check(this.lastName)&& this.check(this.newUserName)
-    && this.check(this.password)&& this.check(this.password)&& this.check(this.email)
-    && this.check(this.phoneNumber)&& this.check(this.dob)&& this.check(this.addressLine1)
-    && this.check(this.addressType)&& this.check(this.city)
-    && this.check(this.zipcode)) {
+    if (this.check(this.firstName) && this.check(this.lastName) && this.check(this.newUserName)
+      && this.check(this.password) && this.check(this.password) && this.check(this.email)
+      && this.check(this.phoneNumber) && this.check(this.dob) && this.check(this.addressLine1)
+      && this.check(this.addressType) && this.check(this.city)
+      && this.check(this.zipcode)) {
       alert("Sign up successfull!");
-          //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
-    rider.address = address;
-    //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
-    console.log(JSON.stringify(rider));
-    this.riderService.postRider(rider).subscribe(
-      r => {
-        console.log(r.firstName + " added successfully");
-        this.delSignUp();
-        //window.location.href = "/login";
-      },
-      error => console.log('Observable not returned')
-    );
-    
+      //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
+      rider.address = address;
+      //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
+      //console.log(JSON.stringify(rider));
+      this.riderService.postRider(rider).subscribe(
+        r => {
+          console.log(r.firstName + " added successfully");
+          this.delSignUp();
+          window.location.href = "/login";
+        },
+        error => console.log('Observable not returned')
+      );
+
     }
-    else{
+    else {
       alert("Signup failed, please check your credentials!")
     }
 
@@ -132,8 +132,8 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("zipcode", "");
   }
 
-  check(cf: string){
-    if(cf != null && cf != "" ){
+  check(cf: string) {
+    if (cf != null && cf != "") {
       return true;
     }
     return false;
