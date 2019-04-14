@@ -9,7 +9,7 @@ export class Ride {
     endTime: string;
     rider: Rider;
     car: Car;
-    start: Address;
+    origin: Address;
     destination: Address;
     distance: number;
     duration: number;
