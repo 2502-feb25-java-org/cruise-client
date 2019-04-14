@@ -30,7 +30,8 @@ export class RequestComponent implements OnInit {
     console.log("hello world!");
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   dummyStartAddress() {
     let address= new Address();
@@ -68,6 +69,14 @@ export class RequestComponent implements OnInit {
       },
       error => console.log('Observable not returned.')
     );
+  }
+
+  getRidesByRiderId(id: number) {
+    this.rideService.getByRiderId(id).subscribe(
+      myRespBody=> {
+          console.log(myRespBody);
+      }
+    )
   }
   
   getClosestCar() {

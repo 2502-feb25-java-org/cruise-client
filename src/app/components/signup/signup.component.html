@@ -85,16 +85,21 @@
     </div>
 
     <div class="row">
-      <div class="form-group col-6">
+      <div class="form-group col-5">
         <label>City: </label>
         <input class="form-control" type="text" [(ngModel)]="city" (change)="saveSignUp()">
       </div>
 
-      <div class="form-group col-6">
+      <div class="form-group col-5">
         <label>Zipcode: </label>
         <input class="form-control" type="number" [(ngModel)]="zipcode" (change)="saveSignUp()">
       </div>
     </div>
+    <div class="row">
+    <label>State: </label>
+      <input class="form-control" type="text" [(ngModel)]="state" (change)="saveSignUp()">
+    </div>
+  
 
     <div class="form-group">
       <label>Profile Picture: </label>

@@ -33,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProfileComponent,
     HomeComponent, 
     ProfileComponent, 
-    FeedbackComponent, MapComponent
+    FeedbackComponent, 
+    MapComponent
   ],
   imports: [
     BrowserModule,
