@@ -1,6 +1,12 @@
 .card{
   width: 35rem;
   margin: auto;
+  margin-top: 5px;
+}
+
+.card-header{
+  background: rgb(53, 150, 206);
+  color: white;
 }
 
 #user-pic{
