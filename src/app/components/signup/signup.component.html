@@ -1,138 +1,114 @@
-<div class="jumbotron jumbotron-sm" id="SignTitle">
+<div class="jumbotron jumbotron-sm" id="sign_title">
   <h1>Welcome to the Cruise sign up page!</h1>
 </div>
 
-<div class="container" id="SignDisclaimer">
+<!-- <div class="container" id="sign-disclaimer">
   <p>By signing up with Cruise- we will save your <strong>First/Last</strong> names,
     <strong>Username</strong>, <strong>Password</strong>, and <strong>Email</strong>.<p>
-</div>
+</div> -->
 
-<div  class = "container" id = "CardTitle" >
-  <h1>Please fill out the information below</h1>
-    <table>
-  <tr>
-    <th colspan="2">Personal Information</th>
-  </tr>
-      
-  <tr>
-    <td>First Name</td>
-    <td><input type= "text" [(ngModel)]="firstName" placeholder = "First Name here" 
-      (change)="saveSignUp()"/>
-    </td>
-  </tr>
-      
-  <tr>
-    <td>Last Name</td>
-    <td><input type= "text" [(ngModel)]="lastName" placeholder = "Last Name here"
-      (change)="saveSignUp()"/>
-    </td>
-  </tr>
-      
-  <tr>
-    <td>Username</td>
-    <td><input type= "text" [(ngModel)]="newUserName" placeholder = "Desired username"
-      (change)="saveSignUp()"/>
-    </td>
-  </tr>
-      
-<tr>
-    <td>Password</td>
-    <td><input type= "password" [(ngModel)]="password" placeholder = "Desired password"/>
-    </td>
-  </tr>
+<div class="card" id="sign-card">
+  <div class="card-body">
+    <h5 class="card-title">Sign-up</h5>
 
- <tr>
-    <td>Email</td>
-    <td>
-      <input id="email" name="test" class="form-control"
-      required email appForbiddenName="bob"
-      [(ngModel)]="email" #lol="ngModel" (change)="saveSignUp()"placeholder = "Primary email address">
-    </td>
-  </tr>
- 
-  <tr>
-    <td>Phone Number</td>
-    <td>
-      <input id="email" name="test" class="form-control"
-      required pattern="^[2-9]\d{2}-\d{3}-\d{4}$"
-      [(ngModel)]="phoneNumber" #phone="ngModel"(change)="saveSignUp()" maxlength="12" >
-    </td>
-  </tr>
-      
-<tr>
-    <td>Date of Birth</td>
-    <td><input type="date" [(ngModel)]="dob" name="birthday" placeholder="Date of Birth"
-      (change)="saveSignUp()">
-    </td>
-  </tr>    
-  
-  <tr>
-    <td>Address Line 1: </td>
-    <td><input type="text" [(ngModel)]="addressLine1" placeholder= "Address Line 1"
-      (change)="saveSignUp()">
-    </td>
-  </tr>
-  
-  <tr>
-    <td>Address Line 2: </td>
-    <td><input type="text" [(ngModel)]="addressLine2" placeholder="Address Line 2"
-      (change)="saveSignUp()">
-    </td>
-  </tr>
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="first-name">First Name</label>
+        <input class="form-control" type="text" [(ngModel)]="firstName" (change)="saveSignUp()" name="first-name" />
+      </div>
 
-  <tr>
-    <td><select [(ngModel)]="addressType" (change) = "saveSignUp()">
-      <option value="residenceType">Type of Residence:</option>
-      <option value="type1">Home</option>
-      <option value="type2">Work</option>
-      <option value="other">Other</option>
-    </select></td>    
-  </tr>
+      <div class="form-group col-6">
+        <label for="last-name">Last Name</label>
+        <input class="form-control" type="text" [(ngModel)]="lastName" (change)="saveSignUp()" name="last-name" />
+      </div>
+    </div>
 
-  <tr>
-    <td>City: </td>
-    <td><input type="text" [(ngModel)]="city" placeholder="City" 
-      (change)="saveSignUp()">
-    </td>
-  </tr>
+    <div class="form-group">
+      <label>Username</label>
+      <input class="form-control" type="text" [(ngModel)]="newUserName" (change)="saveSignUp()" />
+    </div>
 
-  <tr>
-    <td>Zipcode: </td>
-    <td><input type="number" [(ngModel)]="zipcode" placeholder="Postal/Zipcode"
-      (change) = "saveSignUp()"></td>
-  </tr>
+    <div class="form-group">
+      <label>Password</label>
+      <input class="form-control" type="password" [(ngModel)]="password" />
+    </div>
 
-  <tr>
-      <td>Profile Picture: </td>
-      <td><input type="file" [(ngModel)]="picture" name="pic" accept="image/*"></td>
-  </tr>
+    <div class="form-group">
+      <label>Email</label>
+      <input id="email" name="test" class="form-control" required email appForbiddenName="bob" [(ngModel)]="email"
+        #lol="ngModel" (change)="saveSignUp()" />
+    </div>
+    <!--Error message for not having a valid email address-->
+    <div *ngIf="lol.invalid && (lol.dirty || lol.touched)" class="alert alert-danger">
 
-</table>
+      <div *ngIf="lol.errors.required">
+        Please enter your email!
+      </div>
+      <div *ngIf="lol.errors.email">
+        Not a valid Email!
+      </div>
+    </div>
+    <div class="row">
 
-<div>
-  <p>Please read through your information and make sure it is correct.</p>
-  <p>When you have verified your personal/contact information is accurate, click sumbit to join Cruise!</p>
-  <button [disabled]="lol.invalid || phone.invalid" (click) = "addRider()">Register!</button>
-</div>
-<!--Error message for not having a valid email address-->
-<div *ngIf="lol.invalid && (lol.dirty || lol.touched)"
-    class="alert alert-danger">
+      <div class="form-group col-6">
+        <label>Phone Number</label>
+        <input id="email" name="test" class="form-control" required pattern="^[2-9]\d{2}-\d{3}-\d{4}$"
+          [(ngModel)]="phoneNumber" #phone="ngModel" (change)="saveSignUp()" maxlength="12">
+      </div>
 
-  <div *ngIf="lol.errors.required">
-    Please enter your email!
+
+      <div class="form-group col-6">
+        <label>Date of Birth</label>
+        <input class="form-control" type="date" [(ngModel)]="dob" name="birthday" (change)="saveSignUp()">
+      </div>
+    </div>
+    <!--Error Message for not having a proper phone number-->
+    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+
+      <div *ngIf="phone.errors.required">
+        Please enter your phone number
+      </div>
+      <div *ngIf="phone.errors.pattern">
+        Phone number must be in this form: XXX-XXX-XXXX.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Address Line 1: </label>
+      <input class="form-control" type="text" [(ngModel)]="addressLine1" (change)="saveSignUp()">
+      <label>Address Line 2:</label>
+      <input class="form-control" type="text" [(ngModel)]="addressLine2" (change)="saveSignUp()">
+
+
+      <label>Address Type:</label>
+      <select class="form-control" [(ngModel)]="addressType" (change)="saveSignUp()">
+        <option value="type1">Home</option>
+        <option value="type2">Work</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-6">
+        <label>City: </label>
+        <input class="form-control" type="text" [(ngModel)]="city" (change)="saveSignUp()">
+      </div>
+
+      <div class="form-group col-6">
+        <label>Zipcode: </label>
+        <input class="form-control" type="number" [(ngModel)]="zipcode" (change)="saveSignUp()">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Profile Picture: </label>
+      <input class="form-control" type="file" [(ngModel)]="picture" name="pic" accept="image/*">
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <button class="btn btn-primary" [disabled]="lol.invalid || phone.invalid"
+          (click)="addRider()">Register!</button>
+      </li>
+    </ul>
   </div>
-  <div *ngIf="lol.errors.email">
-    Not a valid Email!
-</div>
-</div>
-<!--Error Message for not having a proper phone number-->
-<div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
-    class="alert alert-danger">
-
-  <div *ngIf="phone.errors.required">
-    Please enter your phone number
-  </div>
-  <div *ngIf="phone.errors.pattern">
-    Phone number must be in this form: XXX-XXX-XXXX.
-</div>
 </div>
