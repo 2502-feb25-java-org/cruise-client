@@ -14,5 +14,4 @@ export class Ride {
     distance: number;
     duration: number;
     type: string;
-    
 }

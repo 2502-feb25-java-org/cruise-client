@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RiderService } from 'src/app/services/rider/rider.service'
 import { Address } from 'src/app/models/address/address'
 import { Rider } from '../../models/rider/rider'
+import { Ride } from 'src/app/models/ride/ride';
 
 @Component({
   selector: 'app-profile',
@@ -9,15 +10,24 @@ import { Rider } from '../../models/rider/rider'
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  loggedUser = JSON.parse(sessionStorage.getItem("loggedUserObj"));
+  loggedUser : Rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
+  rides: Ride[] = this.getRides();
 
-  name = this.loggedUser.firstName + " " + this.loggedUser.lastName;
-  uName = this.loggedUser.username;
-  email = this.loggedUser.email;
-  homeAddr;
-  addressLine2;
-  profDob = this.loggedUser.dob;
+  name : string = this.loggedUser.firstName + " " + this.loggedUser.lastName;
+  uName : string = this.loggedUser.username;
+  email : string = this.loggedUser.email;
+  homeAddr : string;
+  addressLine2 : string;
+  profDob : string = this.loggedUser.dob;
+
   constructor() { }
+
+  getRides() : Ride[]{
+    let rides : Ride[];
+    
+
+    return null;
+  }
 
   ngOnInit() {
     if(this.loggedUser.address.line2 == "" || this.loggedUser.address.line2 == null){
@@ -28,7 +38,6 @@ export class ProfileComponent implements OnInit {
     }
     this.homeAddr = this.loggedUser.address.line1 + ", " + this.loggedUser.address.city + ", " 
     + this.loggedUser.address.state + ", " + this.loggedUser.address.country + ", " + this.loggedUser.address.zipcode;
-  
   }
 }
 
