@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
       this.addressLine2 = ", " + this.loggedUser.address.line2;
     }
     this.homeAddr = this.loggedUser.address.line1 + ", " + this.loggedUser.address.city + ", " 
-    + this.loggedUser.address.state + this.loggedUser.address.country + ", " + this.loggedUser.address.zipcode;
+    + this.loggedUser.address.state + ", " + this.loggedUser.address.country + ", " + this.loggedUser.address.zipcode;
   
   }
 
