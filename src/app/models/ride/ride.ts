@@ -4,12 +4,13 @@ import { Address } from '../address/address';
 
 export class Ride {
     id: number;
+    cost: number;
     startTime: Date;
     endTime: Date;
     rider: Rider;
     car: Car;
-    start: Address;
-    destination: Address;
+    start: Address[];
+    destination: Address[];
     distance: number;
     duration: number;
     type: string;

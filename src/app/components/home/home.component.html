@@ -1,15 +1,37 @@
-<div id="firstname">
-<header class="masthead text-white text-center">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5 bg-dark">Cruise the City!</h1>
-        </div>
-        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          
-        </div>
-      </div>
+<div class="row" id="firstRow">
+<div id="introCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#introCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#introCarousel" data-slide-to="1"></li>
+    <li data-target="#introCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="https://i.ytimg.com/vi/aNkKZuKbVKc/maxresdefault.jpg" alt="First slide">
     </div>
-  </header>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://static.dezeen.com/uploads/2018/01/paul-priestman-priestmangoode-autonomous-vehicles-self-driving-cars-exacerbate-congestion-drones-transport-virtual-reality_dezeen_2364_hero_0-852x479.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://spectrum.ieee.org/image/MzIzMjg2NA" alt="Third slide">
+    </div>
   </div>
+  <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#introCarousel " role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<div *ngIf= "ifUserNotLogged()" id="homeLogin" >
+<app-login></app-login>
+</div>
+</div>
+
+<!-- <div class="row">
+  <img src="https://i.ytimg.com/vi/aNkKZuKbVKc/maxresdefault.jpg"
+  width="800rem"/>
+  <app-login></app-login>
+</div> -->

@@ -5,12 +5,21 @@
   .demo-section {
     border: 1px solid #bbb;
   }
- 
+ .page-footer{
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(48, 53, 78);
+  color: white;
+  text-align: center;
+ }
   
   footer {
     background-color: #ddd;
     border-top: 1px solid #bbb;
     text-align: center;
+    
   }
   
   #clickFooter footer:hover {

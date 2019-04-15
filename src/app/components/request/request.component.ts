@@ -14,13 +14,16 @@ import { Car } from 'src/app/models/car/car';
 export class RequestComponent implements OnInit {
 
   test: string;
-  id: number;
-  start: Address;
-  destination: Address;
+  cost: number
+  endTime: string;
+  startTime: string;
+  riderId: number;
+  startId: Address[];
+  destination: Address[];
   distance: number;
   duration: number;
-  model: Car;
-  make: Car;
+  carID: Car;
+  
   
 
   constructor(private rideService: RideService) {
@@ -35,13 +38,18 @@ export class RequestComponent implements OnInit {
 
   addRide() {
     let ride = new Ride();
+    let rider = new Ride();
     let address = new Address();
     let car = new Car();
+    ride.cost = 22;
+    ride.destination = Address[3];
+    ride.distance = 4;
+    ride.duration = 14;
+    ride.endTime = new Date();
+    ride.startTime = new Date();
+    car.id = 1;
+    rider.id = 7;
 
-    ride.start = this.start;
-    ride.destination = this.destination;
-    ride.distance = this.distance;
-    ride.duration = this.duration;
     //car.make = this.make;
 
     console.log(JSON.stringify(ride));

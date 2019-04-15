@@ -20,11 +20,18 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^4.1.1",
+    "agm-direction": "^0.7.6",
     "angular-datatables": "^7.0.0",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "jquery": "^3.4.0",
+<<<<<<< HEAD
+=======
+    "ng-bootstrap": "^1.6.3",
+>>>>>>> 524702abc56bbcb734615cdfb2b2ad790c3330fb
     "npm-install-missing": "^0.1.4",
     "rxjs": "^6.4.0",
     "tslib": "^1.9.0",
