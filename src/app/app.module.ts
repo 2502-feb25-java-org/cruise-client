@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,8 @@ import { RideService } from './services/ride/ride.service';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { MapComponent } from './components/map/map.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditprofileComponent } from './components/editprofile/editprofile.component';
+import { AgmDirectionModule } from 'agm-direction';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProfileComponent,
     HomeComponent, 
     ProfileComponent, 
-    FeedbackComponent, MapComponent
+    FeedbackComponent, MapComponent, 
+    EditprofileComponent, 
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -42,10 +46,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpModule,
     HttpClientModule,
     AgmCoreModule.forRoot({ 
-      apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
-      DataTablesModule,
-      NgbModule.forRoot(),
-      
+      //apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
+      apiKey: 'AIzaSyCaYpN8YwJavuYo-F1prHvN7U86BsZdNA0' }),
+    AgmDirectionModule,
+    DataTablesModule,
+    NgbModule
   ],
   providers: [
     RiderService,

@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(private riderService: RiderService) { }
 
   ngOnInit() {
+    //==Login Storage
     if (localStorage.getItem('rememberMe') == 'true') {
       this.username = localStorage.getItem('storedUsername');
       this.rememberBox = localStorage.getItem('rememberMe');
@@ -68,8 +69,7 @@ export class LoginComponent implements OnInit {
 
   login(username: string, password: string) {
     this.riderService.getByUsernameAndPassword(username, password).subscribe(
-      myRespBody => {
-        
+      myRespBody => { 
         console.log("Observable received");
         if(myRespBody != null){
           this.rider = myRespBody;
