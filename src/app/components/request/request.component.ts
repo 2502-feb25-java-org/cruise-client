@@ -37,9 +37,7 @@ export class RequestComponent implements OnInit {
   duration: number = 14;
   carID: Car;
 
-  ride: Ride;
-
-  
+  ride: Ride;  
 
   public latitude: number;
   public longitude: number;
@@ -49,7 +47,7 @@ export class RequestComponent implements OnInit {
   public iconurl: string;
   public mapCustomStyles: any;
   public estimatedTime: any;
-  public estimatedDistance: any;
+  public estimatedDistance: string;
   public cost: number;
 
   @ViewChild("pickupInput")
@@ -78,14 +76,13 @@ export class RequestComponent implements OnInit {
   this.zoom = 10;
   this.latitude = 21.1212853;
   this.longitude = -86.9893194;
-  //this.iconurl = '../image/map-icon.png';
-  //this.iconurl = 'https://image.flaticon.com/icons/png/128/484/484167.png';
-
+  
  // this.mapCustomStyles = this.getMapCusotmStyles();
 
   //create search FormControl
  // this.destinationInput = new FormControl();
   //this.destinationOutput = new FormControl();
+  
   //set current position
   this.setCurrentPosition();
   
@@ -154,7 +151,7 @@ export class RequestComponent implements OnInit {
     //this.estimatedDistance = this.vc.estimatedDistance;
     this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2)
     //this.cost = 4 + 1.25*this.estimatedDistance;
-    this.cost = Number.parseFloat(4 + 1.25*this.estimatedDistance).toFixed(2) //ignore error still works!!
+    this.cost = Number.parseFloat(4 + 1.25*this.vc.estimatedDistance).toFixed(2) //ignore error still works!!
     //alert(this.estimatedDistance);
   }
   
