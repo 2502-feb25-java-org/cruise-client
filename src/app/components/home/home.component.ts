@@ -12,4 +12,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  ifUserNotLogged() {
+    if (sessionStorage.getItem("loggedUserObj") != null && sessionStorage.getItem("loggedUserObj") != "") {
+      console.log("true");
+
+      return false;
+    }
+    else {
+      console.log("false");
+      return true;
+    }
+  }
 }

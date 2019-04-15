@@ -1,27 +1,23 @@
-p{
-    font-size: 8pt;
-  }
-  
-  #profileHeader{
-    margin-bottom: 0px;
-  }
-  
-  #disclaimer{
-    margin-top: 0px;
-  }
-  
-  #dOne{
-    background-color: cyan;
-    position: relative;
-    top: 0px; /* Header Height */
-    bottom: 20px; /* Footer Height */
-    width: 100%
-  }
-  
-  table, th, td {
-      border: 1px solid black;
-  }
-  
-  img{
-    margin-left: 50%;
-  }
+.card{
+  width: 35rem;
+  margin: auto;
+  margin-top: 5px;
+}
+
+.card-header{
+  background: rgb(53, 150, 206);
+  color: white;
+}
+
+#user-pic{
+  margin: auto;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+}
+
+#history-div{
+  padding: 10px;
+  border-style: solid;
+  margin: 10px;
+}

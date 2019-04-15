@@ -1,12 +1,15 @@
-#one{
-    background-color: turquoise;
-    border: dashed
-  }
-  
-  #three{
-    border-style: dashed;
-  }
-  
-  table, th, td {
-    border: 1px solid black;
-  }
+#sign-card{
+  width: 35rem;
+  align-content: center;
+  margin: auto;
+  margin-top: 5px;
+}
+
+.card-header{
+  background: rgb(53, 150, 206);
+  color: white;
+}
+
+.p{
+  align-self: right;
+}

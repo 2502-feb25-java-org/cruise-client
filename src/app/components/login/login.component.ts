@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(private riderService: RiderService) { }
 
   ngOnInit() {
+    //==Login Storage
     if (localStorage.getItem('rememberMe') == 'true') {
       this.username = localStorage.getItem('storedUsername');
       this.rememberBox = localStorage.getItem('rememberMe');
@@ -69,18 +70,15 @@ export class LoginComponent implements OnInit {
 
   login(username: string, password: string) {
     this.riderService.getByUsernameAndPassword(username, password).subscribe(
-      myRespBody => {
-        
+      myRespBody => { 
         console.log("Observable received");
         if(myRespBody != null){
           this.rider = myRespBody;
+          sessionStorage.setItem("loggedUserObj", JSON.stringify(this.rider));
+          sessionStorage.setItem("loggedUserName", this.rider.username);
           console.log("Rider recieved!" + JSON.stringify(this.rider));
-          this.loginErrMsg = '';
-          sessionStorage.setItem("loggedUsername", this.rider.username);
-          sessionStorage.setItem("loggedEmail", this.rider.email);
-          sessionStorage.setItem("loggedAddress1", this.rider.address.line1);
-          sessionStorage.setItem("loggedCountry", this.rider.address.country);
-          sessionStorage.setItem("loggedCity", this.rider.address.city);
+          this.loginErrMsg = '';          
+          window.location.href = "/home"; //redirects a user
         }
         else{
           console.log("User not found");
@@ -93,16 +91,14 @@ export class LoginComponent implements OnInit {
 
   //===Super function called by login_btn===
   submit(username: string, password: string) {
-    this.login(username, password);
-    // if (this.validUsername(username) && this.validPassword(password)) { 
-    //   //make sure validPassword returns otherwise evaluated as void
-    //   this.remember();
-    //   this.login(username, password);
-    //   window.location.href = "/home"; //redirects a user
-    // }
-    // else {
-    //   alert('Please fillout all forms!');
-    // }
+    if (this.validUsername(username) && this.validPassword(password)) { 
+      //make sure validPassword returns otherwise evaluated as void
+      this.remember();
+      this.login(username, password);
+    }
+    else {
+      alert('Please fillout all forms!');
+    }
   }
 
 }

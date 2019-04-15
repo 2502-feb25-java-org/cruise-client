@@ -11,7 +11,6 @@ import { checkAndUpdateBinding } from '@angular/core/src/view/util';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  test: string;
   firstName: string;
   lastName: string;
   newUserName: string;
@@ -23,21 +22,21 @@ export class SignupComponent implements OnInit {
   addressLine2: string;
   addressType: string;
   city: string;
+  state: string;
   zipcode: string;
   picture: string;
+  missingForm: string = "";
 
 
   constructor(private riderService: RiderService) {
     console.log('in SignUpComponent constructor. instantiating RiderService');
-    console.log(riderService.name);
   }
 
   ngOnInit() {
     console.log('in SignupComponent ngOnInit');
-    this.test = this.riderService.test();
     this.loadLocalVal();
   }
-  
+
   addRider() {
     let rider = new Rider();
     let address = new Address;
@@ -52,36 +51,37 @@ export class SignupComponent implements OnInit {
     address.line1 = this.addressLine1;
     address.line2 = this.addressLine2;
     address.city = this.city;
+    address.state = this.state;       //added State
     address.zipcode = this.zipcode;
     address.country = "United States";
-    address.zipcode = this.zipcode;     //added zipcode
     rider.address = address;
 
-    if(this.check(this.firstName) && this.check(this.lastName)&& this.check(this.newUserName)
-    && this.check(this.password)&& this.check(this.password)&& this.check(this.email)
-    && this.check(this.phoneNumber)&& this.check(this.dob)&& this.check(this.addressLine1)
-    && this.check(this.addressType)&& this.check(this.city)
-    && this.check(this.zipcode)) {
+    if (this.check(this.firstName, "First Name") && this.check(this.lastName, "Last Name")
+      && this.check(this.newUserName, "Desired Username") && this.check(this.password, "Password")
+      && this.check(this.email, "Email") && this.check(this.phoneNumber, "Phone Number") &&
+      this.check(this.dob, "Date of Birth") && this.check(this.addressLine1, "Address Line 1")
+      && this.check(this.city, "City") && this.check(this.state, "State")
+      && this.check(this.zipcode, "Zipcode")) {
       alert("Sign up successfull!");
-          //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
-    rider.address = address;
-    //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
-    console.log(JSON.stringify(rider));
-    this.riderService.postRider(rider).subscribe(
-      r => {
-        console.log(r.firstName + " added successfully");
-        this.delSignUp();
-        //window.location.href = "/login";
-      },
-      error => console.log('Observable not returned')
-    );
-    
-    }
-    else{
-      alert("Signup failed, please check your credentials!")
-    }
+      //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
+      rider.address = address;
+      //console.log("Trying to add rider:" + rider.firstName + "Who was born on: " + rider.DOB);
+      console.log(JSON.stringify(rider));
+      this.riderService.postRider(rider).subscribe(
+        r => {
+          console.log(r.firstName + " added successfully");
+          this.delSignUp();
+          window.location.href = "/login";
+        },
+        error => console.log('Observable not returned')
+      );
 
+    }
+    else {
+      alert("Signup failed," + this.missingForm);
+      this.missingForm = "";
 
+    }
   }
 
   //===LocalStorage===
@@ -96,6 +96,7 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("addressLine1", this.addressLine1);
     localStorage.setItem("addressLine2", this.addressLine2);
     localStorage.setItem("city", this.city);
+    localStorage.setItem("state", this.state);
     localStorage.setItem("zipcode", this.zipcode);
   }
   loadLocalVal() {
@@ -109,6 +110,7 @@ export class SignupComponent implements OnInit {
     this.addressLine1 = this.notNull("addressLine1");
     this.addressLine2 = this.notNull("addressLine2");
     this.city = this.notNull("city");
+    this.state = this.notNull("state");
     this.zipcode = this.notNull("zipcode");
   }
   notNull(checkStr: string) {
@@ -132,13 +134,19 @@ export class SignupComponent implements OnInit {
     localStorage.setItem("addressLine1", "");
     localStorage.setItem("addressLine2", "");
     localStorage.setItem("city", "");
+    localStorage.setItem("state", "");
     localStorage.setItem("zipcode", "");
+    this.missingForm = "";
   }
 
-  check(cf: string){
-    if(cf != null && cf != "" ){
+  check(cf: string, formID: string) {
+    if (cf != null && cf != "") {
       return true;
     }
-    return false;
+    else {
+      this.missingForm = "Please fill in the following form: \n" + formID;
+      console.log("empty missing form" + this.missingForm);
+      return false;
+    }
   }
 }

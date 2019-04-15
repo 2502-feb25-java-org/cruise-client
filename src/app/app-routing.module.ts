@@ -6,6 +6,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
+import { MapComponent } from './components/map/map.component';
+import { EditprofileComponent } from './components/editprofile/editprofile.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent},
   { path: 'users', component: ProfileComponent},
+  { path: 'temp', component: MapComponent},
+  { path: 'editprofile', component: EditprofileComponent}
   
 ];
 
