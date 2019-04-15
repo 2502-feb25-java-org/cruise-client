@@ -30,7 +30,6 @@ export class SignupComponent implements OnInit {
 
   constructor(private riderService: RiderService) {
     console.log('in SignUpComponent constructor. instantiating RiderService');
-    console.log(riderService.name);
   }
 
   ngOnInit() {
@@ -55,7 +54,6 @@ export class SignupComponent implements OnInit {
     address.state = this.state;       //added State
     address.zipcode = this.zipcode;
     address.country = "United States";
-    address.zipcode = this.zipcode;     //added zipcode
     rider.address = address;
 
     if (this.check(this.firstName, "First Name") && this.check(this.lastName, "Last Name")

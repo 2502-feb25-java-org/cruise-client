@@ -70,8 +70,7 @@ export class LoginComponent implements OnInit {
 
   login(username: string, password: string) {
     this.riderService.getByUsernameAndPassword(username, password).subscribe(
-      myRespBody => {
-        
+      myRespBody => { 
         console.log("Observable received");
         if(myRespBody != null){
           this.rider = myRespBody;
