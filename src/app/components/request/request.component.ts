@@ -39,18 +39,12 @@ export class RequestComponent implements OnInit {
 
   ride: Ride;
 
-  newRoute = {
-    'coordA': '',
-    'coordB': '',
-    'asientos_disponibles': '',
-    'activa': '',
-    'horario': '',
-  }
+  
 
   public latitude: number;
   public longitude: number;
-  public destinationInput: FormControl;
-  public destinationOutput: FormControl;
+  public destinationInput: string;
+  public destinationOutput: string;
   public zoom: number;
   public iconurl: string;
   public mapCustomStyles: any;
@@ -88,9 +82,10 @@ export class RequestComponent implements OnInit {
   //this.iconurl = 'https://image.flaticon.com/icons/png/128/484/484167.png';
 
  // this.mapCustomStyles = this.getMapCusotmStyles();
+
   //create search FormControl
-  this.destinationInput = new FormControl();
-  this.destinationOutput = new FormControl();
+ // this.destinationInput = new FormControl();
+  //this.destinationOutput = new FormControl();
   //set current position
   this.setCurrentPosition();
   
@@ -154,9 +149,12 @@ export class RequestComponent implements OnInit {
   
   
   getDistanceAndDuration(){
-    this.estimatedTime = this.vc.estimatedTime;
-    this.estimatedDistance = this.vc.estimatedDistance;
-    this.cost = 4 + 1.25*this.estimatedDistance;
+    //this.estimatedTime = this.vc.estimatedTime;
+    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2)
+    //this.estimatedDistance = this.vc.estimatedDistance;
+    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2)
+    //this.cost = 4 + 1.25*this.estimatedDistance;
+    this.cost = Number.parseFloat(4 + 1.25*this.estimatedDistance).toFixed(2) //ignore error still works!!
     //alert(this.estimatedDistance);
   }
   
@@ -223,10 +221,10 @@ export class RequestComponent implements OnInit {
   addRide() {
     this.ride = new Ride();
     this.ride.rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
-    this.ride.origin = Address.parse(this.origin);
-    this.ride.destination = Address.parse(this.destination);
-    this.ride.distance = this.distance;
-    this.ride.duration = this.duration;
+    this.ride.origin = Address.parse(this.destinationInput);
+    this.ride.destination = Address.parse(this.destinationOutput);
+    this.ride.distance = this.estimatedDistance;
+    this.ride.duration = this.estimatedTime;
     this.ride.startTime = this.startTime;
     this.ride.endTime = this.endTime;
     this.ride.cost = this.cost;

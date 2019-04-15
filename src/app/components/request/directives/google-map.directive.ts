@@ -53,8 +53,9 @@ export class DirectionsMapDirective {
                                   map.setZoom(30);
                                   //alert(me.getcomputeDistance (latLngA, latLngB));
                                   var point = response.routes[ 0 ].legs[ 0 ];
-                                  me.estimatedTime = point.duration.text ; //in seconds with .value
-                                  me.estimatedDistance = point.distance.text; //in meters, convert to ft then miles
+                                  me.estimatedTime = point.duration.value/60 ; //in seconds with .value
+                                  
+                                  me.estimatedDistance = (point.distance.value*0.62137)/1000; //in meters, convert to km then miles
 
                                   //alert(point.distance.text);
                                   //alert(me.estimatedTime);
