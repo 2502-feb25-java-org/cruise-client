@@ -22,6 +22,7 @@ import { MapComponent } from './components/map/map.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { AgmDirectionModule } from 'agm-direction';
+import { StringifyPipe } from './pipes/stringify.pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AgmDirectionModule } from 'agm-direction';
     ProfileComponent, 
     FeedbackComponent, MapComponent, 
     EditprofileComponent, 
-    MapComponent
+    MapComponent, 
+    StringifyPipe
   ],
   imports: [
     BrowserModule,

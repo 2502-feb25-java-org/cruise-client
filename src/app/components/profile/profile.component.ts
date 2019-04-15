@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { RiderService } from 'src/app/services/rider/rider.service'
 import { Address } from 'src/app/models/address/address'
 import { Rider } from '../../models/rider/rider'
+import { getLocaleExtraDayPeriodRules } from '@angular/common';
+import { Ride } from 'src/app/models/ride/ride';
+import { RideService } from 'src/app/services/ride/ride.service';
+import { Subject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Http, Response } from '@angular/http';
+
+
 
 @Component({
   selector: 'app-profile',
@@ -9,17 +17,49 @@ import { Rider } from '../../models/rider/rider'
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  loggedUser = JSON.parse(sessionStorage.getItem("loggedUserObj"));
+  loggedUser : Rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
+  rides: Ride[] = this.getRides();
 
-  name = this.loggedUser.firstName + " " + this.loggedUser.lastName;
-  uName = this.loggedUser.username;
-  email = this.loggedUser.email;
-  homeAddr;
-  addressLine2;
-  profDob = this.loggedUser.dob;
-  constructor() { }
+  name : string = this.loggedUser.firstName + " " + this.loggedUser.lastName;
+  uName : string = this.loggedUser.username;
+  email :string = this.loggedUser.email;
+  homeAddr : string;
+  addressLine2 : string;
+  profDob : string = this.loggedUser.dob;
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<Ride> = new Subject();
+  
+
+  constructor(private rideService: RideService) {
+
+   }
+
+  getRides() : Ride[] {
+    let rides : Ride[] = [];
+
+    this.rideService.getByRiderId(this.loggedUser.id)
+      .subscribe(
+      myRespBody => {
+        if(myRespBody != null){
+          this.rides = myRespBody;
+          this.dtTrigger.next();
+          console.log(this.rides + " found.");
+        } else {
+          console.log('Could not find rides.');
+        }
+      },
+      error => console.log('Observable not returned.')
+  );
+    return rides;
+  }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2
+    };
+
     if(this.loggedUser.address.line2 == "" || this.loggedUser.address.line2 == null){
       this.addressLine2 = ", ";
     } 
@@ -31,10 +71,21 @@ export class ProfileComponent implements OnInit {
   
   }
 
+  // private extractData(res: Response) {
+  //   const body = res.json();
+  //   return body.data || {};
+  // }
+
+  ngOnDestroy() {
+    this.dtTrigger.unsubscribe();
+  
+  }
 }
 
 @Component({
   selector: 'app-profile',
   templateUrl: 'profile.component.html'
 })
+
+
 export class ZeroConfigComponent { }
