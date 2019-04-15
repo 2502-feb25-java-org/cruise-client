@@ -1,7 +1,22 @@
 agm-map {
     height: 430px;
   }
-
+  #sign-card{
+    width: 35rem;
+    align-content: center;
+    margin: auto;
+    margin-top: 5px;
+  }
+  
+  .card-header{
+    background: rgb(53, 150, 206);
+    color: white;
+    text-align: center;
+  }
+  
+  .p{
+    align-self: right;
+  }
   .jumbotron {
     background: rgb(53, 150, 206);
     color: #FFF;
