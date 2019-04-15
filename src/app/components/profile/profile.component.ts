@@ -9,23 +9,26 @@ import { Rider } from '../../models/rider/rider'
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  loggedUser =JSON.parse( sessionStorage.getItem("loggedUserObj"));
+  loggedUser = JSON.parse(sessionStorage.getItem("loggedUserObj"));
 
   name = this.loggedUser.firstName + " " + this.loggedUser.lastName;
-   uName = this.loggedUser.username;
-   email = this.loggedUser.email;
-   homeAddr = this.loggedUser.address.line1 + ", "+ this.loggedUser.address.line2 + ", "
-   + this.loggedUser.address.city + ", " + this.loggedUser.address.state 
-   + this.loggedUser.address.country + ", " 
-   + this.loggedUser.address.zipcode;
-   
-   profDob = this.loggedUser.dob;
+  uName = this.loggedUser.username;
+  email = this.loggedUser.email;
+  homeAddr;
+  addressLine2;
+  profDob = this.loggedUser.dob;
   constructor() { }
 
   ngOnInit() {
-    // this.uName = RiderService.globalRider.username;
-    //this.email = "Test email";
-    // this.homeAddr = RiderService.globalRider.addresses[1];
+    if(this.loggedUser.address.line2 == "" || this.loggedUser.address.line2 == null){
+      this.addressLine2 = ", ";
+    } 
+    else{
+      this.addressLine2 = ", " + this.loggedUser.address.line2;
+    }
+    this.homeAddr = this.loggedUser.address.line1 + ", " + this.loggedUser.address.city + ", " 
+    + this.loggedUser.address.state + this.loggedUser.address.country + ", " + this.loggedUser.address.zipcode;
+  
   }
 
 }
@@ -34,4 +37,4 @@ export class ProfileComponent implements OnInit {
   selector: 'app-profile',
   templateUrl: 'profile.component.html'
 })
-export class ZeroConfigComponent {}
+export class ZeroConfigComponent { }

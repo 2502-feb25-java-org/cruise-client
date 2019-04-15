@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(private riderService: RiderService) { }
 
   ngOnInit() {
+    //==Login Storage
     if (localStorage.getItem('rememberMe') == 'true') {
       this.username = localStorage.getItem('storedUsername');
       this.rememberBox = localStorage.getItem('rememberMe');

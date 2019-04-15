@@ -37,5 +37,8 @@ export class RiderService {
     return this.http.post<Rider>(this.API_URL + "/find", [username, password], this.httpOptions);
   }
 
+  public updateRider(rider: Rider): Observable<Rider>{
+    return this.http.post<Rider>(this.API_URL + "/update", rider, this.httpOptions);
+  }
 
 }
