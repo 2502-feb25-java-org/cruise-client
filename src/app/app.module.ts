@@ -60,6 +60,4 @@ import { AgmDirectionModule } from 'agm-direction';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-   
- }
+export class AppModule {}
