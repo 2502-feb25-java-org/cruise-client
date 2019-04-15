@@ -33,6 +33,13 @@ export class EditprofileComponent implements OnInit {
   constructor(private riderService: RiderService) { }
 
   ngOnInit() {
+    if(sessionStorage.getItem("loggedUserObj") == null || sessionStorage.getItem("loggedUserObj") == ""){
+      alert("Please sign in!");
+      window.location.href= "/login";
+    }
+    else{
+      this.oldRider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
+    }
   }
 
   update() {
