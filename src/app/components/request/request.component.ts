@@ -47,7 +47,7 @@ export class RequestComponent implements OnInit {
   public iconurl: string;
   public mapCustomStyles: any;
   public estimatedTime: any;
-  public estimatedDistance: string;
+  public estimatedDistance: any;
   public cost: number;
 
   @ViewChild("pickupInput")
