@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
     + this.loggedUser.address.state + ", " + this.loggedUser.address.country + ", " + this.loggedUser.address.zipcode;
   
   }
-
 }
 
 @Component({
