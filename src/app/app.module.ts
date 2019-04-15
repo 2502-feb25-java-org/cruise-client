@@ -20,6 +20,7 @@ import { RideService } from './services/ride/ride.service';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { MapComponent } from './components/map/map.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { AgmDirectionModule } from 'agm-direction';
 
 
@@ -34,7 +35,8 @@ import { AgmDirectionModule } from 'agm-direction';
     ProfileComponent,
     HomeComponent, 
     ProfileComponent, 
-    FeedbackComponent, 
+    FeedbackComponent, MapComponent, 
+    EditprofileComponent, 
     MapComponent
   ],
   imports: [
