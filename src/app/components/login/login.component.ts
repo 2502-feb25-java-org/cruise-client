@@ -76,18 +76,8 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem("loggedUserObj", JSON.stringify(this.rider));
           sessionStorage.setItem("loggedUserName", this.rider.username);
           console.log("Rider recieved!" + JSON.stringify(this.rider));
-<<<<<<< HEAD
-          this.loginErrMsg = '';
-          sessionStorage.setItem("loggedUsername", this.rider.username);
-          sessionStorage.setItem("loggedEmail", this.rider.email);
-          sessionStorage.setItem("loggedAddress1", this.rider.address.line1);
-          sessionStorage.setItem("loggedCountry", this.rider.address.country);
-          sessionStorage.setItem("loggedCity", this.rider.address.city);
-          sessionStorage.setItem("loggedZip", this.rider.address.zipcode);
-=======
           this.loginErrMsg = '';          
           window.location.href = "/home"; //redirects a user
->>>>>>> 524702abc56bbcb734615cdfb2b2ad790c3330fb
         }
         else{
           console.log("User not found");
