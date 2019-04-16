@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   profDob : string = this.loggedUser.dob;
 
   dtOptions: DataTables.Settings = {
-    "pageLength": 50
+    
   };
   dtTrigger: Subject<Ride> = new Subject();
   
@@ -83,11 +83,3 @@ export class ProfileComponent implements OnInit {
   
   }
 }
-
-@Component({
-  selector: 'app-profile',
-  templateUrl: 'profile.component.html'
-})
-
-
-export class ZeroConfigComponent { }
