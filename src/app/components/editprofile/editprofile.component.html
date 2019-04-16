@@ -8,8 +8,17 @@
       <p id="changes-text">Enter your changes here: </p>
     </div>
     <div class="row justify-content-center">
-      <img id="user-pic" src="#" alt="Image not found" onerror="this.src='https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png'" />
-      <input class="form-control" type="file" [(ngModel)]="picture" name="pic" accept="image/*">
+      <img id="user-pic" src="#" alt="Image not found"
+        onerror="this.src='https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png'" />
+      <!-- original input field
+        <input class="form-control" type="file" [(ngModel)]="picture" name="pic" accept="image/*">
+      -->
+
+      <!-- input using to upload to s3 bucket-->
+      <label for="imageUpload">Image Upload</label>
+      <input type="file" (change)="fileEvent($event)" name="imageUpload" id="imageUpload" />
+
+
     </div>
 
     <ul class="list-group">
@@ -19,8 +28,7 @@
           <div class="col-3"><label>
               <h6>First Name:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.firstName" class="form-control" 
-            /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.firstName" class="form-control" /></div>
         </div>
       </li>
 
@@ -29,8 +37,7 @@
           <div class="col-3"><label>
               <h6>Last Name:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.lastName" class="form-control" 
-            /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.lastName" class="form-control" /></div>
         </div>
       </li>
 
@@ -39,8 +46,7 @@
           <div class="col-3"><label>
               <h6>Username:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.username" class="form-control" 
-            /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.username" class="form-control" /></div>
         </div>
       </li>
 
@@ -50,7 +56,7 @@
               <h6>Email:</h6>
             </label></div>
           <div class="col-lg-6"><input id="email" name="test" class="form-control" email [(ngModel)]="oldRider.email"
-              #userEmail="ngModel"/></div>
+              #userEmail="ngModel" /></div>
         </div>
         <div *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert alert-danger">
           <div *ngIf="userEmail.errors.email">
@@ -65,7 +71,7 @@
               <h6>Phone Number:</h6>
             </label></div>
           <div class="col-lg-6"><input id="email" name="test" class="form-control" pattern="^[2-9]\d{2}-\d{3}-\d{4}$"
-              [(ngModel)]="oldRider.phoneNumber" #phone="ngModel" maxlength="12"/>
+              [(ngModel)]="oldRider.phoneNumber" #phone="ngModel" maxlength="12" />
           </div>
         </div>
         <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger" class="row">
@@ -86,8 +92,7 @@
           <div class="col-3"><label>
               <h6>Birthday:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="date" [(ngModel)]="oldRider.dob" class="form-control"
-            /></div>
+          <div class="col-lg-6"><input type="date" [(ngModel)]="oldRider.dob" class="form-control" /></div>
         </div>
       </li>
 
@@ -96,15 +101,13 @@
           <div class="col-3"><label>
               <h6>Address Line1:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.line1" class="form-control" 
-            /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.line1" class="form-control" /></div>
         </div>
         <div class="row">
           <div class="col-3"><label>
               <h6>Address Line2:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.line2" class="form-control" 
-            /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.line2" class="form-control" /></div>
         </div>
         <div class="row">
           <div class="col-3"><label>
@@ -123,8 +126,7 @@
           <div class="col-3"><label>
               <h6>City:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.city" class="form-control" 
-            /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.city" class="form-control" /></div>
         </div>
       </li>
 
@@ -133,8 +135,7 @@
           <div class="col-3"><label>
               <h6>State:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.state" class="form-control" 
-            /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.state" class="form-control" /></div>
         </div>
       </li>
 
@@ -143,14 +144,14 @@
           <div class="col-3"><label>
               <h6>Zipcode: {{oldRider.address.zipcode}}</h6>
             </label></div>
-          <div class="col-lg-6"><input [(ngModel)]="oldRider.address.zipcode" class="form-control" 
-             maxlength="5" pattern="\d{5}" #zipcode="ngModel"/></div>
+          <div class="col-lg-6"><input [(ngModel)]="oldRider.address.zipcode" class="form-control" maxlength="5"
+              pattern="\d{5}" #zipcode="ngModel" /></div>
         </div>
         <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" class="alert alert-danger" class="row">
-            <div *ngIf="zipcode.errors.pattern">
-              Must be less a five-digit code!
-            </div>
+          <div *ngIf="zipcode.errors.pattern">
+            Must be less a five-digit code!
           </div>
+        </div>
       </li>
 
       <li class="list-group-item">

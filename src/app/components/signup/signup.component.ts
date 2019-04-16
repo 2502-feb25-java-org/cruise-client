@@ -5,6 +5,9 @@ import { Address } from 'src/app/models/address/address';
 import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
 import { checkAndUpdateBinding } from '@angular/core/src/view/util';
 
+//s3 bucket import
+import * as AWS from "aws-sdk";
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -149,4 +152,33 @@ export class SignupComponent implements OnInit {
       return false;
     }
   }
+
+  //code for uploading to AWS s3 bucket
+  fileEvent(fileInput: any) {
+    const AWSService = AWS;
+    const region = 'us-east-2';
+    const bucketName = 'cruise-imgs';
+    const IdentityPoolId = '<insert your identity pool id>';
+    const file = fileInput.target.files[0];
+  //Configures the AWS service and initial authorization
+    AWSService.config.update({
+      region: region,
+      credentials: new AWSService.CognitoIdentityCredentials({
+        IdentityPoolId: IdentityPoolId
+      })
+    });
+  //adds the S3 service, make sure the api version and bucket are correct
+    const s3 = new AWSService.S3({
+      apiVersion: '2006-03-01',
+      params: { Bucket: 'cruise-imgs'}
+    });
+  //I store this in a variable for retrieval later
+    //this.image = file.name;   **commented because image gives error
+    s3.upload({ Key: file.name, Bucket: 'cruise-imgs', Body: file, ACL: 'public-read'}, function (err, data) {
+     if (err) {
+       console.log(err, 'there was an error uploading your file');
+     }
+   });
+  }
+  
 }
