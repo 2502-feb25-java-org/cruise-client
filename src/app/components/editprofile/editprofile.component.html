@@ -8,7 +8,7 @@
       <p id="changes-text">Enter your changes here: </p>
     </div>
     <div class="row justify-content-center">
-      <img id="user-pic" src="#" alt="user_pic" />
+      <img id="user-pic" src="#" alt="Image not found" onerror="this.src='https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png'" />
       <input class="form-control" type="file" [(ngModel)]="picture" name="pic" accept="image/*">
     </div>
 
@@ -19,7 +19,8 @@
           <div class="col-3"><label>
               <h6>First Name:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="firstName" class="form-control" /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.firstName" class="form-control" 
+            /></div>
         </div>
       </li>
 
@@ -28,7 +29,8 @@
           <div class="col-3"><label>
               <h6>Last Name:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="lastName" class="form-control" /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.lastName" class="form-control" 
+            /></div>
         </div>
       </li>
 
@@ -37,7 +39,8 @@
           <div class="col-3"><label>
               <h6>Username:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="newUserName" class="form-control" /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.username" class="form-control" 
+            /></div>
         </div>
       </li>
 
@@ -46,8 +49,8 @@
           <div class="col-3"><label>
               <h6>Email:</h6>
             </label></div>
-          <div class="col-lg-6"><input id="email" name="test" class="form-control" email [(ngModel)]="email"
-              #userEmail="ngModel" /></div>
+          <div class="col-lg-6"><input id="email" name="test" class="form-control" email [(ngModel)]="oldRider.email"
+              #userEmail="ngModel"/></div>
         </div>
         <div *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert alert-danger">
           <div *ngIf="userEmail.errors.email">
@@ -62,22 +65,29 @@
               <h6>Phone Number:</h6>
             </label></div>
           <div class="col-lg-6"><input id="email" name="test" class="form-control" pattern="^[2-9]\d{2}-\d{3}-\d{4}$"
-              [(ngModel)]="phoneNumber" #phone="ngModel" maxlength="12">
+              [(ngModel)]="oldRider.phoneNumber" #phone="ngModel" maxlength="12"/>
           </div>
         </div>
         <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger" class="row">
           <div *ngIf="phone.errors.pattern">
             Phone number must be in this form: XXX-XXX-XXXX.
           </div>
+          <div *ngIf="phone.errors.maxLength">
+            phone must be x long!
+          </div>
         </div>
       </li>
 
       <li class="list-group-item">
+        <div class="row justify-content-center">
+          Your Birthday: {{oldRider.dob | date}}
+        </div>
         <div class="row">
           <div class="col-3"><label>
               <h6>Birthday:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="date" [(ngModel)]="dob" class="form-control" /></div>
+          <div class="col-lg-6"><input type="date" [(ngModel)]="oldRider.dob" class="form-control"
+            /></div>
         </div>
       </li>
 
@@ -86,19 +96,21 @@
           <div class="col-3"><label>
               <h6>Address Line1:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="addressLine1" class="form-control" /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.line1" class="form-control" 
+            /></div>
         </div>
         <div class="row">
           <div class="col-3"><label>
               <h6>Address Line2:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="addressLine2" class="form-control" /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.line2" class="form-control" 
+            /></div>
         </div>
         <div class="row">
           <div class="col-3"><label>
               <h6>Address Type:</h6>
             </label></div>
-          <div class="col-lg-6"><select class="form-control" [(ngModel)]="addressType">
+          <div class="col-lg-6"><select class="form-control" [(ngModel)]="oldRider.address.type">
               <option value="type1">Home</option>
               <option value="type2">Work</option>
               <option value="other">Other</option>
@@ -111,7 +123,8 @@
           <div class="col-3"><label>
               <h6>City:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="city" class="form-control" /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.city" class="form-control" 
+            /></div>
         </div>
       </li>
 
@@ -120,23 +133,30 @@
           <div class="col-3"><label>
               <h6>State:</h6>
             </label></div>
-          <div class="col-lg-6"><input type="text" [(ngModel)]="state" class="form-control" /></div>
+          <div class="col-lg-6"><input type="text" [(ngModel)]="oldRider.address.state" class="form-control" 
+            /></div>
         </div>
       </li>
 
       <li class="list-group-item">
         <div class="row">
           <div class="col-3"><label>
-              <h6>Zipcode:</h6>
+              <h6>Zipcode: {{oldRider.address.zipcode}}</h6>
             </label></div>
-          <div class="col-lg-6"><input type="number" [(ngModel)]="zipcode" class="form-control" /></div>
+          <div class="col-lg-6"><input [(ngModel)]="oldRider.address.zipcode" class="form-control" 
+             maxlength="5" pattern="\d{5}" #zipcode="ngModel"/></div>
         </div>
+        <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" class="alert alert-danger" class="row">
+            <div *ngIf="zipcode.errors.pattern">
+              Must be less a five-digit code!
+            </div>
+          </div>
       </li>
 
       <li class="list-group-item">
         <div class="row justify-content-center">
           <input type="button" class="btn btn-primary" value="Submit" (click)="update()"
-            [disabled]="userEmail.invalid || phone.invalid" />
+            [disabled]="userEmail.invalid || phone.invalid || zipcode.invalid" />
         </div>
       </li>
 

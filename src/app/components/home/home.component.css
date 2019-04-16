@@ -11,10 +11,15 @@
 #introCarousel{
   margin: auto;
   height: 20rem;
-  width: 35rem;
+  width: 50%;
 }
 
 #firstRow{
   margin-top: 5px;
   justify-content: center;
 }
+
+.row{
+  height: 35rem;
+}
+
