@@ -27,6 +27,7 @@
     "aws-sdk": "^2.438.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
+    "d": "^1.0.0",
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "jquery": "^3.4.0",
