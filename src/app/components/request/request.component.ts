@@ -166,6 +166,13 @@ export class RequestComponent implements OnInit {
     this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);    
     this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);    
     this.cost = 4 + 1.25*this.vc.estimatedDistance;
+    //this.estimatedTime = this.vc.estimatedTime;
+    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2)
+    //this.estimatedDistance = this.vc.estimatedDistance;
+    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2)
+    //this.cost = 4 + 1.25*this.estimatedDistance;
+    this.cost = 4 + 1.25*this.vc.estimatedDistance //ignore error still works!!
+    //alert(this.estimatedDistance);
   }
   
   scrollToBottom(): void {

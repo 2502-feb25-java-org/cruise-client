@@ -7,7 +7,7 @@
             <label id="username_label">Username:</label>
           </div>
           <div class="form-group">
-            <input type="text" id="username_input" [(ngModel)] = "username" class="form-control" 
+            <input type="text" id="username_input" class="form-control" 
             #usernamebox (change) = "validUsername(usernamebox.value)" placeholder="username"/>
           </div>
         </div>
@@ -19,7 +19,7 @@
             <label id="pwd_label">Password:</label>
           </div>
           <div class="form-group">
-            <input type="password" id="pwd_input" [(ngModel)] = "password" class="form-control" 
+            <input type="password" id="pwd_input" class="form-control" 
             #passwordbox (change) = "validPassword(passwordbox.value)" placeholder="password"
             (keyup.enter)="submit(usernamebox.value, passwordbox.value)"/>
           </div>

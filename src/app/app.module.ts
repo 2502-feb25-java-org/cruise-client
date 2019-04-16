@@ -18,15 +18,13 @@ import { RiderService } from './services/rider/rider.service';
 import { CarService } from './services/car/car.service';
 import { RideService } from './services/ride/ride.service';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-import { MapComponent } from './components/map/map.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { AgmDirectionModule } from 'agm-direction';
+import { StringifyPipe } from './pipes/stringify.pipe';
 import { DirectionsMapDirective } from './components/request/directives/google-map.directive';
 import { GeolocationService } from './services/geolocation.service';
 import { CommonModule } from '@angular/common';
-import { APP_ROUTING } from './app-routing.module';
-//import {outes } from './app-routing.module';
 
 
 
@@ -38,12 +36,11 @@ import { APP_ROUTING } from './app-routing.module';
     RequestComponent,
     SignupComponent,
     FooterComponent,
-    ProfileComponent,
-    HomeComponent,
-    ProfileComponent,
-    FeedbackComponent, MapComponent,
-    EditprofileComponent,
-    MapComponent,
+    HomeComponent, 
+    ProfileComponent, 
+    FeedbackComponent,
+    EditprofileComponent, 
+    StringifyPipe,
     DirectionsMapDirective
   ],
   imports: [
@@ -53,7 +50,6 @@ import { APP_ROUTING } from './app-routing.module';
     HttpModule,
     HttpClientModule,
     CommonModule,
-    APP_ROUTING,
     AgmCoreModule.forRoot({
       //apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
       apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM',

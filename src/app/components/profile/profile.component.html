@@ -5,19 +5,20 @@
 
   <div class="card-body">
     <div class="row justify-content-center">
-      <img id="user-pic" src="#" alt="user_pic" onerror="this.src='https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png'"/>
+      <img id="user-pic" src="#" alt="user_pic"
+        onerror="this.src='https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png'" />
     </div>
 
     <ul class="list-group">
 
-        <li class="list-group-item">
-            <div class="row">
-              <div class="col-3"><label>
-                  <h6>Name:</h6>
-                </label></div>
-              <div class="col-lg-6">{{name}}</div>
-            </div>
-          </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-3"><label>
+              <h6>Name:</h6>
+            </label></div>
+          <div class="col-lg-6">{{name}}</div>
+        </div>
+      </li>
 
       <li class="list-group-item">
         <div class="row">
@@ -38,53 +39,52 @@
       </li>
 
       <li class="list-group-item">
-          <div class="row">
-            <div class="col-3"><label>
-                <h6>Birthday:</h6>
-              </label></div>
-            <div class="col-lg-6">{{profDob | date}}</div>
-          </div>
-        </li>
+        <div class="row">
+          <div class="col-3"><label>
+              <h6>Birthday:</h6>
+            </label></div>
+          <div class="col-lg-6">{{profDob | date}}</div>
+        </div>
+      </li>
 
-        <li class="list-group-item">
-            <div class="row">
-              <div class="col-3"><label>
-                  <h6>Address:</h6>
-                </label></div>
-              <div class="col-lg-6">{{homeAddr}}</div>
-            </div>
-          </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-3"><label>
+              <h6>Address:</h6>
+            </label></div>
+          <div class="col-lg-6">{{homeAddr}}</div>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
 
 <div id="history-div">
-  <div class="row justify-content-center">  
+  <div class="row justify-content-center">
     <h3>My Ride History</h3>
-</div>
+  </div>
   <hr>
-  <table datatable class="row-border hover">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
     <thead>
       <tr>
-        <th>Ride ID</th>
         <th>Start Location</th>
         <th>End Location</th>
         <th>Start Time</th>
         <th>End Time</th>
+        <th>Duaration</th>
         <th>Distance Traveled</th>
         <th>Cost</th>
       </tr>
     </thead>
-
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
+      <tr *ngFor="let ride of rides">
+        <td>{{ ride.origin | stringify }}</td>
+        <td>{{ ride.destination | stringify}}</td>
+        <td>{{ ride.startTime }}</td>
+        <td>{{ ride.endTime }}</td>
+        <td>{{ ride.duration }}</td>
+        <td>{{ ride.distance }}</td>
+        <td>{{ ride.cost }}</td>
       </tr>
     </tbody>
   </table>
