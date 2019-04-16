@@ -151,7 +151,7 @@ export class RequestComponent implements OnInit {
     //this.estimatedDistance = this.vc.estimatedDistance;
     this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2)
     //this.cost = 4 + 1.25*this.estimatedDistance;
-    this.cost = Number.parseFloat(4 + 1.25*this.vc.estimatedDistance).toFixed(2) //ignore error still works!!
+    this.cost = 4 + 1.25*this.vc.estimatedDistance; //ignore error still works!!
     //alert(this.estimatedDistance);
   }
   
