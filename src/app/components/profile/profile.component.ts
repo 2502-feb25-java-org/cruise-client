@@ -56,13 +56,6 @@ export class ProfileComponent implements OnInit {
     return rides;
   }
 
-  getRides() : Ride[]{
-    let rides : Ride[];
-    
-
-    return null;
-  }
-
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
