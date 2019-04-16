@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,26 +18,30 @@ import { RiderService } from './services/rider/rider.service';
 import { CarService } from './services/car/car.service';
 import { RideService } from './services/ride/ride.service';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-import { MapComponent } from './components/map/map.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { AgmDirectionModule } from 'agm-direction';
+import { StringifyPipe } from './pipes/stringify.pipe';
+import { DirectionsMapDirective } from './components/request/directives/google-map.directive';
+import { GeolocationService } from './services/geolocation.service';
+import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
-  declarations:[
+  declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
     RequestComponent,
-    SignupComponent,   
-    FooterComponent, 
-    ProfileComponent,
+    SignupComponent,
+    FooterComponent,
     HomeComponent, 
     ProfileComponent, 
-    FeedbackComponent, MapComponent, 
+    FeedbackComponent,
     EditprofileComponent, 
-    MapComponent
+    StringifyPipe,
+    DirectionsMapDirective
   ],
   imports: [
     BrowserModule,
@@ -45,9 +49,12 @@ import { AgmDirectionModule } from 'agm-direction';
     FormsModule,
     HttpModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({ 
+    CommonModule,
+    AgmCoreModule.forRoot({
       //apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
-      apiKey: 'AIzaSyCaYpN8YwJavuYo-F1prHvN7U86BsZdNA0' }),
+      apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM',
+      libraries: ["places"]
+    }),
     AgmDirectionModule,
     DataTablesModule,
     NgbModule
@@ -56,8 +63,10 @@ import { AgmDirectionModule } from 'agm-direction';
     RiderService,
     CarService,
     RideService,
+    GeolocationService,
     GoogleMapsAPIWrapper
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
