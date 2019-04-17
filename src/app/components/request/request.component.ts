@@ -11,6 +11,7 @@ import { CarService } from 'src/app/services/car/car.service';
 import { DirectionsMapDirective } from './directives/google-map.directive';
 import { } from 'googlemaps';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { forEach } from '@angular/router/src/utils/collection';
 
 declare var google: any;
 declare var jQuery: any;
@@ -49,6 +50,7 @@ export class RequestComponent implements OnInit {
   public estimatedTime: any;
   public estimatedDistance: any;
   public cost: number;
+  public waitTime: number;
 
   @ViewChild("pickupInput")
   public pickupInputElementRef: ElementRef;
@@ -72,11 +74,10 @@ export class RequestComponent implements OnInit {
   }
 
   //retrieves distance and time
-  simpleMethod(input: any, output: any){
-    this.pickupInputElementRef = input;
-    this.pickupOutputElementRef = output;
-    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);    
-    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);
+  durationBetweenAddresses(firstAddress: any, secondAddress: any){
+    this.pickupInputElementRef = firstAddress;
+    this.pickupOutputElementRef = secondAddress;
+    return this.vc.estimatedTime;    
   }
 
 
@@ -218,11 +219,11 @@ export class RequestComponent implements OnInit {
     );
   }
 
-  getClosestCar() {
+  getCar() {
     this.carService.getAllAvailable().subscribe(
       myRespBody => {
         if (myRespBody != null) {
-          this.ride.car = myRespBody[0]; // git the first car in the collection
+          this.ride.car = this.getClossestCar(myRespBody); // git the first car in the collection
           console.log(this.ride.car.make + " found");
           this.createRide();
         }
@@ -235,6 +236,21 @@ export class RequestComponent implements OnInit {
     );
   }
 
+  getClossestCar(cars : Car[]) {
+    let clossestCar : Car;
+    let minDuration : number = 999999999; 
+    cars.forEach(car => {
+      let durationFromCar = this.durationBetweenAddresses(Address.stringify(car.location), 
+                                        this.pickupInputElementRef);
+      if (durationFromCar < minDuration){
+          clossestCar = car;
+          minDuration = durationFromCar;
+        }                                          
+    });
+    this.waitTime = minDuration;
+    return clossestCar;
+  }
+
   addRide() {
     this.ride = new Ride();
     this.ride.rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
@@ -245,9 +261,7 @@ export class RequestComponent implements OnInit {
     this.ride.startTime = this.startTime;
     this.ride.endTime = this.endTime;
     this.ride.cost = this.cost;
-    this.getClosestCar();
-
-
+    this.getCar();
   }
 }
 
