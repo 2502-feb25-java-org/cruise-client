@@ -44,7 +44,7 @@ export class DirectionsMapDirective {
               directionsService.route({
                       origin: {placeId : this.originPlaceId },
                       destination: {placeId : this.destinationPlaceId },
-                      avoidHighways: true,
+                      avoidHighways: false,
                       travelMode: google.maps.DirectionsTravelMode.DRIVING
                       //travelMode: 'DRIVING'
                     }, function(response: any, status: any) {
@@ -53,7 +53,7 @@ export class DirectionsMapDirective {
                                   map.setZoom(30);
                                   //alert(me.getcomputeDistance (latLngA, latLngB));
                                   var point = response.routes[ 0 ].legs[ 0 ];
-                                  me.estimatedTime = point.duration.value/60 ; //in seconds with .value
+                                  me.estimatedTime = point.duration.value ; //in seconds with .value
                                   
                                   me.estimatedDistance = (point.distance.value*0.62137)/1000; //in meters, convert to km then miles
 

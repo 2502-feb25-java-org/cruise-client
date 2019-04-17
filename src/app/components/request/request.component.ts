@@ -12,6 +12,9 @@ import { DirectionsMapDirective } from './directives/google-map.directive';
 import { } from 'googlemaps';
 import { NgForm, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { forEach } from '@angular/router/src/utils/collection';
+import { stringify } from '@angular/compiler/src/util';
+import { endTimeRange } from '@angular/core/src/profile/wtf_impl';
+import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 
 declare var google: any;
 declare var jQuery: any;
@@ -23,20 +26,10 @@ declare var jQuery: any;
   providers: [GoogleMapsAPIWrapper]
 })
 export class RequestComponent implements OnInit {
-  //latitude :number = 40.7483872;
-  //longitude : number = -73.990094;
-
-  origin: string = "119 W 31st St, New York, NY 10001";
-  destination: string = "1752 Park Ave, New York, NY 10035";
-
-  //cost: number = 10;
-  startTime: string = "2019-04-22 20:46";
-  endTime: string = "2019-04-22 20:00";
-
   rider: Rider;
   distance: number = 4;
   duration: number = 14;
-  carID: Car;
+  car: Car;
 
   ride: Ride;
 
@@ -185,6 +178,7 @@ export class RequestComponent implements OnInit {
     this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);
     this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);
     this.cost = 4 + 1.25 * this.vc.estimatedDistance;
+    this.car = this.getCar();
     
    
   }
@@ -235,12 +229,12 @@ export class RequestComponent implements OnInit {
   }
 
   getCar() {
+    let car = new Car();
     this.carService.getAllAvailable().subscribe(
       myRespBody => {
         if (myRespBody != null) {
-          this.ride.car = this.getClossestCar(myRespBody); // git the first car in the collection
-          console.log(this.ride.car.make + " found");
-          this.createRide();
+          car = this.getClossestCar(myRespBody); // git the first car in the collection
+          console.log(car.make + " found");          
         }
         else {
           console.log("Car not found");
@@ -249,6 +243,7 @@ export class RequestComponent implements OnInit {
       },
       error => console.log('Observable not returned')
     );
+    return car;
   }
 
   getClossestCar(cars: Car[]) {
@@ -268,7 +263,8 @@ export class RequestComponent implements OnInit {
 
   
 
-  addRide() {  
+  addRide() { 
+    console.log('in here!') 
     if(this.ex == false){
       alert('Calculate Trip First!');
     }else{
@@ -278,12 +274,25 @@ export class RequestComponent implements OnInit {
     this.ride.destination = Address.parse(this.destinationOutput);
     this.ride.distance = this.estimatedDistance;
     this.ride.duration = this.estimatedTime;
-    this.ride.startTime = this.startTime;
-    this.ride.endTime = this.endTime;
+    this.ride.startTime = this.getStartTime();
+    this.ride.endTime = this.getEndTime();
     this.ride.cost = this.cost;
-    this.getCar();
+    this.createRide();
     }
   }
+
+  getStartTime() {
+    let time = new Date();
+    time.setSeconds(time.getSeconds() + this.waitTime); 
+    return time.toDateString() + " " + time.toTimeString().substring(0, 8);
+  }
+
+  getEndTime() {
+    let time = new Date();
+    time.setSeconds(time.getSeconds() + this.waitTime + this.estimatedTime);
+    return time.toDateString() + " " + time.toTimeString().substring(0, 8);
+  }
+
 }
 
 

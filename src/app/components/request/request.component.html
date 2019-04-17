@@ -20,9 +20,11 @@
               <input class="form-control" type="text" value="{{cost | currency}}  " readonly>
             </div>
 
-            <div class="form-group col-md-4">
-              <label style="color:rgb(255, 72, 0)"><strong>Duration:</strong></label>
-              <input class="form-control" type="text" value="{{estimatedTime}} minutes" readonly>
+            <div class="form-group col-md-4">             
+
+                <label style="color:rgb(255, 72, 0)"><strong>Duration:</strong></label>
+              <input class="form-control" type="text" value="{{estimatedTime | durationFormat}} "  readonly>
+
             </div>
 
             <div class="form-group col-md-4">
@@ -37,13 +39,14 @@
            <!-- <label style="color:rgb(255, 72, 0); margin-left:25px;"><strong>Car Wait Time: {{waitTime}}</strong></label>-->
             <div class="form-group col-md-4">
               <label style="color:rgb(255, 72, 0)"><strong>Wait Time:</strong></label>
-              <input class="form-control" type="text" value="{{waitTime}}" readonly>
+              <input class="form-control" type="text" value="{{waitTime | durationFormat}}" readonly>
             </div>
           
         </div>
       </div>
     </form>
   </div>
+
   <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" [styles]="mapCustomStyles">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="iconurl">
       <agm-info-window>

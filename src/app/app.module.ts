@@ -25,6 +25,7 @@ import { StringifyPipe } from './pipes/stringify.pipe';
 import { DirectionsMapDirective } from './components/request/directives/google-map.directive';
 import { GeolocationService } from './services/geolocation.service';
 import { CommonModule } from '@angular/common';
+import { DurationFormatPipe } from './pipes/duration-format.pipe';
 
 
 
@@ -41,7 +42,8 @@ import { CommonModule } from '@angular/common';
     FeedbackComponent,
     EditprofileComponent, 
     StringifyPipe,
-    DirectionsMapDirective
+    DirectionsMapDirective,
+    DurationFormatPipe
   ],
   imports: [
     BrowserModule,
