@@ -4,10 +4,11 @@
   </div>
   <br>
   <div class="form-group">
-    <input placeholder="Origin" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #pickupInput
+    <input placeholder="Origin" [(ngModel)]="destinationInput" autocorrect="off" autocapitalize="off" spellcheck="off" (blur)="clear()" type="text" #pickupInput
       class="form-control"><br>
-    <input placeholder="Destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+    <input placeholder="Destination" [(ngModel)]="destinationOutput" autocorrect="off" autocapitalize="off" (blur)="clear()" spellcheck="off" type="text"
       #pickupOutput class="form-control">
+    
     <form action="" #myForm="ngForm" novalidate>
       <div class="row">
         <div class="col-md-12">
@@ -30,10 +31,14 @@
             </div>
           </div>
           
-          
-            <button (click)="getEstimate()" style="margin:1px" class="btn btn-primary">Plan Trip</button>
-            <button style="margin:1px" (click)="clear()" class="btn btn-primary">Cancel Trip</button>
-            <button (click)="getDistanceAndDuration(); addRide()" class="btn btn-primary">Request Ride</button>
+
+            <button (click)="getEstimate();" style="margin-right:6.5rem" class="btn btn-primary">Calculate Trip</button>
+            <button (click)="addRide()" style="margin:1px" class="btn btn-primary">Request Ride</button>
+           <!-- <label style="color:rgb(255, 72, 0); margin-left:25px;"><strong>Car Wait Time: {{waitTime}}</strong></label>-->
+            <div class="form-group col-md-4">
+              <label style="color:rgb(255, 72, 0)"><strong>Wait Time:</strong></label>
+              <input class="form-control" type="text" value="{{waitTime}}" readonly>
+            </div>
           
         </div>
       </div>

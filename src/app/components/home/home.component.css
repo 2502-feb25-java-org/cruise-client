@@ -9,7 +9,8 @@
     overflow: hidden;
    } */
 #introCarousel{
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   height: 20rem;
   width: 50%;
 }
@@ -20,6 +21,7 @@
 }
 
 .row{
-  height: 28rem;
+  
+  height: 25rem;
 }
 
