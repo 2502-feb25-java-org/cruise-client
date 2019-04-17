@@ -71,6 +71,15 @@ export class RequestComponent implements OnInit {
     console.log("hello world!");
   }
 
+  //retrieves distance and time
+  simpleMethod(input: any, output: any){
+    this.pickupInputElementRef = input;
+    this.pickupOutputElementRef = output;
+    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);    
+    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);
+  }
+
+
   ngOnInit() {
      //set google maps defaults
   this.zoom = 10;
@@ -146,12 +155,27 @@ export class RequestComponent implements OnInit {
   
   
   getDistanceAndDuration(){
+    
+    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);    
+    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);    
+    this.cost = 4 + 1.25*this.vc.estimatedDistance;
+    
+  }
+
+  getEstimate(){
+    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);    
+    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);    
+    this.cost = 4 + 1.25*this.vc.estimatedDistance;
     //this.estimatedTime = this.vc.estimatedTime;
     this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2)
     //this.estimatedDistance = this.vc.estimatedDistance;
     this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2)
     //this.cost = 4 + 1.25*this.estimatedDistance;
+<<<<<<< HEAD
     this.cost = 4 + 1.25*this.vc.estimatedDistance; //ignore error still works!!
+=======
+    this.cost = 4 + 1.25*this.vc.estimatedDistance //ignore error still works!!
+>>>>>>> 5201d4996844de9130761417d1984aaead9941a1
     //alert(this.estimatedDistance);
   }
   

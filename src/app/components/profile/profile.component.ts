@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   profDob : string = this.loggedUser.dob;
 
   dtOptions: DataTables.Settings = {
-    "pageLength": 50
+    
   };
   dtTrigger: Subject<Ride> = new Subject();
   
