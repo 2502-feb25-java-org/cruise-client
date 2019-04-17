@@ -158,7 +158,7 @@ export class SignupComponent implements OnInit {
     const AWSService = AWS;
     const region = 'us-east-2';
     const bucketName = 'cruise-imgs';
-    const IdentityPoolId = '<insert your identity pool id>';
+    const IdentityPoolId = 'arn:aws:iam::763693537926:role/Cognito_RevatureCruiseClientAuth_Role';
     const file = fileInput.target.files[0];
   //Configures the AWS service and initial authorization
     AWSService.config.update({

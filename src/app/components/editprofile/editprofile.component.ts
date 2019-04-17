@@ -61,14 +61,15 @@ export class EditprofileComponent implements OnInit {
 
   //code for uploading to AWS s3 bucket
   fileEvent(fileInput: any) {
+    console.log("inside fileEvent()");
     const AWSService = AWS;
     const region = 'us-east-2';
     const bucketName = 'cruise-imgs';
     const IdentityPoolId = 'arn:aws:iam::763693537926:role/Cognito_RevatureCruiseClientAuth_Role';
     const file = fileInput.target.files[0];
   //Configures the AWS service and initial authorization
-    AWSService.config.update({
-      region: region,
+    AWSService.config.update(
+      {region: region,
       credentials: new AWSService.CognitoIdentityCredentials({
         IdentityPoolId: IdentityPoolId
       })
@@ -79,7 +80,7 @@ export class EditprofileComponent implements OnInit {
       params: { Bucket: 'cruise-imgs'}
     });
   //I store this in a variable for retrieval later
-    //this.image = file.name;   **commented because image gives error
+    //this.image = file.name;   //**commented because image gives error
     s3.upload({ Key: file.name, Bucket: 'cruise-imgs', Body: file, ACL: 'public-read'}, function (err, data) {
      if (err) {
        console.log(err, 'there was an error uploading your file');
