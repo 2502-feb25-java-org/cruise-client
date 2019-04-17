@@ -10,7 +10,7 @@ import { Car } from 'src/app/models/car/car';
 import { CarService } from 'src/app/services/car/car.service';
 import { DirectionsMapDirective } from './directives/google-map.directive';
 import { } from 'googlemaps';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgForm,FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 declare var google: any;
 declare var jQuery: any;
@@ -49,6 +49,7 @@ export class RequestComponent implements OnInit {
   public estimatedTime: any;
   public estimatedDistance: any;
   public cost: number;
+  
 
   @ViewChild("pickupInput")
   public pickupInputElementRef: ElementRef;
@@ -144,6 +145,15 @@ export class RequestComponent implements OnInit {
        });
   
   }
+
+clear(){
+  
+  this.estimatedTime = 0;    
+    this.estimatedDistance = 0;
+    this.cost = 0;
+    alert("Trip Canceled!");
+}
+
    route() {
         this.vc.origin = {lng: -86.8295894, la: 21.1354986 };  
         this.vc.destination = {lng: -86.8261042, lat: 21.20137644}; // its a example aleatory position
