@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
   testpic: string;
   str : string;
 
-  s3BucketUrl : string = "https://s3.us-east-2.amazonaws.com/cruise-imgs/";
+  s3BucketUrl : string = "https://s3.amazonaws.com/revature-cruise-client-imgs/";
 
   constructor(private riderService: RiderService) {
     console.log('in SignUpComponent constructor. instantiating RiderService');
@@ -62,6 +62,7 @@ export class SignupComponent implements OnInit {
     address.zipcode = this.zipcode;
     address.country = "United States";
     rider.address = address;
+    rider.picture = sessionStorage.getItem("imgURL");
 
     if (this.check(this.firstName, "First Name") && this.check(this.lastName, "Last Name")
       && this.check(this.newUserName, "Desired Username") && this.check(this.password, "Password")
@@ -156,7 +157,8 @@ export class SignupComponent implements OnInit {
   }
 
   //code for uploading to AWS s3 bucket
-  fileEvent(fileInput: any) {
+  fileEvent(fileInput: any) 
+  {
     const AWSService = AWS;
     const region = 'us-east-1';
     const bucketName = 'revature-cruise-client-imgs';
@@ -183,9 +185,8 @@ export class SignupComponent implements OnInit {
     //console.log(this.str);
 
     s3.upload({ Key: file.name, Bucket: 'revature-cruise-client-imgs', Body: file, ACL: 'public-read' }, function (err, data) {
-      if (err) {
+      if (err)
         console.log(err, 'there was an error uploading your file');
-      }
 
       else
       {
@@ -193,11 +194,11 @@ export class SignupComponent implements OnInit {
       }
     });
 
-  document.getElementById("imageUpload").onchange = () => 
-  {
-    this.picture = document.getElementById("imageUpload").onchange;
-    alert("Selected File" + this.picture.name);
-  }
+    document.getElementById("imageUpload").onchange = () => 
+    {
+      this.picture = document.getElementById("imageUpload").onchange;
+      alert("Selected File" + this.picture.name);
+    }
   
   }
 }
