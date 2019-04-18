@@ -105,14 +105,13 @@
       </div>
 
     <div class="form-group">
-      <label>Profile Picture: </label>
+      <label>Profile Picture-> </label>
 
       <!-- original input field 
         <input class="form-control" type="file" [(ngModel)]="picture" name="pic" accept="image/*">
       -->
 
       <!-- input using to upload to s3 bucket-->
-      <label for="imageUpload">Image Upload</label>
       <input type="file" (change)="fileEvent($event)" name="imageUpload" id="imageUpload"/>
 
     </div>
