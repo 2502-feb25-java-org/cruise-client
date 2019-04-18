@@ -63,7 +63,7 @@ export class EditprofileComponent implements OnInit {
     console.log("inside fileEvent()");
     const AWSService = AWS;
     const region = 'us-east-1';
-    const bucketName = 'cruise-imgs';
+    const bucketName = 'revature-cruise-client-imgs';
     const IdentityPoolId = 'us-east-1:0c838622-9be1-4f98-b122-cc4dbcc698f7';
     const file = fileInput.target.files[0];
 
@@ -77,11 +77,11 @@ export class EditprofileComponent implements OnInit {
   //adds the S3 service, make sure the api version and bucket are correct
     const s3 = new AWSService.S3({
       apiVersion: '2006-03-01',
-      params: { Bucket: 'cruise-imgs'}
+      params: { Bucket: 'revature-cruise-client-imgs'}
     }); //closes s3
   //I store this in a variable for retrieval later
     //this.image = file.name;   //**commented because image gives error
-    s3.upload({ Key: file.name, Bucket: 'cruise-imgs', Body: file, ACL: 'public-read-write'}, function (data) {
+    s3.upload({ Key: file.name, Bucket: 'revature-cruise-client-imgs', Body: file, ACL: 'public-read-write'}, function (data) {
    
        console.log(data);
 
