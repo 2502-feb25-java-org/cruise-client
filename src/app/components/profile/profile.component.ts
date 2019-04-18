@@ -27,6 +27,8 @@ export class ProfileComponent implements OnInit {
   addressLine2 : string;
   profDob : string = this.loggedUser.dob;
 
+  profImgURL : string;
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<Ride> = new Subject();
 
@@ -59,6 +61,8 @@ export class ProfileComponent implements OnInit {
       pageLength: 2
     };
     
+    this.profImgURL = sessionStorage.getItem("imgURL");
+
     if(this.loggedUser.address.line2 == "" || this.loggedUser.address.line2 == null){
       this.addressLine2 = ", ";
     } 
