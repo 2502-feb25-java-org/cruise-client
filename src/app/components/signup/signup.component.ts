@@ -7,6 +7,7 @@ import { checkAndUpdateBinding } from '@angular/core/src/view/util';
 
 //s3 bucket import
 import * as AWS from "aws-sdk";
+import { TestingCompilerFactory } from '@angular/core/testing/src/test_compiler';
 
 @Component({
   selector: 'app-signup',
@@ -27,9 +28,12 @@ export class SignupComponent implements OnInit {
   city: string;
   state: string;
   zipcode: string;
-  picture: string;
+  picture: any;
   missingForm: string = "";
+  testpic: string;
+  str : string;
 
+  s3BucketUrl : string = "https://s3.us-east-2.amazonaws.com/cruise-imgs/";
 
   constructor(private riderService: RiderService) {
     console.log('in SignUpComponent constructor. instantiating RiderService');
@@ -78,12 +82,10 @@ export class SignupComponent implements OnInit {
         },
         error => console.log('Observable not returned')
       );
-
     }
     else {
       alert("Signup failed," + this.missingForm);
       this.missingForm = "";
-
     }
   }
 
@@ -160,25 +162,42 @@ export class SignupComponent implements OnInit {
     const bucketName = 'cruise-imgs';
     const IdentityPoolId = 'us-east-1:0c838622-9be1-4f98-b122-cc4dbcc698f7';
     const file = fileInput.target.files[0];
-    console.log(fileInput.target.file);
-  //Configures the AWS service and initial authorization
+
+    //Configures the AWS service and initial authorization
     AWSService.config.update({
       region: region,
       credentials: new AWSService.CognitoIdentityCredentials({
         IdentityPoolId: IdentityPoolId
       })
     });
-  //adds the S3 service, make sure the api version and bucket are correct
+    //adds the S3 service, make sure the api version and bucket are correct
     const s3 = new AWSService.S3({
       apiVersion: '2006-03-01',
-      params: { Bucket: 'cruise-imgs'}
+      params: { Bucket: 'cruise-imgs' }
     });
-  //I store this in a variable for retrieval later
+    //I store this in a variable for retrieval later
     //this.image = file.name;   **commented because image gives error
-    s3.upload({ Key: file.name, Bucket: 'cruise-imgs', Body: file, ACL: 'public-read'}, function (err, data) {
-     if (err) {
-       console.log(err, 'there was an error uploading your file');
-     }
-   });
+    
+    this.str = this.testpic.substring(12);
+    sessionStorage.setItem("imgURL", this.s3BucketUrl + this.str);
+    //console.log(this.str);
+
+    s3.upload({ Key: file.name, Bucket: 'cruise-imgs', Body: file, ACL: 'public-read' }, function (err, data) {
+      if (err) {
+        console.log(err, 'there was an error uploading your file');
+      }
+
+      else
+      {
+        console.log("onchange()-- picture: " + this.testpic)
+      }
+    });
+
+  document.getElementById("imageUpload").onchange = () => 
+  {
+    this.picture = document.getElementById("imageUpload").onchange;
+    alert("Selected File" + this.picture.name);
+  }
+  
   }
 }

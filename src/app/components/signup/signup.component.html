@@ -112,8 +112,9 @@
       -->
 
       <!-- input using to upload to s3 bucket-->
-      <input type="file" (change)="fileEvent($event)" name="imageUpload" id="imageUpload"/>
-
+      <input type="file" (change)="fileEvent($event)" name="imageUpload" id="imageUpload" [(ngModel)] = "testpic"
+      accept = ".png, .jpg, .webp, .bmp"/>
+      <p>Testing variable: {{testpic}}</p>
     </div>
 
     <ul class="list-group list-group-flush">
