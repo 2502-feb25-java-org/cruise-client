@@ -27,10 +27,7 @@ declare var jQuery: any;
 })
 export class RequestComponent implements OnInit {
   rider: Rider;
-  distance: number = 4;
-  duration: number = 14;
   car: Car;
-
   ride: Ride;
 
   public latitude: number;
@@ -38,10 +35,16 @@ export class RequestComponent implements OnInit {
   public zoom: number;
   public iconurl: string;
   public mapCustomStyles: any;
-  public estimatedTime: any;
-  public estimatedDistance: any;
+
+  public originAddress: string;
+  public destinationAddress: string;
+  public estimatedTime: number;
+  public estimatedDistance: number;
   public cost: number;
-  public ex: boolean = false;
+  public ready: boolean = false;
+
+  public autocompleteInput: google.maps.places.Autocomplete;
+  public autocompleteOutput: google.maps.places.Autocomplete;
 
   public waitTime: number;
 
@@ -62,138 +65,102 @@ export class RequestComponent implements OnInit {
     private ngZone: NgZone,
     private gmapsApi: GoogleMapsAPIWrapper,
     private _elementRef: ElementRef) {
-    //console.log(rideService.start);
-    console.log("hello world!");
   }
-
-  //retrieves distance and time
-  durationBetweenAddresses(firstAddress: any, secondAddress: any) {
-    this.pickupInputElementRef = firstAddress;
-    this.pickupOutputElementRef = secondAddress;
-    return this.vc.estimatedTime;
-  }
-
 
   ngOnInit() {
+
+    // this.ready = true;
+    //this.getCar();
+
     //set google maps defaults
     this.zoom = 10;
     this.latitude = 21.1212853;
     this.longitude = -86.9893194;
-
-    // this.mapCustomStyles = this.getMapCusotmStyles();
-
-    //create search FormControl
-    // this.destinationInput = new FormControl();
-    //this.destinationOutput = new FormControl();
 
     //set current position
     this.setCurrentPosition();
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let autocompleteInput = new google.maps.places.Autocomplete(this.pickupInputElementRef.nativeElement, {
+      this.autocompleteInput = new google.maps.places.Autocomplete(this.pickupInputElementRef.nativeElement, {
         types: ["address"]
       });
 
-      let autocompleteOutput = new google.maps.places.Autocomplete(this.pickupOutputElementRef.nativeElement, {
+      this.autocompleteOutput = new google.maps.places.Autocomplete(this.pickupOutputElementRef.nativeElement, {
         types: ["address"]
       });
 
-      this.setupPlaceChangedListener(autocompleteInput, 'ORG');
-      this.setupPlaceChangedListener(autocompleteOutput, 'DES');
+      this.setupPlaceChangedListener(this.autocompleteInput, 'ORG');
+      this.setupPlaceChangedListener(this.autocompleteOutput, 'DES');
     });
   }
+
   private setupPlaceChangedListener(autocomplete: any, mode: any) {
-    autocomplete.addListener("place_changed", () => {
-      console.log(autocomplete);
-      this.ngZone.run(() => {
-        //get the place result
-        let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-        //verify result
-        if (place.geometry === undefined) {
-          return;
-        }
-        if (mode === 'ORG') {
-          this.vc.origin = { lng: -86.8295894, la: 21.1354986 };
-          this.vc.originPlaceId = place.place_id;
-          console.log(this.vc.origin);
-        } else {
-          this.vc.destination = { lng: -86.8261042, lat: 21.20137644 }; // its a example aleatory position
-          this.vc.destinationPlaceId = place.place_id;
-          console.log(this.vc.destination);
-        }
-
-        if (this.vc.directionsDisplay === undefined) {
-          this.mapsAPILoader.load().then(() => {
-            this.vc.directionsDisplay = new google.maps.DirectionsRenderer;
-
-          });
-        }
-
-        //Update the directions
-        console.log(this.vc, "traza")
-        this.vc.updateDirections();
-        this.zoom = 6;
-      });
-
-    });
-
+    autocomplete.addListener("place_changed", () => this.placeChanged(autocomplete, mode));
   }
+
+  placeChanged(autocomplete: any, mode: any) {
+    console.log("Counter");
+    this.ngZone.run(() => {
+      //get the place result
+      let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+      //verify result
+      if (place.geometry === undefined) {
+        return;
+      }
+      if (mode === 'ORG') {
+        this.vc.originPlaceId = place.place_id;
+      } else {
+        this.vc.destinationPlaceId = place.place_id;
+      }
+
+      if (this.vc.directionsDisplay === undefined) {
+        this.mapsAPILoader.load().then(() => {
+          this.vc.directionsDisplay = new google.maps.DirectionsRenderer;
+        });
+      }
+      //Update the directions
+      this.vc.updateDirections();
+      this.zoom = 6;
+    });
+  }
+
+    //retrieves distance and time
+    durationBetweenAddresses(firstAddress: any, secondAddress: any) {
+      this.pickupInputElementRef.nativeElement.value = firstAddress;
+      this.pickupOutputElementRef.nativeElement.value = secondAddress;
+
+      console.log("First: " + this.pickupInputElementRef.nativeElement.value);
+      console.log("Second: " + this.pickupOutputElementRef.nativeElement.value);
+
+      pickupInputElementRef.
+
+      return this.vc.estimatedTime;
+    }
 
   clear() {
-    this.estimatedTime = 0;
-    this.estimatedDistance = 0;
-    this.cost = 0;
-  }
-
-  cancel() {
-    alert('Trip Canceled!');
-    this.estimatedTime = 0;
-    this.estimatedDistance = 0;
-    this.cost = 0;
-  }
-
-  route() {
-    this.vc.origin = { lng: -86.8295894, la: 21.1354986 };
-    this.vc.destination = { lng: -86.8261042, lat: 21.20137644 }; // its a example aleatory position
-    this.vc.directionsDisplay = new google.maps.DirectionsRenderer;
-
-    this.vc.updateDirections();
-    this.zoom = 6;
-  }
-
-
-  getDistanceAndDuration() {
-
-    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);
-    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);
-    this.cost = 4 + 1.25 * this.vc.estimatedDistance;
-
+    this.estimatedTime = undefined;
+    this.estimatedDistance = undefined;
+    this.cost = undefined;
   }
 
   getEstimate() {
-    this.ex = true;
-    this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);
-    this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);
+    this.originAddress = this.pickupInputElementRef.nativeElement.value;
+    this.destinationAddress = this.pickupOutputElementRef.nativeElement.value;
+    this.estimatedTime = this.vc.estimatedTime;
+    this.estimatedDistance = this.vc.estimatedDistance;
     this.cost = 4 + 1.25 * this.vc.estimatedDistance;
+
     this.getCar();
+
+    this.ready = true;
+    console.log("Origin: " + this.pickupInputElementRef.nativeElement.value);
+    console.log("Destination: " + this.pickupOutputElementRef.nativeElement.value);
   }
 
   scrollToBottom(): void {
     jQuery('html, body').animate({ scrollTop: jQuery(document).height() }, 3000);
   }
-  private setPickUpLocation(place: any) {
-
-    if (place.geometry === undefined || place.geometry === null) {
-      return;
-    }
-    this.latitude = place.geometry.location.lat();
-    this.longitude = place.geometry.location.lng();
-    console.log("ok")
-    this.zoom = 6;
-  }
-
-  
 
   private setCurrentPosition() {
     console.log("ok")
@@ -207,15 +174,48 @@ export class RequestComponent implements OnInit {
     });
   }
 
+  // dummyRide() {
+  //   let ride = new Ride();
+  //   ride.type = "Test";
+  //   ride.rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
+  //   ride.car = this.car;
+  //   ride.origin = Address.parse(this.originAddress);
+  //   ride.destination = Address.parse(this.destinationAddress);
+  //   ride.distance = 45;
+  //   ride.duration =
+  //     ride.cost = this.cost;
+  //   ride.status = "Requested";
+  //   ride.startTime = this.getStartTime();
+  //   ride.endTime = this.getEndTime();
+  //   return ride;
+  // }
+
+  displayRide(ride: Ride) {
+    console.log("Status: " + ride.status);
+    console.log("Type: " + ride.type);
+    console.log("Rider:")
+    console.log(ride.rider);
+    console.log("Car:");
+    console.log(ride.car);
+    console.log("Origin Address:");
+    console.log(ride.origin);
+    console.log("Destination Address");
+    console.log(ride.destination);
+    console.log("Star Time: " + ride.startTime);
+    console.log("End Time: " + ride.endTime);
+    console.log("Distance: " + ride.distance);
+    console.log("Duration: " + ride.duration);
+    console.log("Cost: " + ride.cost);
+  }
 
   createRide() {
     console.log("Trying to create a ride...");
-    console.log(JSON.stringify(this.ride));
+    this.displayRide(this.ride);
     this.rideService.postRide(this.ride).subscribe(
       myRespBody => {
-        if (myRespBody != null && this.ride.car != null) {
+        if (myRespBody != null && myRespBody.car != null) {
           this.ride = myRespBody;
-          console.log(this.ride + " addded successfully");
+          console.log(myRespBody + " addded successfully");
           //window.location.href = "/request";
         } else {
           console.log('Could not create ride.');
@@ -230,7 +230,8 @@ export class RequestComponent implements OnInit {
       myRespBody => {
         if (myRespBody != null) {
           this.car = this.getClossestCar(myRespBody); // git the first car in the collection
-          console.log(this.car.make + " found");        
+          //this.car = myRespBody[0];
+          console.log(this.car.make + " found at " + Address.stringify(this.car.location));
         }
         else {
           console.log("Car not found");
@@ -246,39 +247,43 @@ export class RequestComponent implements OnInit {
     let minDuration: number = 999999999;
     cars.forEach(car => {
       let durationFromCar = this.durationBetweenAddresses(Address.stringify(car.location),
-      "245 Park Avenue, New York, NY, USA");
+        this.originAddress);
+      console.log("duration:" + durationFromCar);
       if (durationFromCar < minDuration) {
         clossestCar = car;
         minDuration = durationFromCar;
       }
+      //console.log(clossestCar);
     });
     this.waitTime = minDuration;
+    this.pickupInputElementRef.nativeElement.value = this.originAddress;
+    this.pickupOutputElementRef.nativeElement.value = this.destinationAddress;
     return clossestCar;
   }
 
-  
-
-  addRide() { 
-    if(this.ex == false){
+  addRide() {
+    if (!this.ready) {
       alert('Calculate Trip First!');
-    }else{
-    this.ride = new Ride();
-    this.ride.rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
-    this.ride.origin = Address.parse("245 Park Avenue, New York, NY, USA");
-    this.ride.destination = Address.parse("315 Madison Avenue, New York, NY, USA");
-    this.ride.distance = this.estimatedDistance;
-    this.ride.duration = this.estimatedTime;
-    this.ride.startTime = this.getStartTime();
-    this.ride.endTime = this.getEndTime();
-    this.ride.cost = this.cost;
-    this.ride.car = this.car;
-    this.createRide();
+    } else {
+      this.ride = new Ride();
+      this.ride.type = "No Stops";
+      this.ride.status = "Requested";
+      this.ride.rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
+      this.ride.origin = Address.parse(this.originAddress);
+      this.ride.destination = Address.parse(this.destinationAddress);
+      this.ride.distance = this.estimatedDistance;
+      this.ride.duration = this.estimatedTime;
+      this.ride.startTime = this.getStartTime();
+      this.ride.endTime = this.getEndTime();
+      this.ride.cost = this.cost;
+      this.ride.car = this.car;
+      this.createRide();
     }
   }
 
   getStartTime() {
     let time = new Date();
-    time.setSeconds(time.getSeconds() + this.waitTime); 
+    time.setSeconds(time.getSeconds() + this.waitTime);
     return time.toDateString() + " " + time.toTimeString().substring(0, 8);
   }
 
@@ -287,6 +292,24 @@ export class RequestComponent implements OnInit {
     time.setSeconds(time.getSeconds() + this.waitTime + this.estimatedTime);
     return time.toDateString() + " " + time.toTimeString().substring(0, 8);
   }
+
+  getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1);
+    var a =
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c; // Distance in km
+    return d;
+   }
+   
+ deg2rad(deg) {
+    return deg * (Math.PI/180)
+   }
 
 }
 
