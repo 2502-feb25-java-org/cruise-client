@@ -160,7 +160,7 @@ export class SignupComponent implements OnInit {
     const bucketName = 'cruise-imgs';
     const IdentityPoolId = 'us-east-1:0c838622-9be1-4f98-b122-cc4dbcc698f7';
     const file = fileInput.target.files[0];
-    console.log(fileInput.target.file.name);
+    console.log(fileInput.target.file);
   //Configures the AWS service and initial authorization
     AWSService.config.update({
       region: region,
