@@ -12,7 +12,7 @@ import * as AWS from "aws-sdk";
   styleUrls: ['./editprofile.component.css']
 })
 export class EditprofileComponent implements OnInit {
-
+  loggedUser : Rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
   oldRider: Rider;
   updatedRider: Rider;
   addressObj: Address;
