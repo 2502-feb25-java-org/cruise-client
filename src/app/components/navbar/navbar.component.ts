@@ -13,8 +13,10 @@ export class NavbarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    if (sessionStorage.getItem("loggedUserOb") != null) {
+  ngOnInit() 
+  {
+    if (sessionStorage.getItem("loggedUserOb") != null) 
+    {
       this.loggedUser = JSON.parse(sessionStorage.getItem("loggedUserObj"));
       //this.uName = sessionStorage.getItem("loggedUserName");
     }
@@ -35,6 +37,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     sessionStorage.setItem("loggedUserObj", "");
     sessionStorage.setItem("loggedUserName", "");
+    sessionStorage.setItem("imgURL", "");
     alert("Logged out!");
   }
 

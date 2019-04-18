@@ -73,4 +73,4 @@ import { DistanceFormatPipe } from './pipes/distance-format.pipe';
   bootstrap: [AppComponent],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class AppModule { }
+export class AppModule {}

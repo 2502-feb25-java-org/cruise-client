@@ -27,11 +27,10 @@ export class ProfileComponent implements OnInit {
   addressLine2 : string;
   profDob : string = this.loggedUser.dob;
 
-  dtOptions: DataTables.Settings = {
-    
-  };
+  profImgURL : string;
+
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<Ride> = new Subject();
-  
 
   constructor(private rideService: RideService) {
 
@@ -61,6 +60,8 @@ export class ProfileComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 2
     };
+    
+    this.profImgURL = sessionStorage.getItem("imgURL");
 
     if(this.loggedUser.address.line2 == "" || this.loggedUser.address.line2 == null){
       this.addressLine2 = ", ";
