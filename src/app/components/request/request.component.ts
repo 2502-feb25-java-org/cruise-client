@@ -35,8 +35,6 @@ export class RequestComponent implements OnInit {
 
   public latitude: number;
   public longitude: number;
-  public destinationInput: string;
-  public destinationOutput: string;
   public zoom: number;
   public iconurl: string;
   public mapCustomStyles: any;
@@ -178,9 +176,7 @@ export class RequestComponent implements OnInit {
     this.estimatedTime = Number.parseFloat(this.vc.estimatedTime).toFixed(2);
     this.estimatedDistance = Number.parseFloat(this.vc.estimatedDistance).toFixed(2);
     this.cost = 4 + 1.25 * this.vc.estimatedDistance;
-    this.car = this.getCar();
-    
-   
+    this.getCar();
   }
 
   scrollToBottom(): void {
@@ -213,6 +209,7 @@ export class RequestComponent implements OnInit {
 
 
   createRide() {
+    console.log("Trying to create a ride...");
     console.log(JSON.stringify(this.ride));
     this.rideService.postRide(this.ride).subscribe(
       myRespBody => {
@@ -229,12 +226,11 @@ export class RequestComponent implements OnInit {
   }
 
   getCar() {
-    let car = new Car();
     this.carService.getAllAvailable().subscribe(
       myRespBody => {
         if (myRespBody != null) {
-          car = this.getClossestCar(myRespBody); // git the first car in the collection
-          console.log(car.make + " found");          
+          this.car = this.getClossestCar(myRespBody); // git the first car in the collection
+          console.log(this.car.make + " found");        
         }
         else {
           console.log("Car not found");
@@ -243,7 +239,6 @@ export class RequestComponent implements OnInit {
       },
       error => console.log('Observable not returned')
     );
-    return car;
   }
 
   getClossestCar(cars: Car[]) {
@@ -251,7 +246,7 @@ export class RequestComponent implements OnInit {
     let minDuration: number = 999999999;
     cars.forEach(car => {
       let durationFromCar = this.durationBetweenAddresses(Address.stringify(car.location),
-        this.pickupInputElementRef);
+      "245 Park Avenue, New York, NY, USA");
       if (durationFromCar < minDuration) {
         clossestCar = car;
         minDuration = durationFromCar;
@@ -264,19 +259,19 @@ export class RequestComponent implements OnInit {
   
 
   addRide() { 
-    console.log('in here!') 
     if(this.ex == false){
       alert('Calculate Trip First!');
     }else{
     this.ride = new Ride();
     this.ride.rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
-    this.ride.origin = Address.parse(this.destinationInput);
-    this.ride.destination = Address.parse(this.destinationOutput);
+    this.ride.origin = Address.parse("245 Park Avenue, New York, NY, USA");
+    this.ride.destination = Address.parse("315 Madison Avenue, New York, NY, USA");
     this.ride.distance = this.estimatedDistance;
     this.ride.duration = this.estimatedTime;
     this.ride.startTime = this.getStartTime();
     this.ride.endTime = this.getEndTime();
     this.ride.cost = this.cost;
+    this.ride.car = this.car;
     this.createRide();
     }
   }
