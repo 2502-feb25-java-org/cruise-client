@@ -6,4 +6,9 @@ agm-map {
   .container{
       justify-content: center;
   }
-  
+  #user-pic{
+    margin: auto;
+    text-align: center;
+    max-width: 400px;
+    max-height: 400px;
+  }

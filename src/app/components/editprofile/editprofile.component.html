@@ -5,9 +5,6 @@
 
   <div class="card-body">
     <div class="row justify-content-center">
-      <p id="changes-text">Enter your changes here: </p>
-    </div>
-    <div class="row justify-content-center">
       <img id="user-pic" src= {{loggedUser.picture}} alt="Image not found"
         onerror="this.src='https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png'" />
       <!-- original input field
@@ -16,12 +13,9 @@
 
       <!-- input using to upload to s3 bucket-->
       <input type="file" (change)="fileEvent($event)" name="imageUpload" id="imageUpload" [(ngModel)] = "testpic"/>
-
-
     </div>
 
     <ul class="list-group">
-
       <li class="list-group-item">
         <div class="row">
           <div class="col-3"><label>
