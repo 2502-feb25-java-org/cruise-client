@@ -26,6 +26,7 @@ import { DirectionsMapDirective } from './components/request/directives/google-m
 import { GeolocationService } from './services/geolocation.service';
 import { CommonModule } from '@angular/common';
 import { DurationFormatPipe } from './pipes/duration-format.pipe';
+import { DistanceFormatPipe } from './pipes/distance-format.pipe';
 
 
 
@@ -43,7 +44,8 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
     EditprofileComponent, 
     StringifyPipe,
     DirectionsMapDirective,
-    DurationFormatPipe
+    DurationFormatPipe,
+    DistanceFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -53,9 +55,9 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
     HttpClientModule,
     CommonModule,
     AgmCoreModule.forRoot({
-      //apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
-      apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM',
-      libraries: ["places"]
+      apiKey: 'AIzaSyCaYpN8YwJavuYo-F1prHvN7U86BsZdNA0',
+      //apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM',
+      libraries: ["places", "geometry"]
     }),
     AgmDirectionModule,
     DataTablesModule,
@@ -69,6 +71,6 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
     GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent],
-  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas:  [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

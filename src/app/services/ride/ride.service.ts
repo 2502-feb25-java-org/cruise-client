@@ -26,7 +26,6 @@ export class RideService {
   }
 
   public postRide(ride: Ride): Observable<Ride>{
-    console.log(this.API_URL);
     return this.http.post<Ride>(this.API_URL + "/add", ride, this.httpOptions);
   }
 

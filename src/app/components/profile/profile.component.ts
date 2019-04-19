@@ -58,7 +58,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10,
+      "columnDefs": [
+        { "visible": false, "targets": 0 }],
+      "order": [[ 0, 'desc' ]]
     };
     
     this.profImgURL = sessionStorage.getItem("imgURL");

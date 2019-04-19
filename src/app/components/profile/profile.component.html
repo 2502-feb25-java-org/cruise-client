@@ -5,7 +5,7 @@
 
   <div class="card-body">
     <div class="row justify-content-center">
-      <img id="user-pic" src= {{loggedUser.picture}} alt="user_pic"
+      <img id="user-pic" src={{loggedUser.picture}} alt="user_pic"
         onerror="this.src='https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png'">
     </div>
 
@@ -66,26 +66,28 @@
   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Start Location</th>
         <th>End Location</th>
         <th>Start Time</th>
-        <th>Starting Origin</th>
-        <th>Destination</th>
         <th>End Time</th>
-        <th>Duaration</th>
-        <th>Distance Traveled</th>
-        <th>Cost</th>
+        <th>Ride Duration</th>
+        <th>Ride Distance</th>
+        <th>Ride Cost</th>
+        <th>Ride Status</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ride of rides">
+        <td>{{ ride.id }}</td>
         <td>{{ ride.origin | stringify }}</td>
         <td>{{ ride.destination | stringify}}</td>
         <td>{{ ride.startTime }}</td>
         <td>{{ ride.endTime }}</td>
-        <td>{{ ride.duration }}</td>
-        <td>{{ ride.distance }}</td>
-        <td>{{ ride.cost }}</td>
+        <td>{{ ride.duration | durationFormat }}</td>
+        <td>{{ ride.distance | distanceFormat }}</td>
+        <td>{{ ride.cost | currency}}</td>
+        <td>{{ ride.status}}</td>
       </tr>
     </tbody>
   </table>
