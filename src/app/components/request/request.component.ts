@@ -124,22 +124,6 @@ export class RequestComponent implements OnInit {
     });
   }
 
-  //retrieves distance and time
-  // durationBetweenAddresses(firstAddress: any, secondAddress: any) {
-  //   this.originInputElementRef.nativeElement.value = firstAddress;
-  //   this.destinationInputElementRef.nativeElement.value = secondAddress;
-
-  //   this.autocompleteORG.setValues(firstAddress);
-  //   this.autocompleteDES.setValues(secondAddress);
-
-  //   console.log("First: " + this.originInputElementRef.nativeElement.value);
-  //   console.log(this.autocompleteORG.getPlace());
-  //   console.log("Second: " + this.destinationInputElementRef.nativeElement.value);
-  //   console.log(this.autocompleteORG.getPlace());
-
-  //   return this.googleMaps.estimatedTime;
-  // }
-
   clear() {
     this.estimatedTime = undefined;
     this.estimatedDistance = undefined;
@@ -204,7 +188,7 @@ export class RequestComponent implements OnInit {
         if (myRespBody != null && myRespBody.car != null) {
           this.ride = myRespBody;
           alert("Thank you for your business.");
-          window.location.href = "/request";
+          window.location.href = "/users";
         } else {
           console.log('Could not create ride.');
         }

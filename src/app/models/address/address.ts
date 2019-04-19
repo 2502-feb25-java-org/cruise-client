@@ -10,14 +10,14 @@ export class Address {
     zipcode: string;
     country: string;
 
-    // stringify() : string {
-    //     return this.line1 + ", " + this.city + ", " + 
-    //         this.state + " " + this.zipcode + ", " + this.country;
-    // }
-
     static stringify(address: Address) : string {
-        return address.line1 + ", " + address.city + ", " + 
-        address.state + " " + address.zipcode + ", " + address.country;
+        let addressString = "";
+        addressString += address.line1 + ", " + address.city + ", " + address.state;
+        if (address.zipcode != null)
+            addressString += " " + address.zipcode + ", " + address.country;
+        if (address.country != null)
+            addressString += ", " + address.country;
+        return addressString;
     }
 
     static parse(addressString: string) : Address{
