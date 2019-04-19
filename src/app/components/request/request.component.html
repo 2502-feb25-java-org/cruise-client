@@ -49,7 +49,21 @@
       </div>
     </form>
   </div>
+  <!--Showing the car photo-->
+  <div *ngIf="ready == true" id="carPic-div">
+    <div class="card justify-content-center">
+      <div class="card-header justify-content-center">
+        <h4>Your Car will be ready in: {{waitTime | durationFormat}}</h4>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-center">
+        <img id="car-picture-id" src={{carPicURL}} alt="Car Picture not Found...">
+      </div>
+      </div>
+      
+    </div>
 
+  </div>
 
 
   <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" [styles]="mapCustomStyles">
@@ -59,17 +73,8 @@
       </agm-info-window>
     </agm-marker>
     <!-- <agm-map-directions [origin]="origin" [destination]="destination"></agm-map-directions> -->
-    <sebm-google-map-directions [origin]="originAddress" [destination]="destinationAddress"></sebm-google-map-directions>
+    <sebm-google-map-directions [origin]="originAddress" [destination]="destinationAddress">
+    </sebm-google-map-directions>
   </agm-map>
-
-  <!--Showing the car photo-->
-<div *ngIf="carFound == true"  id="carPic-div">
-    <div class="row justify-content-center">
-        <h4>Your Car: </h4>
-    </div>
-    <div class="row justify-content-center">
-        <img id="car-picture-id" src= {{carPicURL}} alt="Car Picture not Found...">
-    </div>
-  </div>
 
 </div>

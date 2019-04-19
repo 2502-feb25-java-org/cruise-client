@@ -73,6 +73,12 @@ export class RequestComponent implements OnInit {
   }
 
   ngOnInit() {
+    //check for logged in
+    if(sessionStorage.getItem("loggedUserObj") == "" || sessionStorage.getItem("loggedUserObj") == null){
+      alert("Please sign in before requesting a ride.");
+      window.location.href = "/home";
+    }
+  
     //set google maps defaults
 
     this.latitude = 40.748367;
@@ -191,8 +197,9 @@ export class RequestComponent implements OnInit {
       myRespBody => {
         if (myRespBody != null && myRespBody.car != null) {
           this.ride = myRespBody;
-          alert("Thank you for your business.");
-          window.location.href = "/users";
+          this.carPicURL = this.ride.car.picture;
+          
+          console.log("Found Car? "+ this.carFound + "car pic URL? " + this.carPicURL);
         } else {
           console.log('Could not create ride.');
         }
@@ -263,9 +270,6 @@ export class RequestComponent implements OnInit {
         me.car = clossestCar;
         me.ready = true;
         me.waitStatus = "Car found.";
-        this.carFound = true;
-        this.carPicURL = me.car.picture;
-        console.log("Found Car? "+ this.carFound + "car pic URL? " + this.carPicURL);
         console.log(me.car.make + " found at " + Address.stringify(me.car.location));
         console.log("Seconds till car arrives: " + me.waitTime);
       }

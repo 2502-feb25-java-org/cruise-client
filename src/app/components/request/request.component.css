@@ -108,12 +108,12 @@ agm-map {
     color:#fff;
 }
 
-#car-picture-id{
-  max-height: 400px;
-}
-#carPic-div{
-  border-style: solid;
+#cardPic-div{
+  max-width: 300px;
 }
 
-
-
+.card{
+  width: 35rem;
+  margin: auto;
+  margin-top: 5px;
+}
