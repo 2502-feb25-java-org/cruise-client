@@ -46,6 +46,7 @@ export class RequestComponent implements OnInit {
   public estimatedDistance: number;
   public cost: number;
   public ready: boolean = false;
+  public requestMade : boolean = false;
   public waitStatus: string = "";
 
   public autocompleteORG: google.maps.places.Autocomplete;
@@ -140,6 +141,7 @@ export class RequestComponent implements OnInit {
     this.cost = undefined;
     this.waitTime = undefined;
     this.ready = false;
+    this.requestMade = false;
     this.waitStatus = "";
   }
 
@@ -198,7 +200,7 @@ export class RequestComponent implements OnInit {
         if (myRespBody != null && myRespBody.car != null) {
           this.ride = myRespBody;
           this.carPicURL = this.ride.car.picture;
-          
+          this.requestMade = true; 
           console.log("Found Car? "+ this.carFound + "car pic URL? " + this.carPicURL);
         } else {
           console.log('Could not create ride.');

@@ -13,7 +13,7 @@ export class DurationFormatPipe implements PipeTransform {
   
     duration = (hours > 0 ? hours + " hours" : "");
     duration += (hours > 0 && minutes > 0 ? ", " : "");
-    duration += (minutes > 0 ? minutes + " minutes" : "");
+    duration += (minutes >= 0 ? minutes + " minutes" : "");
     return duration;
   }
 }
