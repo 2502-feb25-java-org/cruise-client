@@ -30,6 +30,8 @@ export class RequestComponent implements OnInit {
   distance: number = 4;
   duration: number = 14;
   car: Car;
+  //===Car===
+  carPicURL: string = "";
 
   ride: Ride;
 
@@ -234,7 +236,10 @@ export class RequestComponent implements OnInit {
       myRespBody => {
         if (myRespBody != null) {
           car = this.getClossestCar(myRespBody); // git the first car in the collection
-          console.log(car.make + " found");          
+          console.log(car.make + " found");   
+          this.carPicURL = car.picture;
+          console.log("car: " + JSON.stringify(car) + ", carPicURL: " + this.carPicURL);
+       
         }
         else {
           console.log("Car not found");
