@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { $ } from 'protractor';
 import { RiderService } from '../../services/rider/rider.service'
 import { Rider } from '../../models/rider/rider'
 import { Address } from 'src/app/models/address/address';
@@ -11,7 +10,7 @@ import { Address } from 'src/app/models/address/address';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   //===Strings===
   username: string;
   userErrMsg: string;
@@ -20,7 +19,7 @@ export class LoginComponent implements OnInit {
   rememberBox;
 
   //===Objects===
-  rider: Rider;
+  rider : Rider;
 
   constructor(private riderService: RiderService) { }
 
@@ -88,7 +87,6 @@ export class LoginComponent implements OnInit {
       error => console.log('Observable not returned')
     );
   }
-
   //===Super function called by login_btn===
   submit(username: string, password: string) {
     if (this.validUsername(username) && this.validPassword(password)) { 

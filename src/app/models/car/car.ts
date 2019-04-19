@@ -8,4 +8,5 @@ export class Car {
     maxCapacity: number;
     seatsLeft: number;
     location: Address;
+    picture: string;
 }

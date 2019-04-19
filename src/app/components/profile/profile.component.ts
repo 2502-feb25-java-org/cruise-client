@@ -27,11 +27,10 @@ export class ProfileComponent implements OnInit {
   addressLine2 : string;
   profDob : string = this.loggedUser.dob;
 
-  dtOptions: DataTables.Settings = {
-    
-  };
+  profImgURL : string;
+
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<Ride> = new Subject();
-  
 
   constructor(private rideService: RideService) {
 
@@ -59,8 +58,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10,
+      "columnDefs": [
+        { "visible": false, "targets": 0 }],
+      "order": [[ 0, 'desc' ]]
     };
+    
+    this.profImgURL = sessionStorage.getItem("imgURL");
 
     if(this.loggedUser.address.line2 == "" || this.loggedUser.address.line2 == null){
       this.addressLine2 = ", ";
