@@ -26,7 +26,7 @@ export class Address {
         let addressParts = addressString.split(',');
         console.log("Address array:")
         console.log(addressParts);
-        while (addressParts.length > 3)
+        while (addressParts.length > 4)
             addressParts.splice(1,1);
         let length = addressParts.length;
         if (length > 0)
