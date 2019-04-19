@@ -28,6 +28,7 @@ declare var jQuery: any;
 export class RequestComponent implements OnInit {
   rider: Rider;
   car: Car;
+  carFound = false;
   //===Car===
   carPicURL: string = "";
 
@@ -278,8 +279,9 @@ export class RequestComponent implements OnInit {
         me.car = clossestCar;
         me.ready = true;
         me.waitStatus = "Car found.";
+        this.carFound = true;
         this.carPicURL = me.car.picture;
-        console.log("car pic URL? " + this.carPicURL);
+        console.log("Found Car? "+ this.carFound + "car pic URL? " + this.carPicURL);
         console.log(me.car.make + " found at " + Address.stringify(me.car.location));
         console.log("Seconds till car arrives: " + me.waitTime);
       }

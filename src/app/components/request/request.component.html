@@ -50,15 +50,7 @@
     </form>
   </div>
 
-<!--Showing the car photo-->
-<div *ngIf="carPicURL != ''"  id="carPic-div">
-  <div class="row justify-content-center">
-      <h4>Your Car: </h4>
-  </div>
-  <div class="row justify-content-center">
-      <img id="car-picture-id" src= {{carPicURL}} alt="Car Picture not Found...">
-  </div>
-</div>
+
 
   <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" [styles]="mapCustomStyles">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="iconurl">
@@ -69,5 +61,15 @@
     <!-- <agm-map-directions [origin]="origin" [destination]="destination"></agm-map-directions> -->
     <sebm-google-map-directions [origin]="originAddress" [destination]="destinationAddress"></sebm-google-map-directions>
   </agm-map>
+
+  <!--Showing the car photo-->
+<div *ngIf="carFound == true"  id="carPic-div">
+    <div class="row justify-content-center">
+        <h4>Your Car: </h4>
+    </div>
+    <div class="row justify-content-center">
+        <img id="car-picture-id" src= {{carPicURL}} alt="Car Picture not Found...">
+    </div>
+  </div>
 
 </div>
