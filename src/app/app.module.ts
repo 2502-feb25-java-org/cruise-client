@@ -55,9 +55,9 @@ import { DistanceFormatPipe } from './pipes/distance-format.pipe';
     HttpClientModule,
     CommonModule,
     AgmCoreModule.forRoot({
-      //apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM' }),
-      apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM',
-      libraries: ["places"]
+      apiKey: 'AIzaSyCaYpN8YwJavuYo-F1prHvN7U86BsZdNA0',
+      //apiKey: 'AIzaSyDaI3ZqczbOfJkDdzS2AJUODgWp7zsTcbM',
+      libraries: ["places", "geometry"]
     }),
     AgmDirectionModule,
     DataTablesModule,
@@ -71,6 +71,6 @@ import { DistanceFormatPipe } from './pipes/distance-format.pipe';
     GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent],
-  schemas:  [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas:  [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

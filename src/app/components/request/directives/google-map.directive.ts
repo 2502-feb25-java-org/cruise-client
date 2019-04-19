@@ -22,7 +22,6 @@ export class DirectionsMapDirective {
 
   constructor(private gmapsApi: GoogleMapsAPIWrapper) { }
   updateDirections() {
-    console.log('in function!');
     this.gmapsApi.getNativeMap().then(map => {
       if (!this.originPlaceId || !this.destinationPlaceId) {
         return;
@@ -30,8 +29,6 @@ export class DirectionsMapDirective {
 
       var directionsService = new google.maps.DirectionsService;
       var me = this;
-      //var latLngA = new google.maps.LatLng({lat: this.origin.latitude, lng: this.origin.longitude });
-      //var latLngB = new google.maps.LatLng({lat: this.destination.latitude, lng: this.destination.longitude });
       this.directionsDisplay.setMap(map);
       this.directionsDisplay.setOptions({
         polylineOptions: {
@@ -46,23 +43,15 @@ export class DirectionsMapDirective {
         destination: { placeId: this.destinationPlaceId },
         avoidHighways: false,
         travelMode: google.maps.DirectionsTravelMode.DRIVING
-        //travelMode: 'DRIVING'
       }, function (response: any, status: any) {
         if (status === 'OK') {
           me.directionsDisplay.setDirections(response);
           map.setZoom(30);
-          //alert(me.getcomputeDistance (latLngA, latLngB));
           var point = response.routes[0].legs[0];
           me.estimatedTime = point.duration.value; //in seconds with .value
-
           me.estimatedDistance = (point.distance.value * 0.62137) / 1000; //in meters, convert to km then miles
-
-          //alert(point.distance.text);
-          //alert(me.estimatedTime);
-          //alert( 'Estimated travel time: ' + point.duration.text + ' Distance:' + point.distance.text );
-
         } else {
-          //aert('Directions request failed due to ' + status);
+          alert('Directions request failed due to ' + status);
         }
       });
     });

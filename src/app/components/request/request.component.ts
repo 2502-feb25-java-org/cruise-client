@@ -42,22 +42,23 @@ export class RequestComponent implements OnInit {
   public estimatedDistance: number;
   public cost: number;
   public ready: boolean = false;
+  public waitStatus: string = "";
 
-  public autocompleteInput: google.maps.places.Autocomplete;
-  public autocompleteOutput: google.maps.places.Autocomplete;
+  public autocompleteORG: google.maps.places.Autocomplete;
+  public autocompleteDES: google.maps.places.Autocomplete;
 
   public waitTime: number;
 
-  @ViewChild("pickupInput")
-  public pickupInputElementRef: ElementRef;
+  @ViewChild("originInput")
+  public originInputElementRef: ElementRef;
 
-  @ViewChild("pickupOutput")
-  public pickupOutputElementRef: ElementRef;
+  @ViewChild("destinationInput")
+  public destinationInputElementRef: ElementRef;
 
   @ViewChild("scrollMe")
   private scrollContainer: ElementRef;
 
-  @ViewChild(DirectionsMapDirective) vc: DirectionsMapDirective;
+  @ViewChild(DirectionsMapDirective) googleMaps: DirectionsMapDirective;
 
 
   constructor(private rideService: RideService, private carService: CarService,
@@ -68,30 +69,28 @@ export class RequestComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // this.ready = true;
-    //this.getCar();
-
     //set google maps defaults
+
+    this.latitude = 40.748367;
+    this.longitude = -73.990044;
     this.zoom = 10;
-    this.latitude = 21.1212853;
-    this.longitude = -86.9893194;
+
 
     //set current position
-    this.setCurrentPosition();
+    //this.setCurrentPosition();
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      this.autocompleteInput = new google.maps.places.Autocomplete(this.pickupInputElementRef.nativeElement, {
+      this.autocompleteORG = new google.maps.places.Autocomplete(this.originInputElementRef.nativeElement, {
         types: ["address"]
       });
 
-      this.autocompleteOutput = new google.maps.places.Autocomplete(this.pickupOutputElementRef.nativeElement, {
+      this.autocompleteDES = new google.maps.places.Autocomplete(this.destinationInputElementRef.nativeElement, {
         types: ["address"]
       });
 
-      this.setupPlaceChangedListener(this.autocompleteInput, 'ORG');
-      this.setupPlaceChangedListener(this.autocompleteOutput, 'DES');
+      this.setupPlaceChangedListener(this.autocompleteORG, 'ORG');
+      this.setupPlaceChangedListener(this.autocompleteDES, 'DES');
     });
   }
 
@@ -109,53 +108,58 @@ export class RequestComponent implements OnInit {
         return;
       }
       if (mode === 'ORG') {
-        this.vc.originPlaceId = place.place_id;
+        this.googleMaps.originPlaceId = place.place_id;
       } else {
-        this.vc.destinationPlaceId = place.place_id;
+        this.googleMaps.destinationPlaceId = place.place_id;
       }
 
-      if (this.vc.directionsDisplay === undefined) {
+      if (this.googleMaps.directionsDisplay === undefined) {
         this.mapsAPILoader.load().then(() => {
-          this.vc.directionsDisplay = new google.maps.DirectionsRenderer;
+          this.googleMaps.directionsDisplay = new google.maps.DirectionsRenderer;
         });
       }
       //Update the directions
-      this.vc.updateDirections();
+      this.googleMaps.updateDirections();
       this.zoom = 6;
     });
   }
 
-    //retrieves distance and time
-    durationBetweenAddresses(firstAddress: any, secondAddress: any) {
-      this.pickupInputElementRef.nativeElement.value = firstAddress;
-      this.pickupOutputElementRef.nativeElement.value = secondAddress;
+  //retrieves distance and time
+  // durationBetweenAddresses(firstAddress: any, secondAddress: any) {
+  //   this.originInputElementRef.nativeElement.value = firstAddress;
+  //   this.destinationInputElementRef.nativeElement.value = secondAddress;
 
-      console.log("First: " + this.pickupInputElementRef.nativeElement.value);
-      console.log("Second: " + this.pickupOutputElementRef.nativeElement.value);
+  //   this.autocompleteORG.setValues(firstAddress);
+  //   this.autocompleteDES.setValues(secondAddress);
 
-      pickupInputElementRef.
+  //   console.log("First: " + this.originInputElementRef.nativeElement.value);
+  //   console.log(this.autocompleteORG.getPlace());
+  //   console.log("Second: " + this.destinationInputElementRef.nativeElement.value);
+  //   console.log(this.autocompleteORG.getPlace());
 
-      return this.vc.estimatedTime;
-    }
+  //   return this.googleMaps.estimatedTime;
+  // }
 
   clear() {
     this.estimatedTime = undefined;
     this.estimatedDistance = undefined;
     this.cost = undefined;
+    this.waitTime = undefined;
+    this.ready = false;
+    this.waitStatus = "";
   }
 
   getEstimate() {
-    this.originAddress = this.pickupInputElementRef.nativeElement.value;
-    this.destinationAddress = this.pickupOutputElementRef.nativeElement.value;
-    this.estimatedTime = this.vc.estimatedTime;
-    this.estimatedDistance = this.vc.estimatedDistance;
-    this.cost = 4 + 1.25 * this.vc.estimatedDistance;
-
+    this.originAddress = this.originInputElementRef.nativeElement.value;
+    this.destinationAddress = this.destinationInputElementRef.nativeElement.value;
+    this.estimatedTime = this.googleMaps.estimatedTime;
+    this.estimatedDistance = this.googleMaps.estimatedDistance;
+    this.cost = 4 + 1.25 * this.googleMaps.estimatedDistance;
+    this.waitStatus = "Looking for nearest car...";
     this.getCar();
 
-    this.ready = true;
-    console.log("Origin: " + this.pickupInputElementRef.nativeElement.value);
-    console.log("Destination: " + this.pickupOutputElementRef.nativeElement.value);
+    console.log("Origin: " + this.originInputElementRef.nativeElement.value);
+    console.log("Destination: " + this.destinationInputElementRef.nativeElement.value);
   }
 
   scrollToBottom(): void {
@@ -173,22 +177,6 @@ export class RequestComponent implements OnInit {
 
     });
   }
-
-  // dummyRide() {
-  //   let ride = new Ride();
-  //   ride.type = "Test";
-  //   ride.rider = JSON.parse(sessionStorage.getItem("loggedUserObj"));
-  //   ride.car = this.car;
-  //   ride.origin = Address.parse(this.originAddress);
-  //   ride.destination = Address.parse(this.destinationAddress);
-  //   ride.distance = 45;
-  //   ride.duration =
-  //     ride.cost = this.cost;
-  //   ride.status = "Requested";
-  //   ride.startTime = this.getStartTime();
-  //   ride.endTime = this.getEndTime();
-  //   return ride;
-  // }
 
   displayRide(ride: Ride) {
     console.log("Status: " + ride.status);
@@ -215,8 +203,8 @@ export class RequestComponent implements OnInit {
       myRespBody => {
         if (myRespBody != null && myRespBody.car != null) {
           this.ride = myRespBody;
-          console.log(myRespBody + " addded successfully");
-          //window.location.href = "/request";
+          alert("Thank you for your business.");
+          window.location.href = "/request";
         } else {
           console.log('Could not create ride.');
         }
@@ -229,9 +217,7 @@ export class RequestComponent implements OnInit {
     this.carService.getAllAvailable().subscribe(
       myRespBody => {
         if (myRespBody != null) {
-          this.car = this.getClossestCar(myRespBody); // git the first car in the collection
-          //this.car = myRespBody[0];
-          console.log(this.car.make + " found at " + Address.stringify(this.car.location));
+          this.getClossestCar(myRespBody); // git the first car in the collection
         }
         else {
           console.log("Car not found");
@@ -243,25 +229,60 @@ export class RequestComponent implements OnInit {
   }
 
   getClossestCar(cars: Car[]) {
-    let clossestCar: Car;
-    let minDuration: number = 999999999;
+    let destinationAddresses: string[] = [];
     cars.forEach(car => {
-      let durationFromCar = this.durationBetweenAddresses(Address.stringify(car.location),
-        this.originAddress);
-      console.log("duration:" + durationFromCar);
-      if (durationFromCar < minDuration) {
-        clossestCar = car;
-        minDuration = durationFromCar;
-      }
-      //console.log(clossestCar);
+      destinationAddresses.push(Address.stringify(car.location));
     });
-    this.waitTime = minDuration;
-    this.pickupInputElementRef.nativeElement.value = this.originAddress;
-    this.pickupOutputElementRef.nativeElement.value = this.destinationAddress;
-    return clossestCar;
+    
+    let service = new google.maps.DistanceMatrixService;
+    let durations: number[] = [];
+    let outputString = "";
+    let me = this;
+    service.getDistanceMatrix({
+      origins: [this.originAddress],
+      destinations: destinationAddresses,
+      travelMode: 'DRIVING',
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+      avoidHighways: false,
+      avoidTolls: false
+    }, function (response, status) {
+      if (status !== 'OK') {
+        alert('Error was: ' + status);
+      } else {
+        // let originList = response.originAddresses;
+        // let destinationList = response.destinationAddresses;
+        let results = response.rows[0].elements;
+
+        for (let j = 0; j < results.length; j++) {
+          // outputString += originList[0] + ' to ' + destinationList[j] +
+          //   ': ' + results[j].distance.text + ' in ' +
+          //   results[j].duration.text;
+          durations.push(results[j].duration.value);
+        }
+        console.log("Comparing wait times to cars:");
+        console.log(outputString);
+        console.log(durations);
+
+        let clossestCar: Car;
+        let minDuration: number = 999999999;
+        for (let i = 0; i < durations.length; i++) {
+          if (durations[i] < minDuration) {
+            minDuration = durations[i];
+            clossestCar = cars[i];
+          }
+        }
+        me.waitTime = minDuration;
+        me.car = clossestCar;
+        me.ready = true;
+        me.waitStatus = "Car found.";
+        console.log(me.car.make + " found at " + Address.stringify(me.car.location));
+        console.log("Seconds till car arrives: " + me.waitTime);
+      }
+    });
   }
 
   addRide() {
+    console.log(this.waitTime);
     if (!this.ready) {
       alert('Calculate Trip First!');
     } else {
@@ -292,25 +313,6 @@ export class RequestComponent implements OnInit {
     time.setSeconds(time.getSeconds() + this.waitTime + this.estimatedTime);
     return time.toDateString() + " " + time.toTimeString().substring(0, 8);
   }
-
-  getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2-lat1);  // deg2rad below
-    var dLon = deg2rad(lon2-lon1);
-    var a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon/2) * Math.sin(dLon/2)
-      ;
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    var d = R * c; // Distance in km
-    return d;
-   }
-   
- deg2rad(deg) {
-    return deg * (Math.PI/180)
-   }
-
 }
 
 

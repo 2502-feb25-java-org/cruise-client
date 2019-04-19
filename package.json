@@ -24,7 +24,7 @@
     "@types/google-maps": "^3.2.0",
     "agm-direction": "^0.7.6",
     "angular-datatables": "^7.0.0",
-    "aws-sdk": "^2.438.0",
+    "aws-sdk": "^2.440.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "d": "^1.0.0",
